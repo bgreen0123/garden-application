@@ -34,7 +34,7 @@ public class Model {
 		garden = g;
 	}
 	
-	public Lep[] getLeps() {
+	public ArrayList<Lep> getLeps() {
 		return leps;
 	}
 	
@@ -46,7 +46,7 @@ public class Model {
 		return height;
 	}
 
-	public ArrayList<plant> getPlants() {
+	public ArrayList<Plant> getPlants() {
 		return plants;
 	}
 

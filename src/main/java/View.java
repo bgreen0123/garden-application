@@ -12,10 +12,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import views.WelcomeScreen;
+import views.GardenScreen;
+
 public class View extends Application {
 	Controller cont;
-	Window currWindow;
-	
+	CurrentScreen currentScreen;
+	WelcomeScreen welcome;
+	GardenScreen garden;
 	
 	@Override
     public void start(Stage stage) {
@@ -26,7 +30,13 @@ public class View extends Application {
 		return;
 	}
 	
-	public void drawScreen(Window window) {
+	public void drawScreen() {
+		switch(currentScreen){
+			case WELCOME:
+				welcome.draw();
+			case GARDEN:
+				garden.draw();
+		}
 		return;
 	}
 
