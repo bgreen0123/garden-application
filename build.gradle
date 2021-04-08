@@ -12,5 +12,4 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-//uncomment this and point to your main class
-//mainClassName = '' 
+mainClassName = 'View' 
