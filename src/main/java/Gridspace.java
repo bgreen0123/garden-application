@@ -4,8 +4,28 @@ public class Gridspace {
 	Boolean hasPlant;
 	Boolean canPlace;
 	
-	public void addPlant(Plant p) {
-		return;
+	public Plant getPlant() {
+		return plant;
+	}
+	
+	public void setPlant(Plant p) {
+		plant = p;
+	}
+	
+	public Boolean getHasPlant() {
+		return hasPlant;
+	}
+	
+	public void setHasPlant(Boolean b) {
+		hasPlant = b;
+	}
+	
+	public Boolean getCanPlace() {
+		return canPlace;
+	}
+	
+	public void setCanPlace(Boolean b) {
+		canPlace = b;
 	}
 
 	public void removePlant() {

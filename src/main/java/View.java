@@ -13,10 +13,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class View extends Application {
+	Controller cont;
+	Window currWindow;
+	
 	
 	@Override
     public void start(Stage stage) {
 
+	}
+	
+	public void update() {
+		return;
+	}
+	
+	public void drawScreen(Window window) {
+		return;
 	}
 
 	public static void main(String[] args) {
