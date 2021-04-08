@@ -1,103 +1,105 @@
 
 public class Plant {
-	String comName;
-	String sciName;
-	int lepsSupported;
-	int width;
-	int height;
-	int xloc;
-	int yloc;
-	PlantType type;
-	Sun sun;
-	Soil soil;
-	Moisture moist;
+	private String comName;
+	private String sciName;
+	private int lepsSupported;
+	private int width;
+	private int height;
+	private int xloc;
+	private int yloc;
+	private PlantType type;
+	private Sun sun;
+	private Soil soil;
+	private Moisture moist;
 	
 	public void move() {
 		return;
 	}
 	
+	//Getters
 	public String getComName() {
 		return comName;
-	}
-	
-	public void setComName(String n) {
-		comName = n;
 	}
 	
 	public String getSciName() {
 		return sciName;
 	}
 	
-	public void setSciName(String n) {
-		sciName = n;
+	public int getWidth() {
+		return width;
 	}
 	
 	public int getLepsSupported() {
 		return lepsSupported;
 	}
-	
-	public void setLepsSupported(int l) {
-		lepsSupported = l;
-	}
-	
-	public int getWidth() {
-		return width;
-	}
-	
-	public void setWidth(int w) {
-		width = w;
-	}
-	
+
 	public int getHeight() {
 		return height;
-	}
-	
-	public void setHeight(int h) {
-		height = h;
 	}
 	
 	public int getX() {
 		return xloc;
 	}
 	
-	public void setX(int x) {
-		xloc = x;
-	}
-	
 	public int getY() {
 		return yloc;
-	}
-	
-	public void setY(int y) {
-		yloc = y;
 	}
 	
 	public PlantType getType() {
 		return type;
 	}
 	
-	public void setType(PlantType t) {
-		type = t;
-	}
-	
 	public Sun getSun() {
 		return sun;
-	}
-	
-	public void setSun(Sun s) {
-		sun = s;
 	}
 	
 	public Soil getSoil() {
 		return soil;
 	}
 	
-	public void setSoil(Soil s) {
-		soil = s;
-	}
-	
 	public Moisture getMoisture() {
 		return moist;
+	}
+	
+	//Setters
+	public void setComName(String n) {
+		comName = n;
+	}
+	
+	public void setSciName(String n) {
+		sciName = n;
+	}
+
+	public void setLepsSupported(int l) {
+		lepsSupported = l;
+	}
+	
+	public void setWidth(int w) {
+		width = w;
+	}
+	
+	public void setHeight(int h) {
+		height = h;
+	}
+	
+	public void setX(int x) {
+		xloc = x;
+	}
+	
+	public void setY(int y) {
+		yloc = y;
+	}
+	
+	public void setType(PlantType t) {
+		type = t;
+	}
+	
+	public void setSun(Sun s) {
+		sun = s;
+	}
+	
+	public void setSoil(Soil s) {
+		soil = s;
 	}
 	
 	public void setMoisture(Moisture m) {
