@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import views.WelcomeScreen;
 import views.GardenScreen;
+import enums.CurrentScreen;
 
 public class View extends Application {
 	Controller cont;

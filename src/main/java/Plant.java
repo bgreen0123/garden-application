@@ -1,3 +1,7 @@
+import enums.Moisture;
+import enums.PlantType;
+import enums.Soil;
+import enums.Sun;
 
 public class Plant {
 	private String comName;

@@ -13,7 +13,7 @@ public class Controller{
 		};
 	}
 	
-	public EventHandler toNextPage(Window window) {
+	public EventHandler toNextPage() {
 		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {}

@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+import enums.Moisture;
+import enums.Soil;
+import enums.Sun;
+
 public class Model {
 	private Gridspace[][] garden;
 	private ArrayList<Lep> leps;
