@@ -1,6 +1,11 @@
+package controller;
+
 import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.Node;
+
+import model.Model;
+import view.View;
 
 public class Controller{
 	Model model;

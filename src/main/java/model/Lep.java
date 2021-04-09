@@ -1,3 +1,4 @@
+package model;
 
 public class Lep {
 	private int xloc;

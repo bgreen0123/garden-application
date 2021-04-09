@@ -1,3 +1,5 @@
+package view;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,9 +13,11 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import view.GardenScreen;
+import view.WelcomeScreen;
 
-import views.WelcomeScreen;
-import views.GardenScreen;
+import controller.Controller;
+
 import enums.CurrentScreen;
 
 public class View extends Application {

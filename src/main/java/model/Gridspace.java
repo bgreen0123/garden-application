@@ -1,3 +1,4 @@
+package model;
 
 public class Gridspace {
 	private Plant plant;

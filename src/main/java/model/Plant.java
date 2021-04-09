@@ -1,3 +1,5 @@
+package model;
+
 import enums.Moisture;
 import enums.PlantType;
 import enums.Soil;
@@ -19,7 +21,12 @@ public class Plant {
 	public void move() {
 		return;
 	}
-	
+	public Plant(String sciName, String comName, int lepsSupported, PlantType type){
+		this.comName = comName;
+		this.sciName = sciName;
+		this.lepsSupported = lepsSupported;
+		this.type = type;
+	}
 	//Getters
 	public String getComName() {
 		return comName;
@@ -108,5 +115,10 @@ public class Plant {
 	
 	public void setMoisture(Moisture m) {
 		moist = m;
+	}
+
+	@Override
+	public String toString(){
+		return comName;
 	}
 }
