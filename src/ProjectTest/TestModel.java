@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.*;
 
 import model.*;
 
@@ -15,7 +15,7 @@ public class TestModel {
 
 	@Before
 	public void init() {
-		plantsTest.add("Plant 1");
+		plantsTest.add("Plant 1","Plant 1",34,"Woody");
 		plantsTest.add("Plant 2");
 		plantsTest.add("Plant 3");
 		
@@ -63,6 +63,8 @@ public class TestModel {
 	public void destroy() {
 		plantsTest.removeAll();
 		lepsTest.removeAll();
+		assertEquals("destroying all plants",0,plantsTest.size());
+		assertEquals("destroying all plants",0,lepsTest.size());
 	}
 	
 
