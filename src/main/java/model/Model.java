@@ -18,7 +18,7 @@ public class Model {
 	private int budgetLeft;
 	private int lepCount;
 
-	public void updateBudget(int cost) {
+	public static void updateBudget(int cost) {
 		return;
 	}
 	

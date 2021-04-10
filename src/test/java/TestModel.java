@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.*;
+import org.junit.Test;
 
 import model.*;
 
@@ -15,7 +15,7 @@ public class TestModel {
 
 	@Before
 	public void init() {
-		plantsTest.add("Plant 1","Plant 1",34,"Woody");
+		plantsTest.add("Plant 1");
 		plantsTest.add("Plant 2");
 		plantsTest.add("Plant 3");
 		
@@ -36,7 +36,7 @@ public class TestModel {
 	@Test
 	public void testUpdateBudget() {
 		System.out.println("test case update budget");
-		assertEquals(0, Calculation.updateBudget(new int 30));
+		assertEquals(0, Model.updateBudget(30));
 	}
 	
 	@Test
