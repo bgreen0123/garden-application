@@ -13,8 +13,13 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import view.GardenScreen;
+
 import view.WelcomeScreen;
+import view.EndWindow;
+import view.GardenWindow;
+import view.MarketEntryWindow;
+import view.MarketItem;
+import view.MarketWindow;
 
 import controller.Controller;
 
@@ -24,7 +29,11 @@ public class View extends Application {
 	Controller cont;
 	CurrentScreen currentScreen;
 	WelcomeScreen welcome;
-	GardenScreen garden;
+	EndWindow endWindow;
+	GardenWindow garden;
+	MarketItem marketItem;
+	MarketWindow marketWindow;
+	MarketEntryWindow marketEntry;
 	
 	@Override
     public void start(Stage stage) {
