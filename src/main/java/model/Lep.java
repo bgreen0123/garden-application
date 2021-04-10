@@ -6,6 +6,13 @@ public class Lep {
 	private int xVelocity;
 	private int yVelocity;
 	
+	public Lep(int xloc, int yloc, int xVelocity, int yVelocity) {
+		this.xloc = xloc;
+		this.yloc = yloc;
+		this.xVelocity = xVelocity;
+		this.yVelocity = yVelocity;
+	}
+	
 	public void updateLocation() {
 		/* 
 		xloc += xVelocity;
