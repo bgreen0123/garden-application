@@ -3,14 +3,14 @@ package model;
 public class Lep {
 	private int xloc;
 	private int yloc;
-	private int xVelocity;
-	private int yVelocity;
+	private int xVel;
+	private int yVel;
 	
 	public Lep(int xloc, int yloc, int xVelocity, int yVelocity) {
 		this.xloc = xloc;
 		this.yloc = yloc;
-		this.xVelocity = xVelocity;
-		this.yVelocity = yVelocity;
+		this.xVel = xVelocity;
+		this.yVel = yVelocity;
 	}
 	
 	public void updateLocation() {
@@ -22,7 +22,7 @@ public class Lep {
 		return;
 	}
 	
-	private void updateVelocities(){
+	public void updateVelocities(int inc){
 		return;
 	}
 
@@ -33,6 +33,14 @@ public class Lep {
 
 	public int getY() {
 		return yloc;
+	}
+	
+	public int getXVelocity() {
+		return xVel;
+	}
+
+	public int getYVelocity() {
+		return yVel;
 	}
 	
 	//Setters

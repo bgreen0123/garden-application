@@ -3,6 +3,10 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 
 import org.junit.*;
 
@@ -15,14 +19,16 @@ public class TestModel {
 	//private int budgetLeft = 30;
 	Plant plant1 = new Plant("Plant 1","Plant 1",34,PlantType.WOODY);
 	Lep lep1 = new Lep(0,0,0,0);
+	Model m = new Model(plant1, lep1);
 	
 	
 	@Test
 	public void testUpdateVelocities() {
+		lep1.updateVelocities(2);
 		System.out.println("update x velocity");
-		assertEquals(0,6);
+		assertEquals(2,lep1.getXVelocity());
 		System.out.println("update y velocity");
-		assertEquals(0,6);
+		assertEquals(2,lep1.getYVelocity());
 	}
 	
 	@Test
@@ -45,14 +51,14 @@ public class TestModel {
 		System.out.println("test case add leps");
 		Model.addLeps(lep1);
 		
-		assertEquals(30, Model.getLeps().size());
+		assertEquals(1, Model.getLepCount());
 	}
 	
 	@Test
 	public void testRemovePlant() {
 		System.out.println("test remove leps");
 		Model.removePlant(plant1);
-		assertEquals("removing 1 plant from list", 1, Model.getLeps().size());
+		assertEquals(1, Model.getPlants().size());
 	}
 	
 	@Test
@@ -62,13 +68,14 @@ public class TestModel {
 		Model.getPlants().add(plant1);
 		Model.getPlants().add(plant1);
 		
-		assertEquals("adding 1 plant to list", 2, Model.getPlants().size());
+		assertEquals(3, Model.getPlants().size());
 		fail();
 	}
 	@Test
 	public void destroy() {
 		assertEquals("destroying all plants",0,Model.getPlants().size());
 		assertEquals("destroying all plants",0,Model.getLeps().size());
+		fail();
 	}
 	
 

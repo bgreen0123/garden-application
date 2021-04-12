@@ -16,8 +16,13 @@ public class Model {
 	private Soil soil;
 	private Moisture moist;
 	private static int budgetLeft;
-	private int lepCount;
+	private static int lepCount;
 
+	public Model(Plant p, Lep l) {
+		leps = new ArrayList<Lep>();
+		plants = new ArrayList<Plant>();
+	}
+	
 	public static void updateBudget(int cost) {
 		budgetLeft = cost;
 		return;
@@ -28,8 +33,9 @@ public class Model {
 		return;
 	}
 	
-	public static void addLeps(Lep numLeps) {
-		leps.add(numLeps);
+	public static void addLeps(Lep lep) {
+		
+		//leps.add(lep);
 		return;
 	}
 	
@@ -82,7 +88,7 @@ public class Model {
 		return budgetLeft;
 	}
 
-	public int getLepCount() {
+	public static int getLepCount() {
 		return lepCount;
 	}
 
