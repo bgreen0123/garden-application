@@ -13,7 +13,7 @@ public class TestModel {
 	//private int budgetLeft = 30;
 	Plant plant1 = new Plant("Plant 1","Plant 1",34,PlantType.WOODY);
 	Lep lep1 = new Lep(0,0,0,0);
-	Model m = new Model(plant1, lep1);
+	Model m = new Model();
 	
 	
 	@Test
