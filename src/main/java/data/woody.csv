@@ -1,86 +1,86 @@
-Fagaceae,Quercus,oak
-Rosaceae ,Prunus,"beach plum, cherry, chokecherry, peach, plum, sweet cherry, wild plum, almond"
-Salicaceae,Salix,willow
-Betulaceae,Betula,birch
-Aceraceae,Acer,"maple, boxelder"
-Salicaceae,Populus,"aspen, cottonwood, poplar"
-Rosaceae ,Malus,"crabapple, apple"
-Ericaceae ,Vaccinium,"cranberry, blueberry"
-Juglandaceae,Carya,"hickory, pecan, pignut, bitternut"
-Ulmaceae,Ulmus,elm
-Betulaceae,Alnus,alder
-Pinaceae,Pinus,pine
-Malvaceae,Tilia,"basswood, linden"
-Rosaceae ,Rubus,"blackberry, dewberry, Himalayan berry, raspberry, thimbleberry, loganberry"
-Fagaceae,Fagus,beech
-Oleaceae,Fraxinus,ash
-Juglandaceae,Juglans,"butternut, walnut"
-Rosaceae ,Crataegus,hawthorn
-Fagaceae,Castanea,chestnut
-Rosaceae ,Rosa,"rose, sweetbriar"
-Cornaceae,Cornus,"dogwood, bunchberry"
-Betulaceae,Corylus,"filbert, hazel, hazelnut"
-Adoxaceae,Viburnum,"arrowwood, viburnum, (Viburnum opulus=swamp elder), wild raisin"
-Rosaceae ,Amelanchier,"serviceberry, juneberry, shadbush"
-Betulaceae,Ostrya,"tupelo, ironwood"
-Pinaceae,Tsuga,hemock
-Betulaceae,Carpinus,American hornbeam
-Hamamelidaceae,Hamamelis,witchhazel
-Grossulariaceae ,Ribes,"currant, gooseberry"
-Vitaceae,Vitis,grape
-Rosaceae ,Spiraea,"meadowsweet, spirea"
-Anacardiaceae ,Rhus,sumac
-Ericaceae ,Rhododendron,"rhododendron, azalea, labrador tea"
-Myricaceae,Comptonia,sweet fern
-Ebenaceae,Diospyros,persimmon
-Aquifoliaceae,Ilex,"holly, inkberry, winterberry"
-Platanaceae,Platanus,sycamore
-Ulmaceae,Celtis,"hackberry, sugar berry"
-Ericaceae ,Gaylussacia,"huckleberry, dangleberry"
-Rhamnaceae,Ceanothus,New Jersey tea
-Fabaceae,Gleditsia,"honeylocust, gleditsia"
-Myricaceae,Morella,"red bayberry, wax myrtle, northern bayberry"
-Lauraceae,Sassafras,sassafras
-Rosaceae ,Aronia,black chokeberry
-Hamamelidaceae,Liquidambar,sweetgum
-Nyssaceae,Nyssa,"blackgum, sourgum, tupelo"
-Adoxaceae,Sambucus,elderberry
-Caprifoliaceae ,Lonicera,honeysuckle
-Rosaceae ,Physocarpus,ninebark
-Vitaceae,Parthenocissus,"virginia creeper, woodbine, Boston Ivy"
-Cupressaceae,Juniperus,"juniper, red cedar"
-Rubiaceae,Cephalanthus,buttonbush
-Ericaceae ,Kalmia,"mountainlaurel, sheep laurel, bog laurel, whitewicky"
-Fabaceae,Cercis,"redbud, judas-tree"
-Magnoliaceae ,Liriodendron,"tulip poplar, tuliptree"
-Magnoliaceae ,Magnolia,"magnolia, sweetbay"
-Smilacaceae,Smilax,greenbriar
-Caprifoliaceae ,Symphoricarpos,"snowberry, buckbush"
-Anacardiaceae ,Toxicodendron,"poison oak, poison sumac, posion ivy"
-Cupressaceae,Chamaecyparis,"Atlantic white cedar, white cedar"
-Celastraceae,Euonymus,"wahoo, burningbush, euonymus, spindletree, burstingheart, wintercreeper, strawberrybush"
-Ericaceae ,Oxydendrum,sourwood
-Annonaceae,Asimina,pawpaw
-Lauraceae,Lindera,spicebush
-Cupressaceae   ,Taxodium,"cypress, bald cypress, pond cypress"
-Oleaceae,Chionanthus,fringetree
-Ericaceae,Chamaedaphne,leatherleaf
-Clethraceae,Clethra,"summersweet, sweetpepperbush"
-Ericaceae ,Lyonia,"maleberry, staggerbush"
-Hydrangeaceae,Hydrangea,hydrangea
-Bignoniaceae,Campsis,"trumpetcreeper, trumpet vine"
-Celastraceae,Celastrus,bittersweet
-Moraceae,Morus,mulberry
-Lythraceae ,Decodon,swamp loosestrife
-Taxaceae,Taxus,yew
-Rutaceae ,Zanthoxylum,"pricklyash, Chinese pepper"
-Diervillaceae,Diervilla,bush honeysuckle
-Polygonaceae,Fallopia,"Black-Bindweed, Fleecevine, Japanese knotweed"
-Cistaceae,Crocanthemum,"Frostweed, Rush-Rose"
-Ericaceae,Eubotrys,Deciduous-Doghobble
-Fabaceae,Gymnocladus,Kentucy coffee tree
-Santalaceae,Phoradendron,mistletoe
-Staphyleaceae,Staphylea,bladdernut
-Thymelaeaceae,Dirca,leatherwood
-Ericaceae,Gaultheria,snowberry
-Menispermaceae,Menispermum,moonseed
+Fagaceae,Quercus,463,oak
+Rosaceae ,Prunus,347,"beach plum, cherry, chokecherry, peach, plum, sweet cherry, wild plum, almond"
+Salicaceae,Salix,292,willow
+Betulaceae,Betula,285,birch
+Aceraceae,Acer,256,"maple, boxelder"
+Salicaceae,Populus,240,"aspen, cottonwood, poplar"
+Rosaceae ,Malus,233,"crabapple, apple"
+Ericaceae ,Vaccinium,230,"cranberry, blueberry"
+Juglandaceae,Carya,224,"hickory, pecan, pignut, bitternut"
+Ulmaceae,Ulmus,174,elm
+Betulaceae,Alnus,164,alder
+Pinaceae,Pinus,146,pine
+Malvaceae,Tilia,139,"basswood, linden"
+Rosaceae ,Rubus,135,"blackberry, dewberry, Himalayan berry, raspberry, thimbleberry, loganberry"
+Fagaceae,Fagus,125,beech
+Oleaceae,Fraxinus,124,ash
+Juglandaceae,Juglans,124,"butternut, walnut"
+Rosaceae ,Crataegus,123,hawthorn
+Fagaceae,Castanea,109,chestnut
+Rosaceae ,Rosa,106,"rose, sweetbriar"
+Cornaceae,Cornus,103,"dogwood, bunchberry"
+Betulaceae,Corylus,102,"filbert, hazel, hazelnut"
+Adoxaceae,Viburnum,99,"arrowwood, viburnum, (Viburnum opulus=swamp elder), wild raisin"
+Rosaceae ,Amelanchier,91,"serviceberry, juneberry, shadbush"
+Betulaceae,Ostrya,81,"tupelo, ironwood"
+Pinaceae,Tsuga,69,hemock
+Betulaceae,Carpinus,68,American hornbeam
+Hamamelidaceae,Hamamelis,68,witchhazel
+Grossulariaceae ,Ribes,67,"currant, gooseberry"
+Vitaceae,Vitis,64,grape
+Rosaceae ,Spiraea,61,"meadowsweet, spirea"
+Anacardiaceae ,Rhus,54,sumac
+Ericaceae ,Rhododendron,52,"rhododendron, azalea, labrador tea"
+Myricaceae,Comptonia,47,sweet fern
+Ebenaceae,Diospyros,47,persimmon
+Aquifoliaceae,Ilex,44,"holly, inkberry, winterberry"
+Platanaceae,Platanus,42,sycamore
+Ulmaceae,Celtis,41,"hackberry, sugar berry"
+Ericaceae ,Gaylussacia,39,"huckleberry, dangleberry"
+Rhamnaceae,Ceanothus,38,New Jersey tea
+Fabaceae,Gleditsia,38,"honeylocust, gleditsia"
+Myricaceae,Morella,36,"red bayberry, wax myrtle, northern bayberry"
+Lauraceae,Sassafras,35,sassafras
+Rosaceae ,Aronia,34,black chokeberry
+Hamamelidaceae,Liquidambar,34,sweetgum
+Nyssaceae,Nyssa,34,"blackgum, sourgum, tupelo"
+Adoxaceae,Sambucus,32,elderberry
+Caprifoliaceae ,Lonicera,30,honeysuckle
+Rosaceae ,Physocarpus,29,ninebark
+Vitaceae,Parthenocissus,28,"virginia creeper, woodbine, Boston Ivy"
+Cupressaceae,Juniperus,26,"juniper, red cedar"
+Rubiaceae,Cephalanthus,25,buttonbush
+Ericaceae ,Kalmia,25,"mountainlaurel, sheep laurel, bog laurel, whitewicky"
+Fabaceae,Cercis,22,"redbud, judas-tree"
+Magnoliaceae ,Liriodendron,19,"tulip poplar, tuliptree"
+Magnoliaceae ,Magnolia,19,"magnolia, sweetbay"
+Smilacaceae,Smilax,19,greenbriar
+Caprifoliaceae ,Symphoricarpos,19,"snowberry, buckbush"
+Anacardiaceae ,Toxicodendron,17,"poison oak, poison sumac, posion ivy"
+Cupressaceae,Chamaecyparis,14,"Atlantic white cedar, white cedar"
+Celastraceae,Euonymus,13,"wahoo, burningbush, euonymus, spindletree, burstingheart, wintercreeper, strawberrybush"
+Ericaceae ,Oxydendrum,13,sourwood
+Annonaceae,Asimina,12,pawpaw
+Lauraceae,Lindera,12,spicebush
+Cupressaceae   ,Taxodium,12,"cypress, bald cypress, pond cypress"
+Oleaceae,Chionanthus,11,fringetree
+Ericaceae,Chamaedaphne,10,leatherleaf
+Clethraceae,Clethra,10,"summersweet, sweetpepperbush"
+Ericaceae ,Lyonia,10,"maleberry, staggerbush"
+Hydrangeaceae,Hydrangea,9,hydrangea
+Bignoniaceae,Campsis,6,"trumpetcreeper, trumpet vine"
+Celastraceae,Celastrus,6,bittersweet
+Moraceae,Morus,6,mulberry
+Lythraceae ,Decodon,5,swamp loosestrife
+Taxaceae,Taxus,5,yew
+Rutaceae ,Zanthoxylum,5,"pricklyash, Chinese pepper"
+Diervillaceae,Diervilla,4,bush honeysuckle
+Polygonaceae,Fallopia,4,"Black-Bindweed, Fleecevine, Japanese knotweed"
+Cistaceae,Crocanthemum,3,"Frostweed, Rush-Rose"
+Ericaceae,Eubotrys,3,Deciduous-Doghobble
+Fabaceae,Gymnocladus,3,Kentucy coffee tree
+Santalaceae,Phoradendron,2,mistletoe
+Staphyleaceae,Staphylea,2,bladdernut
+Thymelaeaceae,Dirca,1,leatherwood
+Ericaceae,Gaultheria,1,snowberry
+Menispermaceae,Menispermum,1,moonseed

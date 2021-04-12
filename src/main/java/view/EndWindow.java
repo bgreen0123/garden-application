@@ -1,45 +1,28 @@
 package view;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class EndWindow extends Window{
     Image background;
     Label spent;
     Label totalLeps;
     Label plants;
-    
-    //Getters
-    public Image getBackground() {
-    	return background;
+    Scene scene;
+    int width, height;
+    Stage stage;
+
+    public EndWindow(int width, int height, Stage stage) {
+        this.width = width;
+        this.height = height;
+        this.stage = stage;
+    }
+    @Override
+    public void draw() {
+        
     }
     
-    public Label getSpent() {
-    	return spent;
-    }
     
-    public Label getTotalLeps() {
-    	return totalLeps;
-    }
-    
-    public Label getPlants() {
-    	return plants;
-    }
-    
-    //Setters
-    public void setBackground(Image b) {
-    	background = b;
-    }
-    
-    public void setSpent(Label s) {
-    	spent = s;
-    }
-    
-    public void setTotalLeps(Label t) {
-    	totalLeps = t;
-    }
-    
-    public void setPlants(Label plant) {
-    	plants = plant;
-    }
 }

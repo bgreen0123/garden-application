@@ -5,6 +5,9 @@ public enum CurrentScreen {
     //view that represents the current screen --Adam
 
     WELCOME("WELCOME"),
+	MARKET("MARKET"),
+	CONDITIONS("CONDITIONS"),
+	END("END"),
     GARDEN("GARDEN");
 	
 	private String name = null;

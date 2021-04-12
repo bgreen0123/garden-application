@@ -1,65 +1,30 @@
 package view;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class MarketWindow extends Window{
-	Image background;
+    Image background;
     Button nextPage;
     Button favorited;
     Button woody;
     Button herb;
     MarketItem[] items;
-    
-    //Getters
-    public Image getBackground() {
-    	return background;
+    Scene scene;
+    int width, height;
+    Stage stage;
+
+	public MarketWindow(int width, int height, Stage stage) {
+        this.width = width;
+        this.height = height;
+        this.stage = stage;
     }
-    
-    public Button getNextPage() {
-    	return nextPage;
-    }
-    
-    public Button getFavorited() {
-    	return favorited;
-    }
-    
-    public Button getWoody() {
-    	return woody;
-    }
-    
-    public Button getHerb() {
-    	return herb;
-    }
-    
-    public MarketItem[] getItems() {
-    	return items;
-    }
-    
-    //Setters
-    
-    public void setBackground(Image b) {
-    	background = b;
-    }
-    
-    public void setNextPage(Button b) {
-    	nextPage = b;
-    }
-    
-    public void setFavorited(Button favorite) {
-    	favorited = favorite;
-    }
-    
-    public void setWoody(Button wood) {
-    	woody = wood;
-    }
-    
-    public void setHerb(Button h) {
-    	herb = h;
-    }
-    
-    public void setItems(MarketItem[] item) {
-    	items = item;
+    @Override
+    public void draw() {
+        // TODO Auto-generated method stub
+        
     }
 }
 

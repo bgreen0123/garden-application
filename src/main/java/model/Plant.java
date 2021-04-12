@@ -73,14 +73,16 @@ public class Plant {
 	}
 	
 	//Setters
+
+	//Don't need this
 	public void setComName(String n) {
 		comName = n;
 	}
-	
+	//Don't need this
 	public void setSciName(String n) {
 		sciName = n;
 	}
-
+	//Don't need this
 	public void setLepsSupported(int l) {
 		lepsSupported = l;
 	}
@@ -119,6 +121,6 @@ public class Plant {
 
 	@Override
 	public String toString(){
-		return comName;
+		return comName + " " + sciName + " " + lepsSupported + "\n";
 	}
 }

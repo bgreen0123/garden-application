@@ -1,25 +1,7 @@
 package view;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import view.WelcomeScreen;
-import view.EndWindow;
-import view.GardenWindow;
-import view.MarketEntryWindow;
-import view.MarketItem;
-import view.MarketWindow;
 
 import controller.Controller;
 
@@ -34,10 +16,16 @@ public class View extends Application {
 	MarketItem marketItem;
 	MarketWindow marketWindow;
 	MarketEntryWindow marketEntry;
-	
+	ConditionsWindow conditions;
+
 	@Override
     public void start(Stage stage) {
-
+		cont = new Controller(this);
+		welcome = new WelcomeScreen(800, 600, stage, cont.getWelcomeButton());
+		conditions = new ConditionsWindow(800, 600, stage);
+		stage.setTitle("Garden");
+		currentScreen = CurrentScreen.WELCOME;
+		drawScreen();
 	}
 	
 	public void update() {
@@ -46,12 +34,34 @@ public class View extends Application {
 	
 	public void drawScreen() {
 		switch(currentScreen){
-			case WELCOME:
-				welcome.draw();
-			case GARDEN:
-				garden.draw();
+		case WELCOME:
+			System.out.println("Welcome");
+			welcome.draw();
+			break;
+		case GARDEN:
+			//garden.draw();
+			break;
+		case CONDITIONS:
+			System.out.println("Conditions");
+			conditions.draw();
+			break;
+		case END:
+			//endWindow.draw();
+			break;
+		case MARKET:
+			//marketWindow.draw();
+			break;
+		default:
+			welcome.draw();
+			currentScreen = CurrentScreen.WELCOME;
+			break;
 		}
 		return;
+	}
+
+	public void changeScreen(CurrentScreen s){
+		currentScreen = s;
+		drawScreen();
 	}
 
 	public static void main(String[] args) {

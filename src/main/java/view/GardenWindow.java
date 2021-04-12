@@ -1,8 +1,10 @@
 package view;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class GardenWindow extends Window{
     Image background;
@@ -10,47 +12,21 @@ public class GardenWindow extends Window{
     String totalLeps;
     Button toMarket;
     Pane faveList;
-    
-    //Getters
-    public Image getBackground() {
-    	return background;
+    Scene scene;
+    int width, height;
+    Stage stage;
+
+    public GardenWindow(int width, int height, Stage stage) {
+        this.width = width;
+        this.height = height;
+        this.stage = stage;
     }
     
-    public String getBudget() {
-    	return budget;
+    @Override
+    public void draw() {
+        // TODO Auto-generated method stub
+        
     }
     
-    public String getTotalLeps() {
-    	return totalLeps;
-    }
     
-    public Button getToMarket() {
-    	return toMarket;
-    }
-    
-    public Pane getFaveList() {
-    	return faveList;
-    }
-    
-    //Setters
-    
-    public void setBackground(Image b) {
-    	background = b;
-    }
-    
-    public void setBudget(String Budget) {
-    	budget = Budget;
-    }
-    
-    public void setTotalLeps(String Leps) {
-    	totalLeps = Leps;
-    }
-    
-    public void setToMarket(Button Market) {
-    	toMarket = Market;
-    }
-    
-    public void setFaveList(Pane favorite) {
-    	faveList = favorite;
-    }
 }	

@@ -1,27 +1,50 @@
 package view;
 
+import java.io.File;
+
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class WelcomeScreen extends Window{
-    Image background;
     Button nextPage;
-    
-    //Getters
-    public Image getBackground() {
-    	return background;
+	Scene scene;
+    int width, height;
+    Stage stage;
+
+    public WelcomeScreen(int width, int height, Stage stage, Button nextPage){
+        this.width = width;
+        this.height = height;
+        this.stage = stage;
+        this.nextPage = nextPage;
     }
     
-    public Button getNextPage() {
-    	return nextPage;
-    }
-    
-    //Setters
-    public void setBackground(Image b) {
-    	background = b;
-    }
-    
-    public void setNextPage(Button b) {
-    	nextPage = b;
+    @Override
+    public void draw() {
+        //Background Image
+        Image img = new Image(new File("src/main/java/images/welcome-background.jpg").toURI().toString(), width, height, false, true);
+        BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background= new Background(bg);
+ 
+        //Border layout with Button in the center, and label on top
+        Label title = new Label("Welcome To The Garden Builder");
+        title.setFont(Font.font("Verdana", 30));
+        BorderPane border = new BorderPane();
+        border.setCenter(nextPage);
+        border.setTop(title);
+        border.setBackground(background);
+
+        scene = new Scene(border, width, height);
+        stage.setScene(scene);
+        stage.show(); 
     }
 }

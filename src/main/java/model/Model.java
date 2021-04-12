@@ -18,7 +18,7 @@ public class Model {
 	private static int budgetLeft;
 	private static int lepCount;
 
-	public Model(Plant p, Lep l) {
+	public Model(){
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 	}
@@ -34,8 +34,7 @@ public class Model {
 	}
 	
 	public static void addLeps(Lep lep) {
-		
-		//leps.add(lep);
+		leps.add(lep);
 		return;
 	}
 	
@@ -93,13 +92,6 @@ public class Model {
 	}
 
 	//Setters
-	public void setLeps(ArrayList<Lep> l) {
-		leps = l;
-	}
-	
-	public void setPlants(ArrayList<Plant> p) {
-		plants = p;
-	}
 	
 	public void setWidth(int w) {
 		width = w;
