@@ -8,6 +8,8 @@ import controller.Controller;
 import enums.CurrentScreen;
 
 public class View extends Application {
+	int height = 600;
+	int width = 800;
 	Controller cont;
 	CurrentScreen currentScreen;
 	WelcomeScreen welcome;
@@ -21,8 +23,8 @@ public class View extends Application {
 	@Override
     public void start(Stage stage) {
 		cont = new Controller(this);
-		welcome = new WelcomeScreen(800, 600, stage, cont.getWelcomeButton());
-		conditions = new ConditionsWindow(800, 600, stage);
+		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
+		conditions = new ConditionsWindow(width, height, stage);
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();

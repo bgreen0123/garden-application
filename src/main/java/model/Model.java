@@ -18,6 +18,11 @@ public class Model {
 	private static int budgetLeft;
 	private static int lepCount;
 
+	public Model(Plant p1, Lep l1){
+		leps = new ArrayList<Lep>();
+		plants = new ArrayList<Plant>();
+	}
+	
 	public Model(){
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
