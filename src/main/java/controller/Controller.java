@@ -21,6 +21,7 @@ public class Controller{
 		model = new Model();
 
 		welcomeNext = new Button("Start");
+		welcomeNext.setPrefSize(100, 50);
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS);
 			System.out.println("Button Pressed");
