@@ -2,6 +2,8 @@ package controller;
 
 import javafx.event.*;
 import javafx.scene.input.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
@@ -12,7 +14,7 @@ import enums.CurrentScreen;
 public class Controller{
 	Model model;
 	View view;
-	
+	Font font = Font.font("Courier New", FontWeight.BOLD, 24);
 	//Buttons
 	Button welcomeNext;
 
@@ -21,6 +23,8 @@ public class Controller{
 		model = new Model();
 
 		welcomeNext = new Button("Start");
+		welcomeNext.setMaxSize(200, 50);
+		welcomeNext.setFont(font);
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS);
 			System.out.println("Button Pressed");
