@@ -38,10 +38,6 @@ public class View extends Application {
 		drawScreen();
 	}
 	
-	public void update() {
-		return;
-	}
-	
 	public void drawScreen() {
 		switch(currentScreen){
 		case WELCOME:
@@ -49,7 +45,8 @@ public class View extends Application {
 			welcome.draw();
 			break;
 		case GARDEN:
-			//garden.draw();
+			System.out.println("Garden");
+			garden.draw();
 			break;
 		case CONDITIONS:
 			System.out.println("Conditions");
