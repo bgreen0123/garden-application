@@ -6,11 +6,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import model.Lep;
 import model.Model;
 import model.Plant;
 import view.View;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import enums.CurrentScreen;
@@ -21,8 +23,6 @@ public class Controller{
 	Font font = Font.font("Courier New", FontWeight.BOLD, 24);
 	//Buttons
 	Button welcomeNext;
-	
-	// download button on the summary/end screen
 	Button download;
 	
 
@@ -37,7 +37,6 @@ public class Controller{
 			view.changeScreen(CurrentScreen.END); // change back to CONDITIONS
 			System.out.println("Button Pressed");
 		});
-		
 	}
 
 	//Getters
