@@ -40,6 +40,10 @@ public class Controller{
 		};
 	}
 	
+	public void goToPage(CurrentScreen cs) {
+			view.changeScreen(cs);
+	}
+	
 	/*
 	 * Change Listeners for Sliders can be added after those sliders are created
 	 * Need them for: 

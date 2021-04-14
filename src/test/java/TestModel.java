@@ -1,10 +1,9 @@
 
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
-import enums.PlantType;
+import enums.*;
 import model.*;
 
 public class TestModel {
@@ -50,7 +49,7 @@ public class TestModel {
 	
 	@Test
 	public void testRemovePlant() {
-		System.out.println("test remove leps");
+		System.out.println("test remove plant");
 		Model.removePlant(plant1);
 		assertEquals(1, Model.getPlants().size());
 	}
@@ -59,12 +58,102 @@ public class TestModel {
 	public void testAddPlant() {
 		System.out.println("test add plant");
 		
-		Model.getPlants().add(plant1);
-		Model.getPlants().add(plant1);
+		Model.addPlant(plant1);
+		Model.addPlant(plant1);
+		
+		assertEquals(0, Model.getLeps().size());
+		fail();
+	}
+	
+	@Test
+	public void testRemoveLeps() {
+		System.out.println("test remove lep");
+		
+		Model.removeLep(lep1);
 		
 		assertEquals(3, Model.getPlants().size());
 		fail();
 	}
+
+	@Test
+	public void testGardenGetSet() {
+		System.out.println("test garden getter and setter");
+		
+		Gridspace plot[][] = new Gridspace[2][2];
+		Model.setGarden(plot);
+		
+		assertSame(plot, Model.getGarden());
+		fail();
+	}
+	
+	@Test
+	public void testWidthAndHeight() {
+		System.out.println("test width/height getter and setter");
+		
+		Model.setHeight(100);
+		Model.setWidth(200);
+		
+		assertEquals(100, Model.getHeight());
+		assertEquals(200, Model.getWidth());
+
+		fail();
+	}
+	
+	@Test
+	public void testSunGetSet() {
+		System.out.println("test sun getter and setter");
+		
+		Model.setSun(Sun.FULLSUN);
+		
+		assertEquals(Sun.FULLSUN, Model.getSun());
+
+		fail();
+	}
+	
+	@Test
+	public void testSoilGetSet() {
+		System.out.println("test soil getter and setter");
+		
+		Model.setSoil(Soil.SAND);
+		
+		assertEquals(Soil.SAND, Model.getSoil());
+
+		fail();
+	}
+	
+	@Test
+	public void testMoistureGetSet() {
+		System.out.println("test moisture getter and setter");
+		
+		Model.setMoisture(Moisture.WET);
+		
+		assertEquals(Moisture.WET, Model.getMoisture());
+
+		fail();
+	}
+	
+	@Test
+	public void testLepCountGetSet() {
+		System.out.println("test lepCount getter and setter");
+		
+		Model.setLepCount(5);
+		
+		assertEquals(5, Model.getLepCount());
+
+		fail();
+	}
+	
+	@Test
+	public void testBudgetGetSet() {
+		System.out.println("test budget getter and setter");
+		
+		Model.setBudget(500);
+		
+		assertEquals(500, Model.getBudget());
+
+		fail();
+	}
+	
 	@Test
 	public void destroy() {
 		assertEquals("destroying all plants",0,Model.getPlants().size());

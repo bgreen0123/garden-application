@@ -7,14 +7,14 @@ import enums.Soil;
 import enums.Sun;
 
 public class Model {
-	private Gridspace[][] garden;
+	private static Gridspace[][] garden;
 	private static ArrayList<Lep> leps;
 	private static ArrayList<Plant> plants;
-	private int width;
-	private int height;
-	private Sun sun;
-	private Soil soil;
-	private Moisture moist;
+	private static int width;
+	private static int height;
+	private static Sun sun;
+	private static Soil soil;
+	private static Moisture moist;
 	private static int budgetLeft;
 	private static int lepCount;
 
@@ -48,11 +48,11 @@ public class Model {
 	}
 	
 	//Getters
-	public Gridspace[][] getGarden() {
+	public static Gridspace[][] getGarden() {
 		return garden;
 	}
 	
-	public void setGarden(Gridspace [][] g) {
+	public static void setGarden(Gridspace [][] g) {
 		garden = g;
 	}
 	
@@ -60,11 +60,11 @@ public class Model {
 		return leps;
 	}
 	
-	public int getWidth() {
+	public static int getWidth() {
 		return width;
 	}
 
-	public int getHeight() {
+	public static int getHeight() {
 		return height;
 	}
 
@@ -72,15 +72,15 @@ public class Model {
 		return plants;
 	}
 
-	public Sun getSun() {
+	public static Sun getSun() {
 		return sun;
 	}
 
-	public Soil getSoil() {
+	public static Soil getSoil() {
 		return soil;
 	}
 
-	public Moisture getMoisture() {
+	public static Moisture getMoisture() {
 		return moist;
 	}
 
@@ -94,31 +94,31 @@ public class Model {
 
 	//Setters
 	
-	public void setWidth(int w) {
+	public static void setWidth(int w) {
 		width = w;
 	}
 	
-	public void setHeight(int h) {
+	public static void setHeight(int h) {
 		height = h;
 	}
 	
-	public void setSun(Sun s) {
+	public static void setSun(Sun s) {
 		sun = s;
 	}
 	
-	public void setSoil(Soil s) {
+	public static void setSoil(Soil s) {
 		soil = s;
 	}
 	
-	public void setMoisture(Moisture m) {
+	public static void setMoisture(Moisture m) {
 		moist = m;
 	}
 	
-	public void setBudget(int b) {
+	public static void setBudget(int b) {
 		budgetLeft = b;
 	}
 	
-	public void setLepCount(int l) {
+	public static void setLepCount(int l) {
 		lepCount = l;
 	}
 }

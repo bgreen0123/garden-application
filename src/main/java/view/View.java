@@ -25,8 +25,9 @@ public class View extends Application {
 		cont = new Controller(this);
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
 		conditions = new ConditionsWindow(width, height, stage);
+		garden = new GardenWindow(width, height, stage, cont);
 		stage.setTitle("Garden");
-		currentScreen = CurrentScreen.WELCOME;
+		currentScreen = CurrentScreen.GARDEN;
 		drawScreen();
 	}
 	
@@ -41,7 +42,8 @@ public class View extends Application {
 			welcome.draw();
 			break;
 		case GARDEN:
-			//garden.draw();
+			System.out.println("Garden");
+			garden.draw();
 			break;
 		case CONDITIONS:
 			System.out.println("Conditions");

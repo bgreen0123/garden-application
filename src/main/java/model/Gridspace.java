@@ -5,6 +5,11 @@ public class Gridspace {
 	private Boolean hasPlant;
 	private Boolean canPlace;
 	
+	public Gridspace() {
+		
+	}
+	
+	
 	//Getters
 	public Plant getPlant() {
 		return plant;
