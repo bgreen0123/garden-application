@@ -2,6 +2,9 @@ package view;
 
 import java.io.File;
 
+import enums.Moisture;
+import enums.Soil;
+import enums.Sun;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -31,11 +34,12 @@ public class ConditionsWindow extends Window{
         this.moisture = moisture;
         this.conditionsNext = conditionsNext;
     }
+    
     @Override
     public void draw() {
     	//Choose a title and set it's font and size
         Label t = new Label("Choose Your Conditions and budget!!");
-        t.setFont(Font.font("Verdana",30));
+        t.setFont(Font.font("Courier New",30));
         
         //Background image for conditions window
         Image img = new Image(new File("src/main/java/images/conditions-window.jpg").toURI().toString(),width,height,false,true);
@@ -57,7 +61,7 @@ public class ConditionsWindow extends Window{
         
         //Add the tile, padding and the drop down menus to the border pane. Set the background
         border.setTop(t);
-        t.setPadding(new Insets(30,30,0,200));
+        t.setPadding(new Insets(30,30,0,130));
         border.setBackground(background);
         
 

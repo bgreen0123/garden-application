@@ -34,6 +34,10 @@ public class Controller{
 	ChoiceBox<Soil> soil;
 	ChoiceBox<Moisture> moisture;
 	
+	//User answers
+  	Sun sunChoice;
+  	Soil soilChoice;
+  	Moisture moistureChoice;
 
 	public Controller(View view){
 		this.view = view;
@@ -47,9 +51,11 @@ public class Controller{
 		});
 
 		conditionsNext.setOnAction(e -> {
+			setChoice(sun,soil,moisture);
 			view.changeScreen(CurrentScreen.END); //Move to market screen
 			System.out.println("Onto market");
 		});
+		
 
 		//Creating the drop down menu
 		sun = new ChoiceBox<>();
@@ -93,10 +99,30 @@ public class Controller{
 		return moisture;
 	}
 	
+	public Sun getSunConditions() {
+		return sunChoice;
+	}
+	
+	public Soil getSoilConditions() {
+		return soilChoice;
+	}
+	
+	public Moisture getMoistureConditions() {
+		return moistureChoice;
+	}
+	
 	public Model getModel() {
 		//This method is used for view to access certain fields such as budget and lep count
 		//No fields should be changed or updated from view, it is only to access values.
 		return model;
+	}
+	
+	//Setter to set the users choice of conditions
+	public void setChoice(ChoiceBox<Sun> sun, ChoiceBox<Soil> soil, ChoiceBox<Moisture> moisture ) {
+		sunChoice = sun.getValue();
+		soilChoice = soil.getValue();
+		moistureChoice = moisture.getValue();
+		System.out.println(sunChoice + ", " + soilChoice + ", and " + moistureChoice);
 	}
 
 	//Actions
