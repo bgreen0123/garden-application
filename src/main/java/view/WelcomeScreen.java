@@ -34,6 +34,7 @@ public class WelcomeScreen extends Window{
     
     @Override
     public void draw() {
+
         //Background Image
         Image img = new Image(new File("src/main/java/images/welcome-background.jpg").toURI().toString(), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -48,7 +49,7 @@ public class WelcomeScreen extends Window{
         
         border.setCenter(nextPage);
         border.setTop(title);
-        border.setAlignment(title, CENTER);
+        BorderPane.setAlignment(title, CENTER);
         border.setBackground(background);
 
         scene = new Scene(border, width, height);

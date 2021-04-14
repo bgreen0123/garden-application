@@ -3,6 +3,8 @@ package view;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 import controller.Controller;
 
 import enums.CurrentScreen;
@@ -19,12 +21,14 @@ public class View extends Application {
 	MarketWindow marketWindow;
 	MarketEntryWindow marketEntry;
 	ConditionsWindow conditions;
+	
 
 	@Override
     public void start(Stage stage) {
 		cont = new Controller(this);
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
 		conditions = new ConditionsWindow(width, height, stage);
+		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont.Budget(), cont.Plants(), cont.Leps());
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();
@@ -48,7 +52,8 @@ public class View extends Application {
 			conditions.draw();
 			break;
 		case END:
-			//endWindow.draw();
+			System.out.println("End");
+			endWindow.draw();
 			break;
 		case MARKET:
 			//marketWindow.draw();

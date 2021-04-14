@@ -6,9 +6,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-
+import model.Lep;
 import model.Model;
+import model.Plant;
 import view.View;
+
+import java.util.ArrayList;
+
 import enums.CurrentScreen;
 
 public class Controller{
@@ -17,6 +21,10 @@ public class Controller{
 	Font font = Font.font("Courier New", FontWeight.BOLD, 24);
 	//Buttons
 	Button welcomeNext;
+	
+	// download button on the summary/end screen
+	Button download;
+	
 
 	public Controller(View view){
 		this.view = view;
@@ -26,14 +34,31 @@ public class Controller{
 		welcomeNext.setMaxSize(200, 50);
 		welcomeNext.setFont(font);
 		welcomeNext.setOnAction(e -> {
-			view.changeScreen(CurrentScreen.CONDITIONS);
+			view.changeScreen(CurrentScreen.END); // change back to CONDITIONS
 			System.out.println("Button Pressed");
 		});
+		
 	}
 
 	//Getters
 	public Button getWelcomeButton(){
 		return welcomeNext;
+	}
+	
+	public Button getDownloadButton() {
+		return download;
+	}
+	
+	public int Budget() {
+		return model.getBudget();
+	}
+	
+	public ArrayList<Plant> Plants() {
+		return model.getPlants();
+	}
+	
+	public ArrayList<Lep> Leps() {
+		return model.getLeps();
 	}
 
 	//Actions
