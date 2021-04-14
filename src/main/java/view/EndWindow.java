@@ -158,9 +158,6 @@ public class EndWindow extends Window{
         	}
         });
         
-        
-        
-        
 //        MenuBar menuBar = new MenuBar(file);
         
         VBox downloadBox = new VBox();
