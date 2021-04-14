@@ -17,17 +17,25 @@ public class Plant {
 	private Sun sun;
 	private Soil soil;
 	private Moisture moist;
+	private String image;
 	
 	public void move() {
 		return;
 	}
-	public Plant(String sciName, String comName, int lepsSupported, PlantType type){
+	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, String image){
 		this.comName = comName;
 		this.sciName = sciName;
 		this.lepsSupported = lepsSupported;
 		this.type = type;
+		this.sun = sun;
+		this.soil = soil;
+		this.moist = moist;
+		this.image = image;
 	}
 	//Getters
+	public String getImageUrl(){
+		return image;
+	}
 	public String getComName() {
 		return comName;
 	}
@@ -121,6 +129,6 @@ public class Plant {
 
 	@Override
 	public String toString(){
-		return comName + " " + sciName + " " + lepsSupported + "\n";
+		return comName + "|" + sciName + "|" + lepsSupported + "\n";
 	}
 }

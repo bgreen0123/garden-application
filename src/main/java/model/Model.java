@@ -8,8 +8,9 @@ import enums.Sun;
 
 public class Model {
 	private Gridspace[][] garden;
-	private static ArrayList<Lep> leps;
-	private static ArrayList<Plant> plants;
+	private ArrayList<Lep> leps;
+	private ArrayList<Plant> plants;
+	private ArrayList<Plant> favoritedPlants;
 	private int width;
 	private int height;
 	private Sun sun;
@@ -24,26 +25,26 @@ public class Model {
 		plants = new ArrayList<Plant>();
 	}
 	
-	public static void updateBudget(int cost) {
+	public void updateBudget(int cost) {
 		budgetLeft = cost;
 		return;
 	}
 	
-	public static void addPlant(Plant p) {
+	public void addPlant(Plant p) {
 		plants.add(p);
 		return;
 	}
 	
-	public static void addLeps(Lep lep) {
+	public void addLeps(Lep lep) {
 		leps.add(lep);
 		return;
 	}
 	
-	public static void removePlant(Plant p) {
+	public void removePlant(Plant p) {
 		return;
 	}
 	
-	public static void removeLep(Lep l) {
+	public void removeLep(Lep l) {
 		return;
 	}
 	
@@ -56,7 +57,7 @@ public class Model {
 		garden = g;
 	}
 	
-	public static ArrayList<Lep> getLeps() {
+	public ArrayList<Lep> getLeps() {
 		return leps;
 	}
 	
@@ -68,7 +69,7 @@ public class Model {
 		return height;
 	}
 
-	public static ArrayList<Plant> getPlants() {
+	public ArrayList<Plant> getPlants() {
 		return plants;
 	}
 
@@ -84,11 +85,11 @@ public class Model {
 		return moist;
 	}
 
-	public static int getBudget() {
+	public int getBudget() {
 		return budgetLeft;
 	}
 
-	public static int getLepCount() {
+	public int getLepCount() {
 		return lepCount;
 	}
 
