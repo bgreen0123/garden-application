@@ -9,6 +9,7 @@ import enums.Sun;
 public class Model {
 	private Gridspace[][] garden;
 	private ArrayList<Lep> leps;
+	private int lepsSupported = 0;
 	private ArrayList<Plant> plants;
 	private ArrayList<Plant> favoritedPlants;
 	private int width;
@@ -16,23 +17,22 @@ public class Model {
 	private Sun sun;
 	private Soil soil;
 	private Moisture moist;
-	private static int budgetLeft;
-	private static int lepCount;
+	private int budgetLeft;
 
 	
 	public Model(){
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
-	}
-	
-	public void updateBudget(int cost) {
-		budgetLeft = cost;
-		return;
+		favoritedPlants = new ArrayList<Plant>();
 	}
 	
 	public void addPlant(Plant p) {
 		plants.add(p);
 		return;
+	}
+	
+	public void addFavoritePlant(Plant p) {
+		favoritedPlants.add(p);
 	}
 	
 	public void addLeps(Lep lep) {
@@ -49,6 +49,13 @@ public class Model {
 	}
 	
 	//Getters
+	public int getNumLeps() {
+		return lepsSupported;
+	}
+	public ArrayList<Plant> getFavorites(){
+		return favoritedPlants;
+	}
+	
 	public Gridspace[][] getGarden() {
 		return garden;
 	}
@@ -89,10 +96,6 @@ public class Model {
 		return budgetLeft;
 	}
 
-	public int getLepCount() {
-		return lepCount;
-	}
-
 	//Setters
 	
 	public void setWidth(int w) {
@@ -115,11 +118,11 @@ public class Model {
 		moist = m;
 	}
 	
-	public void setBudget(int b) {
+	public void updateBudget(int b) {
 		budgetLeft = b;
 	}
 	
-	public void setLepCount(int l) {
-		lepCount = l;
+	public void updateLepCount(int l) {
+		lepsSupported += l;
 	}
 }

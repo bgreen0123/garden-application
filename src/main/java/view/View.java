@@ -2,6 +2,9 @@ package view;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Model;
+
+
 
 import controller.Controller;
 
@@ -19,12 +22,17 @@ public class View extends Application {
 	MarketWindow marketWindow;
 	MarketEntryWindow marketEntry;
 	ConditionsWindow conditions;
+	
+	Model model;
+	
 
 	@Override
     public void start(Stage stage) {
 		cont = new Controller(this);
+		model = cont.getModel();
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
-		conditions = new ConditionsWindow(width, height, stage);
+		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton());
+		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), model.getBudget(), model.getPlants(), model.getNumLeps());
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();
@@ -48,7 +56,8 @@ public class View extends Application {
 			conditions.draw();
 			break;
 		case END:
-			//endWindow.draw();
+			System.out.println("End");
+			endWindow.draw();
 			break;
 		case MARKET:
 			//marketWindow.draw();
@@ -70,3 +79,4 @@ public class View extends Application {
 		launch();
 	}
 }
+
