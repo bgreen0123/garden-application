@@ -56,6 +56,7 @@ public class MarketWindowHerbaceous extends Window{
         grid.add(list, 1, 1);
         grid.add(nextPage, 2, 2 );
         grid.setAlignment(Pos.CENTER);
+        nextPage.setPrefSize(100,50);
         
         grid.setBackground(background);
         scene = new Scene(grid, width, height);
