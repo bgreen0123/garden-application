@@ -192,11 +192,15 @@ public class GardenWindow extends Window{
             }
         });
         
+		
         border.setTop(countBar);
         border.setCenter(plot);
         border.setRight(favs);
+        favs.getChildren().add(gardenNextBox);
         border.setRight(gardenNextBox);
-        gardenNext.setPrefSize(100, 50);
+		gardenNext.setPrefSize(100, 50);
+        
+        
         
         
         
