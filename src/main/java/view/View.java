@@ -18,9 +18,8 @@ public class View extends Application {
 	WelcomeScreen welcome;
 	EndWindow endWindow;
 	GardenWindow garden;
-	MarketItem marketItem;
-	MarketWindow marketWindow;
-	MarketEntryWindow marketEntry;
+	MarketWindowHerbaceous marketH;
+	MarketWindowWoody marketW;
 	ConditionsWindow conditions;
 	
 	Model model;
@@ -33,6 +32,9 @@ public class View extends Application {
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
 		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton());
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), model.getBudget(), model.getPlants(), model.getNumLeps());
+		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext());
+		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext());
+		garden = new GardenWindow(width, height, stage, cont);
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();
@@ -56,8 +58,11 @@ public class View extends Application {
 			System.out.println("End");
 			endWindow.draw();
 			break;
-		case MARKET:
-			//marketWindow.draw();
+		case MARKET_H:
+			marketH.draw();
+			break;
+		case MARKET_W:
+			marketW.draw();
 			break;
 		default:
 			welcome.draw();

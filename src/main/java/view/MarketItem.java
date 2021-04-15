@@ -1,34 +1,22 @@
 package view;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import model.Plant;
+
 public class MarketItem {
-	String comName;
-	String sciName;
-	int lepSupported;
-	
-	
-	//Getters
-	public String getComName() {
-		return comName;
+	HBox comp;
+	Label l;
+	public MarketItem(Plant p, Button b) {
+		l = new Label(p.toString());
+		comp = new HBox();
+		comp.setSpacing(50);
+		comp.getChildren().addAll(l, b);
 	}
 	
-	public String getSciName() {
-		return sciName;
-	}
-	
-	public int getlepSupported() {
-		return lepSupported;
-	}
-	
-	//Setters
-	public void setComName(String com) {
-		comName = com;
-	}
-	
-	public void setSciName(String sci) {
-		sciName = sci;
-	}
-	
-	public void setLepSupported(int lep) {
-		lepSupported = lep;
+	public HBox getComp() {
+		return comp;
 	}
 }

@@ -2,15 +2,13 @@ package controller;
 
 import javafx.event.*;
 import javafx.scene.input.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
-import model.Lep;
+import javafx.scene.image.ImageView;
 import model.Model;
 import model.Plant;
+import view.MarketItem;
 import view.View;
 
 import java.io.File;
@@ -28,7 +26,14 @@ public class Controller{
 	Button welcomeNext;
 	Button download;
 	Button conditionsNext;
-
+	Button woody;
+	Button herbaceous;
+	Button marketNext;
+	
+	//Favorite buttons
+	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
+	ArrayList<MarketItem> herbaceousMarket = new ArrayList<MarketItem>(); 
+	
 	//Drop down menus
 	ChoiceBox<Sun> sun;
 	ChoiceBox<Soil> soil;
@@ -42,9 +47,35 @@ public class Controller{
 	public Controller(View view){
 		this.view = view;
 		model = new Model();
-
+		
+		model.getData().getWoody().forEach(p ->{
+			Button fav = new Button();
+			Image img = new Image(new File("src/main/java/images/favorite_decal.jpg").toURI().toString());
+			ImageView v = new ImageView(img);
+			v.setFitHeight(30);
+			v.setPreserveRatio(true);
+			fav.setGraphic(v);
+			fav.setOnAction(e -> model.addFavoritePlant(p));
+			MarketItem m = new MarketItem(p, fav);
+			woodyMarket.add(m);
+		});
+		
+		model.getData().getHerbacious().forEach(p ->{
+			Button fav = new Button();
+			Image img = new Image(new File("src/main/java/images/favorite_decal.jpg").toURI().toString());
+			ImageView v = new ImageView(img);
+			v.setFitHeight(30);
+			v.setPreserveRatio(true);
+			fav.setGraphic(v);
+			fav.setOnAction(e -> model.addFavoritePlant(p));
+			MarketItem m = new MarketItem(p, fav);
+			herbaceousMarket.add(m);
+		});
 		welcomeNext = new Button("Start");
 		conditionsNext = new Button("Continue");
+		woody = new Button("View Woody Plants");
+		herbaceous = new Button("View Herbaceous Plants");
+		marketNext = new Button("Go To Garden");
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS); // change back to CONDITIONS
 			System.out.println("Button Pressed");
@@ -52,11 +83,14 @@ public class Controller{
 
 		conditionsNext.setOnAction(e -> {
 			setChoice(sun,soil,moisture);
-			view.changeScreen(CurrentScreen.END); //Move to market screen
+			view.changeScreen(CurrentScreen.MARKET_H); //Move to market screen
 			System.out.println("Onto market");
 		});
 		
-
+		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
+		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
+		marketNext.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
+		
 		//Creating the drop down menu
 		sun = new ChoiceBox<>();
 		soil = new ChoiceBox<>();
@@ -72,9 +106,27 @@ public class Controller{
 
 	}
 
-
-
 	//Getters
+	public Button getMarketNext() {
+		return marketNext;
+	}
+	
+	public Button getHerbaceous() {
+		return herbaceous;
+	}
+	
+	public Button getWoody() {
+		return woody;
+	}
+	
+	public ArrayList<MarketItem> getHerbaceousMarket(){
+		return herbaceousMarket;
+	}
+	
+	public ArrayList<MarketItem> getWoodyMarket(){
+		return woodyMarket;
+	}
+	
 	public Button getWelcomeButton(){
 		return welcomeNext;
 	}
@@ -99,18 +151,6 @@ public class Controller{
 		return moisture;
 	}
 	
-	public Sun getSunConditions() {
-		return sunChoice;
-	}
-	
-	public Soil getSoilConditions() {
-		return soilChoice;
-	}
-	
-	public Moisture getMoistureConditions() {
-		return moistureChoice;
-	}
-	
 	public Model getModel() {
 		//This method is used for view to access certain fields such as budget and lep count
 		//No fields should be changed or updated from view, it is only to access values.
@@ -122,10 +162,29 @@ public class Controller{
 		sunChoice = sun.getValue();
 		soilChoice = soil.getValue();
 		moistureChoice = moisture.getValue();
+		model.setSun(sunChoice);
+		model.setSoil(soilChoice);
+		model.setMoisture(moistureChoice);
 		System.out.println(sunChoice + ", " + soilChoice + ", and " + moistureChoice);
 	}
 
 	//Actions
+	public void goToPage(CurrentScreen cs) {
+		view.changeScreen(cs);
+	}
+
+	public void updateLeps(int leps) {
+		model.updateLepCount(leps);
+	}
+	
+	public void updateBudget(int cost) {
+		model.updateBudget(model.getBudget() - cost);
+	}
+	
+	public void addFavPlant(Plant p) {
+		model.addFavoritePlant(p);
+	}
+	
 	public EventHandler dragPlant() {
 		return new EventHandler<MouseEvent>() {
 			@Override
@@ -161,4 +220,5 @@ public class Controller{
 		};
 	}
 }
+
 

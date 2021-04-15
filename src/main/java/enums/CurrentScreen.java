@@ -5,7 +5,8 @@ public enum CurrentScreen {
     //view that represents the current screen --Adam
 
     WELCOME("WELCOME"),
-	MARKET("MARKET"),
+	MARKET_H("MARKET_H"),
+	MARKET_W("MARKET_W"),
 	CONDITIONS("CONDITIONS"),
 	END("END"),
     GARDEN("GARDEN");

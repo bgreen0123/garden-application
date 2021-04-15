@@ -2,11 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import data.Data;
 import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
 
 public class Model {
+	private Data d;
 	private Gridspace[][] garden;
 	private ArrayList<Lep> leps;
 	private int lepsSupported = 0;
@@ -14,13 +16,15 @@ public class Model {
 	private ArrayList<Plant> favoritedPlants;
 	private int width;
 	private int height;
-	private Sun sun;
-	private Soil soil;
-	private Moisture moist;
+	//Temporary Default values to avoid "may not have been initialized error"
+	private Sun sun = Sun.FULLSUN;
+	private Soil soil = Soil.CLAY;
+	private Moisture moist = Moisture.DRY;
 	private int budgetLeft;
 
 	
 	public Model(){
+		d = new Data();
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
@@ -49,9 +53,14 @@ public class Model {
 	}
 	
 	//Getters
+	public Data getData() {
+		return d;
+	}
+	
 	public int getNumLeps() {
 		return lepsSupported;
 	}
+	
 	public ArrayList<Plant> getFavorites(){
 		return favoritedPlants;
 	}
@@ -126,3 +135,5 @@ public class Model {
 		lepsSupported += l;
 	}
 }
+
+

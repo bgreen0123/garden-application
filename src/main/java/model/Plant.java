@@ -129,6 +129,6 @@ public class Plant {
 
 	@Override
 	public String toString(){
-		return comName + "|" + sciName + "|" + lepsSupported + "\n";
+		return "Common Name: " + comName + '\n' + "Scientific Name : " + sciName + "\n" + "Leps Supported: " + lepsSupported;
 	}
 }
