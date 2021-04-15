@@ -197,7 +197,6 @@ public class GardenWindow extends Window{
         border.setCenter(plot);
         border.setRight(favs);
         favs.getChildren().add(gardenNextBox);
-        border.setRight(gardenNextBox);
 		gardenNext.setPrefSize(100, 50);
         
         
