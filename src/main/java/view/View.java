@@ -34,7 +34,7 @@ public class View extends Application {
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), model.getBudget(), model.getPlants(), model.getNumLeps());
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext());
 		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext());
-		garden = new GardenWindow(width, height, stage, cont);
+		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();

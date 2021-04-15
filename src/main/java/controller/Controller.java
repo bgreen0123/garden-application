@@ -29,6 +29,7 @@ public class Controller{
 	Button woody;
 	Button herbaceous;
 	Button marketNext;
+	Button gardenNext;
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -71,11 +72,16 @@ public class Controller{
 			MarketItem m = new MarketItem(p, fav);
 			herbaceousMarket.add(m);
 		});
+		
+		//Buttons
 		welcomeNext = new Button("Start");
-		conditionsNext = new Button("Continue");
+		conditionsNext = new Button("Go To Market");
+		gardenNext = new Button("Go To End");
 		woody = new Button("View Woody Plants");
 		herbaceous = new Button("View Herbaceous Plants");
 		marketNext = new Button("Go To Garden");
+		
+		//Actions
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS); // change back to CONDITIONS
 			System.out.println("Button Pressed");
@@ -85,6 +91,11 @@ public class Controller{
 			setChoice(sun,soil,moisture);
 			view.changeScreen(CurrentScreen.MARKET_H); //Move to market screen
 			System.out.println("Onto market");
+		});
+		
+		gardenNext.setOnAction(e -> {
+			view.changeScreen(CurrentScreen.END);
+			System.out.println("End Window");
 		});
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
@@ -137,6 +148,10 @@ public class Controller{
 
 	public Button getConditionsButton(){
 		return conditionsNext;
+	}
+	
+	public Button getEndButton() {
+		return gardenNext;
 	}
 
 	public ChoiceBox<Sun> getSun() {

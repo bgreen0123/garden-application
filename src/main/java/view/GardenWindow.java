@@ -55,12 +55,14 @@ public class GardenWindow extends Window{
     Label lepLabel;
     Label budgetLabel;
     Insets countBarItemSpacing;
+    Button gardenNext;
 
-    public GardenWindow(int width, int height, Stage stage, Controller cont) {
+    public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
     	this.width = width;
         this.height = height;
         this.stage = stage;
         this.cont = cont;
+        this.gardenNext = gardenNext;
     }
     
     @Override
@@ -91,6 +93,12 @@ public class GardenWindow extends Window{
     	
     	//Top bar
     	HBox countBar = drawCountBar(marketiv, budgetBox, lepBox);
+    	
+    	//Button to next page
+    	HBox gardenNextBox = new HBox();
+    	gardenNextBox.getChildren().add(gardenNext);
+        gardenNextBox.setAlignment(Pos.BOTTOM_RIGHT);
+        
     	
         //Favorite sidebar
         VBox favs = new VBox();
@@ -187,6 +195,9 @@ public class GardenWindow extends Window{
         border.setTop(countBar);
         border.setCenter(plot);
         border.setRight(favs);
+        border.setRight(gardenNextBox);
+        gardenNext.setPrefSize(100, 50);
+        
         
         
         scene = new Scene(border, width, height);
