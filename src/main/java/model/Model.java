@@ -25,6 +25,7 @@ public class Model {
 	
 	public Model(){
 		d = new Data();
+		budgetLeft = 500;
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();

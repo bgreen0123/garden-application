@@ -38,7 +38,7 @@ public class GardenWindow extends Window{
     Controller cont;
     Model model;
 	Image background;
-    int budget = 500;
+    int budget;
     int totalLeps = 0;
     Button toMarket;
     Pane faveList;
@@ -68,7 +68,7 @@ public class GardenWindow extends Window{
     @Override
     public void draw() {
     	model = cont.getModel();
-    	
+    	budget = model.getBudget();
     	//Background Image
     	System.out.println("Draw garden!");
         Image bgimg = new Image(new File("src/main/java/images/dirt-background-transparent.jpg").toURI().toString(), width, height, false, true);
@@ -97,7 +97,7 @@ public class GardenWindow extends Window{
     	//Button to next page
     	HBox gardenNextBox = new HBox();
     	gardenNextBox.getChildren().add(gardenNext);
-        gardenNextBox.setAlignment(Pos.BOTTOM_RIGHT);
+        gardenNextBox.setAlignment(Pos.BOTTOM_CENTER);
         
     	
         //Favorite sidebar
@@ -198,10 +198,6 @@ public class GardenWindow extends Window{
         border.setRight(favs);
         favs.getChildren().add(gardenNextBox);
 		gardenNext.setPrefSize(100, 50);
-        
-        
-        
-        
         
         scene = new Scene(border, width, height);
         stage.setScene(scene);

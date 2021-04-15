@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -35,33 +36,34 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import model.Plant;
 
 public class EndWindow extends Window{
     Image background;
-
+    Controller cont;
     Scene scene;
     int width, height;
     Stage stage;
     
     int budget;
-    ArrayList plantsList;
+    ArrayList<Plant> plantsList;
     int leps;
     
     Button download;
 
-    public EndWindow(int width, int height, Stage stage, Button download, int budget, ArrayList plantsList, int leps) {
+    public EndWindow(int width, int height, Stage stage, Button download, Controller cont) {
         this.width = width;
         this.height = height;
         this.stage = stage;
-        this.budget = budget;
+        this.cont = cont;
         this.download = download;
-        this.plantsList = plantsList;
-        this.leps = leps;
     }
     
     @Override
     public void draw() {
-    	
+    	budget = cont.getModel().getBudget();
+    	leps = cont.getModel().getNumLeps();
+    	plantsList = cont.getModel().getPlants();
     	//Background Image
         Image img = new Image(new File("src/main/java/images/End-background.jpg").toURI().toString(), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -80,7 +82,7 @@ public class EndWindow extends Window{
         dollar.setImage(dollarimg);
         dollar.setPreserveRatio(true);;
         dollar.setFitHeight(45);
-        Label spent = new Label("Amount Spent: " + budget);
+        Label spent = new Label("     Money Remaining: " + budget);
         spent.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
         VBox amountSpentBox = new VBox();
         VBox.setMargin(amountSpentBox, new Insets(25,25,0,0));
@@ -95,11 +97,11 @@ public class EndWindow extends Window{
         plants.setImage(flowerimg);
         plants.setPreserveRatio(true);;
         plants.setFitHeight(40);
-        Label plant = new Label("Plants chosen: " + plantsList);
+        Label plant = new Label("Plants chosen: ");
         plant.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
         VBox plantsBox = new VBox();
         VBox.setMargin(plantsBox, new Insets(50,0,0,0));
-        plantsBox.setSpacing(10);;
+        plantsBox.setSpacing(10);
         plantsBox.setAlignment(Pos.CENTER);
         plantsBox.getChildren().addAll(plants, plant);
         
