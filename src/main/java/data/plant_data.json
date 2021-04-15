@@ -93,7 +93,7 @@
         {
             "common": "Wood Spurge",
             "scientific": "Euphorbia amygdaloides",
-            "leps": "",
+            "leps": "85",
             "sun": "s",
             "soil": "r",
             "moist": "d",

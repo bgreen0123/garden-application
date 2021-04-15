@@ -1,6 +1,8 @@
 
 import org.junit.*;
 
+import data.Data;
+
 import static org.junit.Assert.*;
 
 import enums.*;
@@ -150,6 +152,26 @@ public class TestModel {
 		m.updateBudget(500);
 		
 		assertEquals(500, m.getBudget());
+
+		fail();
+	}
+	
+	@Test
+	public void testFavoriteGetSet() {
+		System.out.println("test fav plant getter and setter");
+		
+		m.addFavoritePlant(plant1);
+		
+		assertEquals(1, m.getFavorites().size());
+
+		fail();
+	}
+	
+	@Test
+	public void testDataGet() {
+		System.out.println("test data getter");
+				
+		assertTrue(m.getData() instanceof Data);
 
 		fail();
 	}
