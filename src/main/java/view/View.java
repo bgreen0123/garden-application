@@ -30,7 +30,7 @@ public class View extends Application {
 		cont = new Controller(this);
 		model = cont.getModel();
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
-		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton());
+		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getText());
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont);
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext());
 		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext());

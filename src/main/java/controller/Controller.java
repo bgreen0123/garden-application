@@ -4,6 +4,7 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Model;
@@ -40,10 +41,14 @@ public class Controller{
 	ChoiceBox<Soil> soil;
 	ChoiceBox<Moisture> moisture;
 	
+	//Budget
+	TextField text;
+	
 	//User answers
   	Sun sunChoice;
   	Soil soilChoice;
   	Moisture moistureChoice;
+  	
 
 	public Controller(View view){
 		this.view = view;
@@ -114,6 +119,9 @@ public class Controller{
 		sun.getSelectionModel().select(0);
 		soil.getSelectionModel().select(0);
 		moisture.getSelectionModel().select(0);
+		
+		//Making text box
+		text = new TextField("Enter Your Budget!");
 
 	}
 
@@ -164,6 +172,10 @@ public class Controller{
 
 	public ChoiceBox<Moisture> getMoisture() {
 		return moisture;
+	}
+	
+	public TextField getText() {
+		return text;
 	}
 	
 	public Model getModel() {
