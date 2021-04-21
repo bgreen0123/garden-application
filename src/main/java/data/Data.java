@@ -1,11 +1,9 @@
 package data;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 import model.Plant;
 import enums.Moisture;
@@ -13,10 +11,14 @@ import enums.PlantType;
 import enums.Soil;
 import enums.Sun;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Element; 
+
+import javax.xml.parsers.DocumentBuilder;
 
 public class Data {
     private ArrayList<Plant> herb;
@@ -29,97 +31,97 @@ public class Data {
     }
 
     private void setData(){
-        JSONParser parser = new JSONParser();
         try {
-        	Object obj = parser.parse(new FileReader(getClass().getResource("/data/plant_data.json").getFile()));
-        	JSONObject jsonObject = (JSONObject) obj;
-        	JSONArray plantsArray = (JSONArray) jsonObject.get("plants");
-        	Iterator iterator = plantsArray.iterator();
-        	Iterator<Map.Entry> itr1;
-        	while(iterator.hasNext()) {
-        		itr1 = ((Map) iterator.next()).entrySet().iterator();
+        	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); 
+        	DocumentBuilder db = dbf.newDocumentBuilder();
+        	InputStream is = getClass().getResourceAsStream("plant_data.xml");
+        	Document doc = db.parse(is);
+        	doc.getDocumentElement().normalize();  
+        	System.out.println("Root element: " + doc.getDocumentElement().getNodeName());  
+        	NodeList nodeList = doc.getElementsByTagName("plant"); 
+        	System.out.println(nodeList.getLength());
+      
+        	for(int i = 0; i < nodeList.getLength(); i++) {
+        		Node node = nodeList.item(i);
         		String common, scientific, l, image, s, so, m, pType;
-        		common = scientific = image = " ";
-        		int leps = 0;
-    			Sun sun = Sun.SHADE;
-    			Moisture moist = Moisture.WET;
-    			Soil soil = Soil.CLAY;
-    			PlantType plantType = PlantType.HERBACIOUS;
-        		while(itr1.hasNext()) {
-        			Map.Entry pair = itr1.next();
-        			String key = (String)pair.getKey();
-        			switch(key) {
-        			case "common":
-        				common = (String)pair.getValue();
-        				break;
-        			case "scientific":
-        				scientific = (String)pair.getValue();
-        				break;
-        			case "leps":
-        				l = (String)pair.getValue();
-        				leps = Integer.parseInt(l);
-        				break;
-        			case "sun":
-        				s = (String)pair.getValue();
-        				switch(s) {
-                		case "f":
-                			sun = Sun.FULLSUN;
-                			break;
-                		case "p":
-                			sun = Sun.PARTSUN;
-                			break;
-                		case "s":
-                			sun = Sun.SHADE;
-        				break;
-        				}
-        			case "soil":
-        				so = (String)pair.getValue();
-        				switch(so) {
-                		case "c":
-                			soil = Soil.CLAY;
-                			break;
-                		case "d":
-                			soil = Soil.DIRT;
-                			break;
-                		case "r":
-                			soil = Soil.ROCK;
-        				break;
-        				}
-        			case "moist":
-        				m = (String)pair.getValue();
-        				switch(m) {
-                		case "w":
-                			moist = Moisture.WET;
-                			break;
-                		case "d":
-                			moist = Moisture.DRY;
-                			break;
-        				}
-        			case "type":
-        				pType = (String)pair.getValue();
-        				switch(pType) {
-                		case "w":
-                			plantType = PlantType.WOODY;
-                			break;
-                		case "h":
-                			plantType = PlantType.HERBACIOUS;
-                			break;
-        				}
-        			case "image":
-        				image = (String)pair.getValue();
-        				break;
+        		int leps;
+    			Sun sun;
+    			Moisture moist;
+    			Soil soil;
+    			PlantType plantType;
+        		if (node.getNodeType() == Node.ELEMENT_NODE) {
+        			Element eElement = (Element) node; 
+        			common = eElement.getElementsByTagName("common").item(0).getTextContent();
+        			scientific = eElement.getElementsByTagName("scientific").item(0).getTextContent();
+        			leps = Integer.parseInt(eElement.getElementsByTagName("leps").item(0).getTextContent());
+        			s = eElement.getElementsByTagName("sun").item(0).getTextContent();
+        			switch(s) {
+            		case "f":
+            			sun = Sun.FULLSUN;
+            			break;
+            		case "p":
+            			sun = Sun.PARTSUN;
+            			break;
+            		case "s":
+            			sun = Sun.SHADE;
+            			break;
+            		default:
+            			sun = Sun.FULLSUN;
+            			break;
         			}
         			
+        			so = eElement.getElementsByTagName("soil").item(0).getTextContent();
+        			switch(so) {
+            		case "c":
+            			soil = Soil.CLAY;
+            			break;
+            		case "d":
+            			soil = Soil.DIRT;
+            			break;
+            		case "r":
+            			soil = Soil.ROCK;
+            			break;
+            		default:
+            			soil = Soil.ROCK;
+            			break;
+    				}
+        			
+        			m = eElement.getElementsByTagName("moist").item(0).getTextContent();
+        			switch(m) {
+            		case "w":
+            			moist = Moisture.WET;
+            			break;
+            		case "d":
+            			moist = Moisture.DRY;
+            			break;
+            		default:
+            			moist = Moisture.DRY;
+            			break;
+    				}
+        			
+        			pType = eElement.getElementsByTagName("type").item(0).getTextContent();
+    				switch(pType) {
+            		case "w":
+            			plantType = PlantType.WOODY;
+            			break;
+            		case "h":
+            			plantType = PlantType.HERBACIOUS;
+            			break;
+            		default:
+            			plantType = PlantType.HERBACIOUS;
+            			break;
+    				}
+    				
+        			image = eElement.getElementsByTagName("image").item(0).getTextContent();
+        			
+        			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, image);
+            		if(plantType == PlantType.WOODY) {
+            			wood.add(newPlant);
+            		}else {
+            			herb.add(newPlant);
+            		}
         		}
-        		Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, image);
-        		if(plantType == PlantType.WOODY) {
-        			wood.add(newPlant);
-        		}else {
-        			herb.add(newPlant);
-        		}
-  
         	}
-        	
         }catch(FileNotFoundException e) {
         	e.printStackTrace();
         }catch(IOException e) {
