@@ -21,6 +21,7 @@ public class View extends Application {
 	MarketWindowHerbaceous marketH;
 	MarketWindowWoody marketW;
 	ConditionsWindow conditions;
+	Favs favs;
 	
 	Model model;
 	
@@ -32,11 +33,18 @@ public class View extends Application {
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
 		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getText());
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont);
-		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext());
-		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext());
+		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont);
+		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont);
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
+		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont);
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
+		drawScreen();
+	}
+	
+	public void setFilter() {
+		marketH.setFilter();
+		marketW.setFilter();
 		drawScreen();
 	}
 	
@@ -63,6 +71,9 @@ public class View extends Application {
 			break;
 		case MARKET_W:
 			marketW.draw();
+			break;
+		case FAVS:
+			favs.draw();
 			break;
 		default:
 			welcome.draw();

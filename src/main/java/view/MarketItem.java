@@ -11,8 +11,10 @@ public class MarketItem {
 	HBox comp;
 	Label l;
 	Button b;
-	public MarketItem(Plant p, Button but) {
+	Plant p;
+	public MarketItem(Plant pl, Button but) {
 		this.b = but;
+		this.p = pl;
 		l = new Label(p.toString());
 		Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
 		ImageView v = new ImageView(img);
@@ -22,7 +24,9 @@ public class MarketItem {
 		comp = new HBox();
 		comp.getChildren().addAll(l, b);
 	}
-	
+	public Plant getPlant() {
+		return p;
+	}
 	public HBox getComp() {
 		return comp;
 	}

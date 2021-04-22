@@ -28,6 +28,9 @@ public class Controller{
 	Button herbaceous;
 	Button marketNext;
 	Button gardenNext;
+	Button applyConditions;
+	Button viewFavs;
+	Button backToMarket;
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -72,6 +75,11 @@ public class Controller{
 		woody = new Button("View Woody Plants");
 		herbaceous = new Button("View Herbaceous Plants");
 		marketNext = new Button("Go To Garden");
+		applyConditions = new Button("Apply Conditions");
+		viewFavs = new Button("View Favorites");
+		backToMarket = new Button("Return to Market");
+		
+		
 		
 		//Actions
 		welcomeNext.setOnAction(e -> {
@@ -93,6 +101,9 @@ public class Controller{
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
 		marketNext.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
+		applyConditions.setOnAction(e -> view.setFilter());
+		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
+		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
 		
 		//Creating the drop down menu
 		sun = new ChoiceBox<>();
@@ -123,6 +134,16 @@ public class Controller{
 	
 	public Button getWoody() {
 		return woody;
+	}
+	
+	public Button getApplyConditions() {
+		return applyConditions;
+	}
+	public Button getViewFavs() {
+		return viewFavs;
+	}
+	public Button getBackToMarket() {
+		return backToMarket;
 	}
 	
 	public ArrayList<MarketItem> getHerbaceousMarket(){

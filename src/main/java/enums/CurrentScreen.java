@@ -9,7 +9,8 @@ public enum CurrentScreen {
 	MARKET_W("MARKET_W"),
 	CONDITIONS("CONDITIONS"),
 	END("END"),
-    GARDEN("GARDEN");
+    GARDEN("GARDEN"),
+	FAVS("FAVS");
 	
 	private String name = null;
 	
