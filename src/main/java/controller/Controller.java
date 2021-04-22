@@ -42,7 +42,7 @@ public class Controller{
 	ChoiceBox<Moisture> moisture;
 	
 	//Budget
-	TextField text;
+	TextField budget;
 	
 	//User answers
   	Sun sunChoice;
@@ -79,6 +79,9 @@ public class Controller{
 		viewFavs = new Button("View Favorites");
 		backToMarket = new Button("Return to Market");
 		
+		//Making text box
+		budget = new TextField("Enter Your Budget!");
+		
 		
 		
 		//Actions
@@ -98,6 +101,11 @@ public class Controller{
 			System.out.println("End Window");
 		});
 		
+		budget.setOnAction(e -> {
+			model.updateBudget(Integer.parseInt(budget.getText()));
+			System.out.println("Budget Updated...");
+		});
+		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
 		marketNext.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
@@ -110,16 +118,17 @@ public class Controller{
 		soil = new ChoiceBox<>();
 		moisture = new ChoiceBox<>();
 		//Adding choices into the drop menu
-		sun.getItems().addAll(Sun.FULLSUN,Sun.PARTSUN,Sun.SHADE);
-		soil.getItems().addAll(Soil.CLAY,Soil.DIRT,Soil.ROCK);
-		moisture.getItems().addAll(Moisture.WET,Moisture.DRY);
-		//Starting value that the user sees
-		sun.getSelectionModel().select(0);
-		soil.getSelectionModel().select(0);
-		moisture.getSelectionModel().select(0);
+		sun.getItems().addAll(Sun.SUN,Sun.FULLSUN,Sun.PARTSUN,Sun.SHADE);
+		soil.getItems().addAll(Soil.SOIL,Soil.CLAY,Soil.DIRT,Soil.ROCK);
+		moisture.getItems().addAll(Moisture.MOISTURE,Moisture.WET,Moisture.DRY);
 		
-		//Making text box
-		text = new TextField("Enter Your Budget!");
+		//Starting value that the user sees
+		sun.setValue(Sun.SUN);
+		soil.setValue(Soil.SOIL);
+		moisture.setValue(Moisture.MOISTURE);
+
+		
+		
 
 	}
 
@@ -182,8 +191,8 @@ public class Controller{
 		return moisture;
 	}
 	
-	public TextField getText() {
-		return text;
+	public TextField getBudget() {
+		return budget;
 	}
 	
 	public Model getModel() {

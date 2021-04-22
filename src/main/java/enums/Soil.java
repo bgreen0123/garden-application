@@ -1,5 +1,6 @@
 package enums;
 public enum Soil {
+	SOIL("SOIL"),
     ROCK("ROCK"),
     CLAY("CLAY"),
     DIRT("DIRT");

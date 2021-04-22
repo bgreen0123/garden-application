@@ -1,5 +1,6 @@
 package enums;
 public enum Sun {
+	SUN("SUN"),
     FULLSUN("FULLSUN"),
     PARTSUN("PARTSUN"),
     SHADE("SHADE");

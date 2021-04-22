@@ -25,7 +25,7 @@ public class Model {
 	
 	public Model(){
 		d = new Data();
-		budgetLeft = 500;
+		budgetLeft = 0;
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
@@ -130,6 +130,7 @@ public class Model {
 	
 	public void updateBudget(int b) {
 		budgetLeft = b;
+		System.out.println("New Budget: "+ budgetLeft);
 	}
 	
 	public void updateLepCount(int l) {

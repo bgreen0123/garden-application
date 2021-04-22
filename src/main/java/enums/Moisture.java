@@ -1,5 +1,6 @@
 package enums;
 public enum Moisture {
+	MOISTURE("MOISTURE"),
     DRY("DRY"),
     WET("WET");
 

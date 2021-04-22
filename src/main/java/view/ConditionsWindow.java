@@ -25,7 +25,7 @@ public class ConditionsWindow extends Window{
     Stage stage;
     ChoiceBox sun, soil, moisture; 
     Button conditionsNext;
-    TextField text;
+    TextField budget;
     
     //Constructor
     public ConditionsWindow(int width, int height, Stage stage, ChoiceBox sun, ChoiceBox soil, ChoiceBox moisture, Button conditionsNext, TextField text){
@@ -36,7 +36,7 @@ public class ConditionsWindow extends Window{
         this.soil = soil;
         this.moisture = moisture;
         this.conditionsNext = conditionsNext;
-        this.text = text;
+        this.budget = text;
     }
     
     @Override
@@ -56,23 +56,24 @@ public class ConditionsWindow extends Window{
         //Set up HBoxes
         HBox choiceBox = new HBox();
         HBox buttonBox = new HBox();
-        HBox textBox = new HBox();
+        //HBox textBox = new HBox();
         
         choiceBox.setAlignment(Pos.CENTER);
         buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
-        choiceBox.getChildren().addAll(sun,soil,moisture);
-        textBox.setAlignment(Pos.BOTTOM_CENTER);
-        textBox.getChildren().add(text);
+        choiceBox.getChildren().addAll(sun,soil,moisture,budget);
+        
+        choiceBox.setSpacing(30);
         
         conditionsNext.setPrefSize(100,50);
+        choiceBox.setPrefSize(300, 300);
         buttonBox.getChildren().add(conditionsNext);
         border.setCenter(choiceBox);
         border.setRight(buttonBox);
-        border.setBottom(textBox);
+        //border.setCenter(textBox);
         
         //Add the tile, padding and the drop down menus to the border pane. Set the background
         border.setTop(t);
-        t.setPadding(new Insets(30,30,0,130));
+        t.setPadding(new Insets(0,0,0,130));
         border.setBackground(background);
         
 
