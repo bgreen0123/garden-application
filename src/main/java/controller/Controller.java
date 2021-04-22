@@ -1,24 +1,21 @@
 package controller;
 
-import javafx.event.*;
-import javafx.scene.input.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import model.Model;
-import model.Plant;
-import view.MarketItem;
-import view.View;
-
-import java.io.File;
 import java.util.ArrayList;
 
 import enums.CurrentScreen;
 import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import model.Model;
+import model.Plant;
+import view.MarketItem;
+import view.View;
 
 public class Controller{
 	Model model;
@@ -56,11 +53,6 @@ public class Controller{
 		
 		model.getData().getWoody().forEach(p ->{
 			Button fav = new Button();
-			Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
-			ImageView v = new ImageView(img);
-			v.setFitHeight(30);
-			v.setPreserveRatio(true);
-			fav.setGraphic(v);
 			fav.setOnAction(e -> model.addFavoritePlant(p));
 			MarketItem m = new MarketItem(p, fav);
 			woodyMarket.add(m);
@@ -68,11 +60,6 @@ public class Controller{
 		
 		model.getData().getHerbacious().forEach(p ->{
 			Button fav = new Button();
-			Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
-			ImageView v = new ImageView(img);
-			v.setFitHeight(30);
-			v.setPreserveRatio(true);
-			fav.setGraphic(v);
 			fav.setOnAction(e -> model.addFavoritePlant(p));
 			MarketItem m = new MarketItem(p, fav);
 			herbaceousMarket.add(m);
@@ -81,7 +68,7 @@ public class Controller{
 		//Buttons
 		welcomeNext = new Button("Start");
 		conditionsNext = new Button("Go To Market");
-		gardenNext = new Button("Go To End");
+		gardenNext = new Button("FINISH");
 		woody = new Button("View Woody Plants");
 		herbaceous = new Button("View Herbaceous Plants");
 		marketNext = new Button("Go To Garden");

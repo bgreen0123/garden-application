@@ -3,16 +3,16 @@ package view;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
-
-
+import java.awt.*;
 
 import controller.Controller;
 
 import enums.CurrentScreen;
 
 public class View extends Application {
-	int height = 600;
-	int width = 800;
+	Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+	int height = (int) size.getHeight() - 65;
+	int width = (int) size.getWidth();
 	Controller cont;
 	CurrentScreen currentScreen;
 	WelcomeScreen welcome;

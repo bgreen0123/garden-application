@@ -49,8 +49,11 @@ public class MarketWindowHerbaceous extends Window{
         nextPage.setPadding(new Insets(5,5,5,5));
         herb.setFont(Font.font("Courier New",30));
         ListView<HBox> list = new ListView<HBox>();
-        herbaceous.forEach(m -> list.getItems().add(m.getComp()));
         list.setPrefSize(width * .7, height * .7);
+        herbaceous.forEach(m -> {
+        	list.getItems().add(m.getComp());
+        	m.getLabel().setPrefWidth(width * .4);
+        });
         grid.add(woody, 0, 0);
         grid.add(herb, 1, 0);
         grid.add(list, 1, 1);

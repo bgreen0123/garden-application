@@ -1,6 +1,5 @@
 package view;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import controller.Controller;
@@ -30,6 +29,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.Model;
 import model.Plant;
@@ -71,7 +72,7 @@ public class GardenWindow extends Window{
     	budget = model.getBudget();
     	//Background Image
     	System.out.println("Draw garden!");
-    	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"));
+    	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(bgimg, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
         
@@ -103,7 +104,7 @@ public class GardenWindow extends Window{
         //Favorite sidebar
         VBox favs = new VBox();
     	favs.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + favBarColor + ";");
-    	favs.setPrefWidth(150);
+    	favs.setPrefWidth(width * .2);
     	Image heartImg = new Image(getClass().getResourceAsStream("/images/heart.png"));
         ImageView heartiv = new ImageView();
         heartiv.setImage(heartImg);
@@ -114,12 +115,11 @@ public class GardenWindow extends Window{
     	HBox favTitle = new HBox(heartiv, favLabel);
     	favTitle.setAlignment(Pos.CENTER);
     	favTitle.setSpacing(15);
+    	favTitle.setPadding(new Insets(15, 15, 15, 15));
     	favs.getChildren().add(favTitle);
     	
     	GridPane plot = new GridPane();
     	plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
-
-    	favs.setSpacing(30);
     	
     	ObservableList<String> backingList;
     	ListView<String> plantList;
@@ -131,6 +131,7 @@ public class GardenWindow extends Window{
     	}
     	backingList = FXCollections.observableArrayList(plantPics);
     	plantList = new ListView<>(backingList);
+    	plantList.setPrefHeight(height * .8);
     	favs.getChildren().add(plantList);
     	
     	// Add mouse event handler for the source
@@ -196,8 +197,12 @@ public class GardenWindow extends Window{
         border.setTop(countBar);
         border.setCenter(plot);
         border.setRight(favs);
-        favs.getChildren().add(gardenNextBox);
-		gardenNext.setPrefSize(100, 50);
+        
+        gardenNext.setPrefSize(width * .2, height * .2);
+        gardenNext.setAlignment(Pos.CENTER);
+        gardenNext.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + countBarColor + ";");
+        gardenNext.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
+        favs.getChildren().add(gardenNext);
         
         scene = new Scene(border, width, height);
         stage.setScene(scene);

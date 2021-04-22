@@ -50,8 +50,11 @@ public class MarketWindowWoody extends Window{
         nextPage.setPadding(new Insets(5,5,5,5));
         wood.setFont(Font.font("Courier New",30));
         ListView<HBox> list = new ListView<HBox>();
-        woody.forEach(m -> list.getItems().add(m.getComp()));
         list.setPrefSize(width * .7, height * .7);
+        woody.forEach(m -> {
+        	list.getItems().add(m.getComp());
+        	m.getLabel().setPrefWidth(width * .4);
+        });
         grid.add(herb, 0, 0);
         grid.add(wood, 1, 0);
         grid.add(list, 1, 1);
