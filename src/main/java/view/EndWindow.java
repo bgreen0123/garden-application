@@ -65,7 +65,7 @@ public class EndWindow extends Window{
     	leps = cont.getModel().getNumLeps();
     	plantsList = cont.getModel().getPlants();
     	//Background Image
-        Image img = new Image(new File("src/main/java/images/End-background.jpg").toURI().toString(), width, height, false, true);
+        Image img = new Image(getClass().getResourceAsStream("/images/end-background.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
         
@@ -77,7 +77,7 @@ public class EndWindow extends Window{
         
         // budget summary 
         
-        Image dollarimg = new Image (new File("src/main/java/images/dollar_sign.png").toURI().toString(), width, height, false, true);
+        Image dollarimg = new Image(getClass().getResourceAsStream("/images/dollar_sign.png"));
         ImageView dollar = new ImageView();
         dollar.setImage(dollarimg);
         dollar.setPreserveRatio(true);;
@@ -92,7 +92,7 @@ public class EndWindow extends Window{
         
         // plants
         
-        Image flowerimg = new Image (new File("src/main/java/images/flower.png.png").toURI().toString(), width, height, false, true);
+        Image flowerimg = new Image(getClass().getResourceAsStream("/images/flower.png.png"));
         ImageView plants = new ImageView();
         plants.setImage(flowerimg);
         plants.setPreserveRatio(true);;
@@ -107,7 +107,7 @@ public class EndWindow extends Window{
         
         // leps
         
-        Image lepimg = new Image (new File("src/main/java/images/butterfly-png.png").toURI().toString(), width, height, false, true);
+        Image lepimg = new Image(getClass().getResourceAsStream("/images/butterfly-png.png"));
         ImageView theLep = new ImageView();
         theLep.setImage(lepimg);
         theLep.setPreserveRatio(true);
@@ -121,14 +121,14 @@ public class EndWindow extends Window{
         lepsBox.getChildren().addAll(theLep, totalLeps);
         
         // download button image
-        Image downloadimg = new Image (new File("src/main/java/images/download.png").toURI().toString(), width, height, false, true);
+        Image downloadimg = new Image(getClass().getResourceAsStream("/images/download.png"));
         ImageView downloading = new ImageView();
         downloading.setImage(downloadimg);
         downloading.setFitHeight(30);
         downloading.setPreserveRatio(true);
         
         
-        Image garden = new Image(new File("src/main/java/images/temporary_garden.jpg").toURI().toString(), width, height, false, true);
+        Image garden = new Image(getClass().getResourceAsStream("/images/temporary_garden.jpg"));
         ImageView gardenimg = new ImageView();
         gardenimg.setImage(garden);
         gardenimg.setPreserveRatio(true);

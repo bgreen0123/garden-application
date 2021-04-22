@@ -37,7 +37,7 @@ public class MarketWindowWoody extends Window{
         this.woody = woody;
         this.herb = herb;
         this.nextPage = nextPage;
-        img = new Image(new File("src/main/java/images/conditions-window.jpg").toURI().toString(),width,height,false,true);
+        img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
     }
     @Override
     public void draw() {

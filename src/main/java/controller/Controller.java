@@ -56,7 +56,7 @@ public class Controller{
 		
 		model.getData().getWoody().forEach(p ->{
 			Button fav = new Button();
-			Image img = new Image(new File("src/main/java/images/favorite_decal.jpg").toURI().toString());
+			Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
 			ImageView v = new ImageView(img);
 			v.setFitHeight(30);
 			v.setPreserveRatio(true);
@@ -68,7 +68,7 @@ public class Controller{
 		
 		model.getData().getHerbacious().forEach(p ->{
 			Button fav = new Button();
-			Image img = new Image(new File("src/main/java/images/favorite_decal.jpg").toURI().toString());
+			Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
 			ImageView v = new ImageView(img);
 			v.setFitHeight(30);
 			v.setPreserveRatio(true);

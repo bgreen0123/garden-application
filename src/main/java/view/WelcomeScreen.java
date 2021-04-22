@@ -36,7 +36,7 @@ public class WelcomeScreen extends Window{
     public void draw() {
 
         //Background Image
-        Image img = new Image(new File("src/main/java/images/welcome-background.jpg").toURI().toString(), width, height, false, true);
+        Image img = new Image(getClass().getResourceAsStream("/images/welcome-background.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
  

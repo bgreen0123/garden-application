@@ -71,7 +71,7 @@ public class GardenWindow extends Window{
     	budget = model.getBudget();
     	//Background Image
     	System.out.println("Draw garden!");
-        Image bgimg = new Image(new File("src/main/java/images/dirt-background-transparent.jpg").toURI().toString(), width, height, false, true);
+    	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"));
         BackgroundImage bg = new BackgroundImage(bgimg, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
         
@@ -104,7 +104,7 @@ public class GardenWindow extends Window{
         VBox favs = new VBox();
     	favs.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + favBarColor + ";");
     	favs.setPrefWidth(150);
-    	Image heartImg = new Image(new File("src/main/java/images/heart.png").toURI().toString(), width, height, false, true);
+    	Image heartImg = new Image(getClass().getResourceAsStream("/images/heart.png"));
         ImageView heartiv = new ImageView();
         heartiv.setImage(heartImg);
         heartiv.setPreserveRatio(true);
@@ -156,10 +156,10 @@ public class GardenWindow extends Window{
             	ImageView iv1;
             	int price;
             	if(favorited.get(index).getType() == PlantType.HERBACIOUS) {
-            		iv1 = new ImageView(new Image(new File("src/main/java/images/plant.png").toURI().toString(), width, height, false, true));
+            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
             		price = 6;
             	} else  {
-            		iv1 = new ImageView(new Image(new File("src/main/java/images/tree.png").toURI().toString(), width, height, false, true));
+            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
             		price = 20;
             	}
             	iv1.setPreserveRatio(true);
@@ -221,7 +221,7 @@ public class GardenWindow extends Window{
     }
     
     public HBox drawLeps() {
-    	Image lepImg = new Image(new File("src/main/java/images/butterfly.png").toURI().toString(), width, height, false, true);
+    	Image lepImg = new Image(getClass().getResourceAsStream("/images/butterfly-png.png"));
         ImageView lepiv = new ImageView();
         lepiv.setImage(lepImg);
         lepiv.setPreserveRatio(true);
@@ -237,7 +237,7 @@ public class GardenWindow extends Window{
     }
     
     public HBox drawBudget() {
-    	Image dollarimg = new Image(new File("src/main/java/images/dollar-sign.png").toURI().toString(), width, height, false, true);
+    	Image dollarimg = new Image(getClass().getResourceAsStream("/images/dollar-sign.png"));
         ImageView dollariv = new ImageView();
         dollariv.setImage(dollarimg);
         dollariv.setPreserveRatio(true);
@@ -253,7 +253,7 @@ public class GardenWindow extends Window{
     }
     
     public ImageView makeMarketButton() {
-    	Image marketImg = new Image(new File("src/main/java/images/stand.jpg").toURI().toString(), width, height, false, true);
+    	Image marketImg = new Image(getClass().getResourceAsStream("/images/stand.jpg"));
         ImageView marketiv = new ImageView();
         marketiv.setImage(marketImg);
         marketiv.setPreserveRatio(true);

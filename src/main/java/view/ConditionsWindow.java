@@ -46,7 +46,7 @@ public class ConditionsWindow extends Window{
         t.setFont(Font.font("Courier New",30));
         
         //Background image for conditions window
-        Image img = new Image(new File("src/main/java/images/conditions-window.jpg").toURI().toString(),width,height,false,true);
+        Image img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img,BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
         Background background = new Background(bg);
         
