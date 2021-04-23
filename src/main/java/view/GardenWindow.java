@@ -1,6 +1,10 @@
 package view;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.imageio.ImageIO;
 
 import controller.Controller;
 import enums.CurrentScreen;
@@ -57,6 +61,7 @@ public class GardenWindow extends Window{
     Label budgetLabel;
     Insets countBarItemSpacing;
     Button gardenNext;
+    HashMap <ImageView, Plant> PlantImageViews;
 
     public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
     	this.width = width;
@@ -64,6 +69,7 @@ public class GardenWindow extends Window{
         this.stage = stage;
         this.cont = cont;
         this.gardenNext = gardenNext;
+        PlantImageViews = new HashMap<ImageView, Plant>();
     }
     
     @Override
@@ -121,18 +127,41 @@ public class GardenWindow extends Window{
     	GridPane plot = new GridPane();
     	plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
     	
-    	ObservableList<String> backingList;
-    	ListView<String> plantList;
+    	
+		ImageView listiv;
+    	ObservableList<ImageView> backingList;
+    	ListView<ImageView> plantList;
     	plot.setPickOnBounds(false);
-    	ArrayList<String> plantPics = new ArrayList<String>();
+    	ArrayList<ImageView> plantPics = new ArrayList<ImageView>();
     	ArrayList<Plant> favorited = model.getFavorites();
     	for(int i = 0; i < favorited.size(); i++) {
-			plantPics.add(favorited.get(i).getComName());
+    		try {
+    			listiv = new ImageView(new Image(favorited.get(i).getImageUrl()));
+    		} catch(Exception e){
+    			if(favorited.get(i).getType() == PlantType.HERBACIOUS) {
+            		listiv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
+            	} else  {
+            		listiv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
+            	}    		
+    		}
+    		listiv.setPreserveRatio(true);
+        	listiv.setFitWidth(75);
+			plantPics.add(listiv);
     	}
     	backingList = FXCollections.observableArrayList(plantPics);
     	plantList = new ListView<>(backingList);
     	plantList.setPrefHeight(height * .8);
     	favs.getChildren().add(plantList);
+    	
+    	//Add the plants
+    	ImageView plantiv;
+    	for(Plant p : model.getPlants()) {
+    		plantiv = p.getImageView();
+    		plantiv.setTranslateX(p.getX());
+    		plantiv.setTranslateY(p.getY());
+    		plot.getChildren().add(plantiv);
+        	plantiv.toFront();
+    	}
     	
     	// Add mouse event handler for the source
 		plantList.setOnDragDetected(new EventHandler <MouseEvent>()
@@ -151,7 +180,7 @@ public class GardenWindow extends Window{
             {	
             	System.out.println("dragging released!");
             	int index = plantList.getSelectionModel().getSelectedIndex();
-            	String selected = plantList.getSelectionModel().getSelectedItem();
+            	ImageView selected = plantList.getSelectionModel().getSelectedItem();
 
             	//make a copy of selected ImageView to put in plot Pane
             	ImageView iv1;
@@ -166,12 +195,14 @@ public class GardenWindow extends Window{
             	iv1.setPreserveRatio(true);
             	iv1.setFitHeight(100);
             	
-            	cont.updateLeps(favorited.get(index).getLepsSupported());
-            	updateLeps(favorited.get(index).getLepsSupported());
+            	Plant p = (Plant)(favorited.get(index).clone());
+            	PlantImageViews.put(iv1, p);
+            	System.out.println(p.getImageUrl());
+            	
+            	cont.updateLeps(p.getLepsSupported());
+            	updateLeps(p.getLepsSupported());
             	cont.updateBudget(price);
             	updateBudget(price);
-            	cont.addFavPlant(favorited.get(index));
-            	
             	
             	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
 
@@ -181,6 +212,11 @@ public class GardenWindow extends Window{
 
             	iv1.setTranslateX(event.getSceneX() - plot.getLayoutX());
             	iv1.setTranslateY(event.getSceneY() - plot.getLayoutY());
+            	
+            	p.setX(iv1.getTranslateX());
+            	p.setY(iv1.getTranslateY());
+            	p.setImageView(iv1);
+            	cont.addPlant(p);
 
             	iv1.setOnMousePressed(event1 -> pressed(event1));
             	iv1.setOnMouseDragged(event2 -> drag(event2));
@@ -216,10 +252,12 @@ public class GardenWindow extends Window{
     }
     
 	public void drag(MouseEvent event) {
-		//System.out.println("ic mouse");
+		System.out.println(event.getSource().getClass().getName());
 		Node n = (Node)event.getSource();
 		n.setTranslateX(n.getTranslateX() + event.getX());
 		n.setTranslateY(n.getTranslateY() + event.getY());
+		PlantImageViews.get(n).setX(n.getTranslateX());
+		PlantImageViews.get(n).setY(n.getTranslateY());
 	}    
     public void released(MouseEvent event) {
     	System.out.println("released");

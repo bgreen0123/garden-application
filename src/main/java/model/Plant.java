@@ -4,20 +4,22 @@ import enums.Moisture;
 import enums.PlantType;
 import enums.Soil;
 import enums.Sun;
+import javafx.scene.image.ImageView;
 
-public class Plant {
+public class Plant implements Cloneable{
 	private String comName;
 	private String sciName;
 	private int lepsSupported;
 	private int width;
 	private int height;
-	private int xloc;
-	private int yloc;
+	private double xloc;
+	private double yloc;
 	private PlantType type;
 	private Sun sun;
 	private Soil soil;
 	private Moisture moist;
 	private String image;
+	private ImageView iv;
 	
 	public void move() {
 		return;
@@ -32,9 +34,22 @@ public class Plant {
 		this.moist = moist;
 		this.image = image;
 	}
+	
+	public Object clone(){  
+	    try{  
+	        return super.clone();  
+	    }catch(Exception e){ 
+	        return null; 
+	    }
+	}
+	
 	//Getters
 	public String getImageUrl(){
 		return image;
+	}
+	
+	public ImageView getImageView() {
+		return iv;
 	}
 	public String getComName() {
 		return comName;
@@ -56,11 +71,12 @@ public class Plant {
 		return height;
 	}
 	
-	public int getX() {
+	public double getX() {
+		System.out.println("Trying to replace...");
 		return xloc;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return yloc;
 	}
 	
@@ -81,6 +97,10 @@ public class Plant {
 	}
 	
 	//Setters
+	
+	public void setImageView(ImageView i) {
+		iv = i;
+	}
 
 	//Don't need this
 	public void setComName(String n) {
@@ -103,11 +123,11 @@ public class Plant {
 		height = h;
 	}
 	
-	public void setX(int x) {
+	public void setX(double x) {
 		xloc = x;
 	}
 	
-	public void setY(int y) {
+	public void setY(double y) {
 		yloc = y;
 	}
 	

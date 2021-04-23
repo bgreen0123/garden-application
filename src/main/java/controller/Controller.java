@@ -281,8 +281,8 @@ public class Controller{
 		model.updateBudget(model.getBudget() - cost);
 	}
 	
-	public void addFavPlant(Plant p) {
-		model.addFavoritePlant(p);
+	public void addPlant(Plant p) {
+		model.addPlant(p);
 	}
 	
 	public EventHandler dragPlant() {
