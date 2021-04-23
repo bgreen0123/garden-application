@@ -6,10 +6,15 @@ import enums.CurrentScreen;
 import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import model.Model;
@@ -31,6 +36,7 @@ public class Controller{
 	Button applyConditions;
 	Button viewFavs;
 	Button backToMarket;
+	Button backToConditions;
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -40,6 +46,10 @@ public class Controller{
 	ChoiceBox<Sun> sun;
 	ChoiceBox<Soil> soil;
 	ChoiceBox<Moisture> moisture;
+	
+	//Sliders
+	Slider x;
+	Slider y;
 	
 	//Budget
 	TextField budget;
@@ -70,7 +80,7 @@ public class Controller{
 		
 		//Buttons
 		welcomeNext = new Button("Start");
-		conditionsNext = new Button("Go To Market");
+		conditionsNext = new Button("NEXT");
 		gardenNext = new Button("FINISH");
 		woody = new Button("View Woody Plants");
 		herbaceous = new Button("View Herbaceous Plants");
@@ -78,20 +88,53 @@ public class Controller{
 		applyConditions = new Button("Apply Conditions");
 		viewFavs = new Button("View Favorites");
 		backToMarket = new Button("Return to Market");
+		backToConditions = new Button("Return to Conditions");
 		
 		//Making text box
-		budget = new TextField("Enter Your Budget!");
+		budget = new TextField();
 		
-		
+		//Making sliders
+		x = new Slider();
+		y = new Slider();
 		
 		//Actions
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS); // change back to CONDITIONS
 			System.out.println("Button Pressed");
 		});
-
+		
+		backToConditions.setOnAction(e -> view.changeScreen(CurrentScreen.CONDITIONS));
+		
+		x.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+                        model.setWidth(new_val.intValue());
+                        System.out.println("Garden Width: " + model.getWidth());
+                }
+            });
+		
+		y.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+                        model.setHeight(new_val.intValue());
+                        System.out.println("Garden Height: " + model.getHeight());
+                }
+            });
 		conditionsNext.setOnAction(e -> {
 			setChoice(sun,soil,moisture);
+			String input = budget.getText();
+			int budget;
+			if(input == "") {
+				budgetError();
+				return;
+			}
+			try {
+				budget = Integer.parseInt(input);
+			}catch (Exception exc){
+				budgetError();
+				return;
+			}
+			model.updateBudget(budget);
 			view.changeScreen(CurrentScreen.MARKET_H); //Move to market screen
 			System.out.println("Onto market");
 		});
@@ -99,11 +142,6 @@ public class Controller{
 		gardenNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.END);
 			System.out.println("End Window");
-		});
-		
-		budget.setOnAction(e -> {
-			model.updateBudget(Integer.parseInt(budget.getText()));
-			System.out.println("Budget Updated...");
 		});
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
@@ -131,8 +169,18 @@ public class Controller{
 		
 
 	}
+	private void budgetError() {
+		Alert budgetError = new Alert(AlertType.ERROR);
+		budgetError.setHeaderText("Invalid budget");
+		budgetError.setContentText("Budget must be an integer and cannot be empty");
+		budgetError.showAndWait();
+	}
 
 	//Getters
+	public Button getBackToConditions() {
+		return backToConditions;
+	}
+	
 	public Button getMarketNext() {
 		return marketNext;
 	}
@@ -193,6 +241,14 @@ public class Controller{
 	
 	public TextField getBudget() {
 		return budget;
+	}
+	
+	public Slider getXSlider() {
+		return x;
+	}
+	
+	public Slider getYSlider() {
+		return y;
 	}
 	
 	public Model getModel() {

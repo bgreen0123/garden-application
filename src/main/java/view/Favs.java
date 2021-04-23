@@ -21,17 +21,19 @@ public class Favs extends Window{
     Image img;
     Button nextPage;
     Button backToMarket;
+    Button cond;
     Scene scene;
     int width, height;
     Stage stage;
     Controller cont;
     
-	public Favs(int width, int height, Stage stage, Button backToMarket, Button nextPage, Controller cont) {
+	public Favs(int width, int height, Stage stage, Button backToMarket, Button nextPage, Button cond, Controller cont) {
         this.width = width;
         this.height = height;
         this.stage = stage;
         this.nextPage = nextPage;
         this.backToMarket = backToMarket;
+        this.cond = cond;
         this.cont = cont;
         img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
     }
@@ -51,7 +53,7 @@ public class Favs extends Window{
         	list.getItems().add(l);
         });
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(backToMarket, nextPage);
+        buttons.getChildren().addAll(backToMarket, cond, nextPage);
         buttons.setPrefWidth(width * .7);
         grid.add(favs, 1, 0);
         grid.add(buttons, 1, 1);

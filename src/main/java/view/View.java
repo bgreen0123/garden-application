@@ -31,12 +31,12 @@ public class View extends Application {
 		cont = new Controller(this);
 		model = cont.getModel();
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
-		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getBudget());
+		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getXSlider(), cont.getYSlider(), cont.getBudget());
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont);
-		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont);
-		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont);
+		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
+		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
-		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont);
+		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont.getBackToConditions(), cont);
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();

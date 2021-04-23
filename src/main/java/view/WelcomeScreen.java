@@ -1,6 +1,6 @@
 package view;
 
-import java.io.File;
+import static javafx.geometry.Pos.CENTER;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,7 +17,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import static javafx.geometry.Pos.CENTER;
 
 public class WelcomeScreen extends Window{
     Button nextPage;

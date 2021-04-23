@@ -3,6 +3,9 @@ package view;
 import java.util.ArrayList;
 
 import controller.Controller;
+import enums.Moisture;
+import enums.Soil;
+import enums.Sun;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,6 +33,7 @@ public class MarketWindowWoody extends Window{
     Button herb;
     Button applyConditions;
     Button viewFavs;
+    Button cond;
     Scene scene;
     int width, height;
     Stage stage;
@@ -38,7 +42,7 @@ public class MarketWindowWoody extends Window{
     private boolean filter = false;
     private int count;
 
-	public MarketWindowWoody(int width, int height, Stage stage, ArrayList<MarketItem> woody, Button herb, Button nextPage, Button applyConditions, Button viewFavs, Controller cont) {
+	public MarketWindowWoody(int width, int height, Stage stage, ArrayList<MarketItem> woody, Button herb, Button nextPage, Button applyConditions, Button viewFavs, Button cond, Controller cont) {
         this.width = width;
         this.height = height;
         this.stage = stage;
@@ -47,6 +51,7 @@ public class MarketWindowWoody extends Window{
         this.nextPage = nextPage;
         this.applyConditions = applyConditions;
         this.viewFavs = viewFavs;
+        this.cond = cond;
         this.cont = cont;
         img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
     }
@@ -68,9 +73,9 @@ public class MarketWindowWoody extends Window{
         count = 0;
         woody.forEach(m -> {
         	if(filter) {
-        		if(cont.getModel().getSun() == m.getPlant().getSun()
-        				&& cont.getModel().getSoil() == m.getPlant().getSoil()
-        				&& cont.getModel().getMoisture() == m.getPlant().getMoisture()) {
+        		if((cont.getModel().getSun() == m.getPlant().getSun() || cont.getModel().getSun() == Sun.SUN)
+        				&& (cont.getModel().getSoil() == m.getPlant().getSoil() || cont.getModel().getSoil() == Soil.SOIL)
+        				&& (cont.getModel().getMoisture() == m.getPlant().getMoisture() || cont.getModel().getMoisture() == Moisture.MOISTURE)) {
         			count++;
         			list.getItems().add(m.getComp());
     	        	m.getLabel().setPrefWidth(width * .4);
@@ -86,7 +91,7 @@ public class MarketWindowWoody extends Window{
     		list.getItems().add(nothing);
     	}
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(herb, applyConditions, viewFavs, nextPage);
+        buttons.getChildren().addAll(herb, applyConditions, viewFavs, cond, nextPage);
         if(filter) {
         	applyConditions.setBackground(new Background(new BackgroundFill(Color.GREENYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
         }else {
