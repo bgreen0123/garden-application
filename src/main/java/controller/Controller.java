@@ -66,14 +66,30 @@ public class Controller{
 		
 		model.getData().getWoody().forEach(p ->{
 			Button fav = new Button();
-			fav.setOnAction(e -> model.addFavoritePlant(p));
+			fav.setOnAction(e -> {
+				for(Plant pl : model.getFavorites()) {
+					if(pl.getComName().equals(p.getComName())) {
+						duplicateError();
+						return;
+					}
+				}
+				model.addFavoritePlant(p);
+			});
 			MarketItem m = new MarketItem(p, fav);
 			woodyMarket.add(m);
 		});
 		
 		model.getData().getHerbacious().forEach(p ->{
 			Button fav = new Button();
-			fav.setOnAction(e -> model.addFavoritePlant(p));
+			fav.setOnAction(e -> {
+				for(Plant pl : model.getFavorites()) {
+					if(pl.getComName().equals(p.getComName())) {
+						duplicateError();
+						return;
+					}
+				}
+				model.addFavoritePlant(p);
+			});
 			MarketItem m = new MarketItem(p, fav);
 			herbaceousMarket.add(m);
 		});
@@ -168,6 +184,12 @@ public class Controller{
 		
 		
 
+	}
+	private void duplicateError() {
+		Alert dupError = new Alert(AlertType.ERROR);
+		dupError.setHeaderText("Plant Already Added");
+		dupError.setContentText("You can only add a plant to the favorite list 1 time.");
+		dupError.showAndWait();
 	}
 	private void budgetError() {
 		Alert budgetError = new Alert(AlertType.ERROR);
