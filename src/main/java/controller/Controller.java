@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
@@ -74,6 +76,10 @@ public class Controller{
 					}
 				}
 				model.addFavoritePlant(p);
+				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
+				i.setFitHeight(30);
+				i.setFitWidth(30);
+				fav.setGraphic(i);
 			});
 			MarketItem m = new MarketItem(p, fav);
 			woodyMarket.add(m);
@@ -89,6 +95,10 @@ public class Controller{
 					}
 				}
 				model.addFavoritePlant(p);
+				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
+				i.setFitHeight(30);
+				i.setFitWidth(30);
+				fav.setGraphic(i);
 			});
 			MarketItem m = new MarketItem(p, fav);
 			herbaceousMarket.add(m);

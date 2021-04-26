@@ -4,6 +4,7 @@ import enums.Moisture;
 import enums.PlantType;
 import enums.Soil;
 import enums.Sun;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Plant implements Cloneable{
@@ -33,6 +34,19 @@ public class Plant implements Cloneable{
 		this.soil = soil;
 		this.moist = moist;
 		this.image = image;
+		makeImageView();
+	}
+	
+	private void makeImageView() {
+		try {
+			iv = new ImageView(new Image(image));
+		} catch(Exception e){
+			if(type == PlantType.HERBACIOUS) {
+        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
+        	} else  {
+        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
+        	}    		
+		}
 	}
 	
 	public Object clone(){  

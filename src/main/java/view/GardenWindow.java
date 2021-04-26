@@ -62,6 +62,8 @@ public class GardenWindow extends Window{
     Insets countBarItemSpacing;
     Button gardenNext;
     HashMap <ImageView, Plant> PlantImageViews;
+	HBox listbox;
+	double favWidth = .3;
 
     public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
     	this.width = width;
@@ -110,7 +112,7 @@ public class GardenWindow extends Window{
         //Favorite sidebar
         VBox favs = new VBox();
     	favs.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + favBarColor + ";");
-    	favs.setPrefWidth(width * .2);
+    	favs.setPrefWidth(width * favWidth);
     	Image heartImg = new Image(getClass().getResourceAsStream("/images/heart.png"));
         ImageView heartiv = new ImageView();
         heartiv.setImage(heartImg);
@@ -128,26 +130,20 @@ public class GardenWindow extends Window{
     	plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
     	
     	
-		ImageView listiv;
-    	ObservableList<ImageView> backingList;
-    	ListView<ImageView> plantList;
+    	ObservableList<HBox> backingList;
+    	ListView<HBox> plantList;
     	plot.setPickOnBounds(false);
-    	ArrayList<ImageView> plantPics = new ArrayList<ImageView>();
+    	ArrayList<HBox> plantPics = new ArrayList<HBox>();
     	ArrayList<Plant> favorited = model.getFavorites();
-    	for(int i = 0; i < favorited.size(); i++) {
-    		try {
-    			listiv = new ImageView(new Image(favorited.get(i).getImageUrl()));
-    		} catch(Exception e){
-    			if(favorited.get(i).getType() == PlantType.HERBACIOUS) {
-            		listiv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
-            	} else  {
-            		listiv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
-            	}    		
-    		}
+    	favorited.forEach(p->{
+    		ImageView listiv;
+    		Label n = new Label(p.toString());
+    		listiv = p.getImageView();
+    		HBox entry = new HBox(listiv, n);
     		listiv.setPreserveRatio(true);
         	listiv.setFitWidth(75);
-			plantPics.add(listiv);
-    	}
+			plantPics.add(entry);
+    	}); 
     	backingList = FXCollections.observableArrayList(plantPics);
     	plantList = new ListView<>(backingList);
     	plantList.setPrefHeight(height * .8);
@@ -180,7 +176,7 @@ public class GardenWindow extends Window{
             {	
             	System.out.println("dragging released!");
             	int index = plantList.getSelectionModel().getSelectedIndex();
-            	ImageView selected = plantList.getSelectionModel().getSelectedItem();
+            	HBox selected = plantList.getSelectionModel().getSelectedItem();
 
             	//make a copy of selected ImageView to put in plot Pane
             	ImageView iv1;
@@ -234,7 +230,7 @@ public class GardenWindow extends Window{
         border.setCenter(plot);
         border.setRight(favs);
         
-        gardenNext.setPrefSize(width * .2, height * .2);
+        gardenNext.setPrefSize(width * favWidth, height * .2);
         gardenNext.setAlignment(Pos.CENTER);
         gardenNext.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + countBarColor + ";");
         gardenNext.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
