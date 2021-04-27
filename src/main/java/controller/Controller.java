@@ -1,5 +1,10 @@
 package controller;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import enums.CurrentScreen;
@@ -39,6 +44,11 @@ public class Controller{
 	Button viewFavs;
 	Button backToMarket;
 	Button backToConditions;
+	Button toLoad;
+	Button save;
+	Button load;
+	Button toWelcome;
+	
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -53,13 +63,18 @@ public class Controller{
 	Slider x;
 	Slider y;
 	
-	//Budget
+	//Text Boxes
 	TextField budget;
+	TextField saveBox;
+	TextField loadBox;
 	
 	//User answers
   	Sun sunChoice;
   	Soil soilChoice;
   	Moisture moistureChoice;
+  	
+  	//Load file
+  	String fileName;
   	
 
 	public Controller(View view){
@@ -115,9 +130,14 @@ public class Controller{
 		viewFavs = new Button("View Favorites");
 		backToMarket = new Button("Return to Market");
 		backToConditions = new Button("Return to Conditions");
+		toLoad = new Button("Load A Garden");
+		save = new Button("Save");
+		load = new Button("Load");
+		toWelcome = new Button("Back to Start");
 		
 		//Making text box
 		budget = new TextField();
+		saveBox = new TextField();
 		
 		//Making sliders
 		x = new Slider();
@@ -176,6 +196,35 @@ public class Controller{
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
+		toLoad.setOnAction(e ->  view.changeScreen(CurrentScreen.LOAD));
+		toWelcome.setOnAction(e -> view.changeScreen(CurrentScreen.WELCOME));
+		
+		save.setOnAction(e -> {
+			fileName = saveBox.getText();
+			try {
+				save(model, fileName);
+			}
+			catch(Exception exc) {
+				System.out.println("Couldn't save file");
+				saveError();
+				return;
+			}
+		});
+		
+		load.setOnAction(e -> {
+			fileName = loadBox.getText();
+			try {
+				Model newM = (Model) load(fileName);
+				model = newM;
+			}
+			catch(Exception exc) {
+				System.out.println("Couldn't load file");
+				loadError();
+				return;
+			}
+		});
+		
+		
 		
 		//Creating the drop down menu
 		sun = new ChoiceBox<>();
@@ -204,8 +253,20 @@ public class Controller{
 	private void budgetError() {
 		Alert budgetError = new Alert(AlertType.ERROR);
 		budgetError.setHeaderText("Invalid budget");
-		budgetError.setContentText("Budget must be an integer and cannot be empty");
+		budgetError.setContentText("Budget must be an integer and cannot be empty.");
 		budgetError.showAndWait();
+	}
+	private void saveError() {
+		Alert saveError = new Alert(AlertType.ERROR);
+		saveError.setHeaderText("Could not save garden");
+		saveError.setContentText("The garden could not be saved at this time. Please try again later.");
+		saveError.showAndWait();
+	}
+	private void loadError() {
+		Alert saveError = new Alert(AlertType.ERROR);
+		saveError.setHeaderText("Could not load garden");
+		saveError.setContentText("The garden could not be loaded at this time. Please try again later.");
+		saveError.showAndWait();
 	}
 
 	//Getters
@@ -258,6 +319,22 @@ public class Controller{
 	public Button getEndButton() {
 		return gardenNext;
 	}
+	
+	public Button getToWelcomeButton(){
+		return toWelcome;
+	}
+	
+	public Button getToLoadButton() {
+		return toLoad;
+	}
+	
+	public Button getSaveButton() {
+		return save;
+	}
+	
+	public Button getLoadButton() {
+		return load;
+	}
 
 	public ChoiceBox<Sun> getSun() {
 		return sun;
@@ -275,12 +352,20 @@ public class Controller{
 		return budget;
 	}
 	
+	public TextField getSave() {
+		return saveBox;
+	}
+	
 	public Slider getXSlider() {
 		return x;
 	}
 	
 	public Slider getYSlider() {
 		return y;
+	}
+	
+	public String getFileName() {
+		return fileName;
 	}
 	
 	public Model getModel() {
@@ -315,6 +400,18 @@ public class Controller{
 	
 	public void addPlant(Plant p) {
 		model.addPlant(p);
+	}
+	
+	public static void save(Serializable data, String fileName) throws Exception{
+		try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
+			oos.writeObject(data);
+		}
+	}
+	
+	public static Object load(String fileName) throws Exception{
+		try(ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))){
+			return ois.readObject();
+		}
 	}
 	
 	public EventHandler dragPlant() {

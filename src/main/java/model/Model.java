@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import data.Data;
@@ -7,7 +8,9 @@ import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
 
-public class Model {
+public class Model implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Data d;
 	private Gridspace[][] garden;
 	private ArrayList<Lep> leps;

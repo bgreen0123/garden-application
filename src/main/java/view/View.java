@@ -22,6 +22,7 @@ public class View extends Application {
 	MarketWindowWoody marketW;
 	ConditionsWindow conditions;
 	Favs favs;
+	LoadWindow load;
 	
 	Model model;
 	
@@ -30,13 +31,15 @@ public class View extends Application {
     public void start(Stage stage) {
 		cont = new Controller(this);
 		model = cont.getModel();
-		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton());
+		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton(), cont.getToLoadButton());
 		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getXSlider(), cont.getYSlider(), cont.getBudget());
-		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont);
+		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont, cont.getFileName(), cont.getSave(), cont.getSaveButton());
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
 		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont.getBackToConditions(), cont);
+		load = new LoadWindow(width, height, stage, cont.getFileName(), cont.getToWelcomeButton());
+		
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
 		drawScreen();
@@ -74,6 +77,10 @@ public class View extends Application {
 			break;
 		case FAVS:
 			favs.draw();
+			break;
+		case LOAD:
+			System.out.println("Load");
+			load.draw();
 			break;
 		default:
 			welcome.draw();

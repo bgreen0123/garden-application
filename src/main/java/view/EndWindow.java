@@ -1,8 +1,7 @@
 package view;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -19,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -44,19 +44,25 @@ public class EndWindow extends Window{
     Scene scene;
     int width, height;
     Stage stage;
-    
+    String fileName;
+    TextField saveBox;
+    Button save;
+   
     int budget;
     ArrayList<Plant> plantsList;
     int leps;
     
     Button download;
 
-    public EndWindow(int width, int height, Stage stage, Button download, Controller cont) {
+    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, Button save) {
         this.width = width;
         this.height = height;
         this.stage = stage;
         this.cont = cont;
         this.download = download;
+        this.fileName = fileName;
+        this.saveBox = saveBox;
+        this.save = save;
     }
     
     @Override
@@ -132,7 +138,8 @@ public class EndWindow extends Window{
         ImageView gardenimg = new ImageView();
         gardenimg.setImage(garden);
         gardenimg.setPreserveRatio(true);
-        gardenimg.setFitHeight(210);
+        gardenimg.setFitHeight(height * .1);
+        gardenimg.setFitWidth(width * .1);
         VBox gardenBox = new VBox();
         VBox.setMargin(gardenBox, new Insets(0,0,0,0));
         gardenBox.setSpacing(10);
@@ -159,6 +166,7 @@ public class EndWindow extends Window{
         		fileChooser.showSaveDialog(stage);
         	}
         });
+        
         
         
         

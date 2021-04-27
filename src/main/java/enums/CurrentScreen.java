@@ -10,7 +10,8 @@ public enum CurrentScreen {
 	CONDITIONS("CONDITIONS"),
 	END("END"),
     GARDEN("GARDEN"),
-	FAVS("FAVS");
+	FAVS("FAVS"),
+	LOAD("LOAD");
 	
 	private String name = null;
 	
