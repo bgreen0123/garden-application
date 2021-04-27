@@ -130,7 +130,7 @@ public class Controller{
 		viewFavs = new Button("View Favorites");
 		backToMarket = new Button("Return to Market");
 		backToConditions = new Button("Return to Conditions");
-		toLoad = new Button("Load A Garden");
+		toLoad = new Button("Load Garden");
 		save = new Button("Save");
 		load = new Button("Load");
 		toWelcome = new Button("Back to Start");

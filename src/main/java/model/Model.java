@@ -32,6 +32,7 @@ public class Model implements Serializable{
 		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
+		DataThread dt = new DataThread(this);
 	}
 	
 	public void addPlant(Plant p) {

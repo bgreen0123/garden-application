@@ -33,10 +33,9 @@ public class Plant implements Cloneable{
 		this.soil = soil;
 		this.moist = moist;
 		this.image = image;
-		makeImageView();
 	}
 	
-	private void makeImageView() {
+	public void makeImageView() {
 		try {
 			iv = new ImageView(new Image(image));
 		} catch(Exception e){
