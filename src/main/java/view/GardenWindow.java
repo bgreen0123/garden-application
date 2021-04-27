@@ -61,8 +61,9 @@ public class GardenWindow extends Window{
     Label budgetLabel;
     Insets countBarItemSpacing;
     Button gardenNext;
-    HashMap <ImageView, Plant> PlantImageViews;
+    HashMap <ImageView, Plant> plantImageViews;
 	HBox listbox;
+	double favHeight = .8;
 	double favWidth = .3;
 
     public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
@@ -71,7 +72,7 @@ public class GardenWindow extends Window{
         this.stage = stage;
         this.cont = cont;
         this.gardenNext = gardenNext;
-        PlantImageViews = new HashMap<ImageView, Plant>();
+        plantImageViews = new HashMap<ImageView, Plant>();
     }
     
     @Override
@@ -86,7 +87,8 @@ public class GardenWindow extends Window{
         
         //Entire screen is a borderpane
         BorderPane border = new BorderPane();
-        border.setBackground(background);
+        border.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:white;");
+        //border.setBackground(background);
         
         countBarItemSpacing = new Insets((countBarHeight-countBarItemHeight)/2, 
     			0, (countBarHeight-countBarItemHeight)/2, 50);
@@ -126,9 +128,17 @@ public class GardenWindow extends Window{
     	favTitle.setPadding(new Insets(15, 15, 15, 15));
     	favs.getChildren().add(favTitle);
     	
+    	double centerWidth = width - (favWidth*width);
+    	int centerHeight = height - countBarHeight;
+    	int gardenWidth = 400;
+    	int gardenHeight = 300;
+    	Pane outerPlot = new Pane();
     	GridPane plot = new GridPane();
-    	plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
-    	
+    	plot.setPrefSize(gardenWidth, gardenHeight);
+    	//plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
+    	plot.setBackground(background);
+    	plot.setLayoutX((centerWidth/2) - gardenWidth/2);
+    	plot.setLayoutY((centerHeight/2) - (gardenHeight/2));
     	
     	ObservableList<HBox> backingList;
     	ListView<HBox> plantList;
@@ -146,7 +156,7 @@ public class GardenWindow extends Window{
     	}); 
     	backingList = FXCollections.observableArrayList(plantPics);
     	plantList = new ListView<>(backingList);
-    	plantList.setPrefHeight(height * .8);
+    	plantList.setPrefHeight(height * favHeight);
     	favs.getChildren().add(plantList);
     	
     	//Add the plants
@@ -170,7 +180,7 @@ public class GardenWindow extends Window{
         });
 		
 		// Add mouse handler for target
-		plot.setOnMouseDragReleased(new EventHandler <MouseDragEvent>()
+		outerPlot.setOnMouseDragReleased(new EventHandler <MouseDragEvent>()
 		{
             public void handle(MouseDragEvent event)
             {	
@@ -189,10 +199,12 @@ public class GardenWindow extends Window{
             		price = 20;
             	}
             	iv1.setPreserveRatio(true);
-            	iv1.setFitHeight(100);
+            	int imDiameter = 100;
+            	iv1.setFitHeight(imDiameter);
             	
             	Plant p = (Plant)(favorited.get(index).clone());
-            	PlantImageViews.put(iv1, p);
+            	p.setDiameter(imDiameter);
+            	plantImageViews.put(iv1, p);
             	System.out.println(p.getImageUrl());
             	
             	cont.updateLeps(p.getLepsSupported());
@@ -206,8 +218,8 @@ public class GardenWindow extends Window{
             	//put dragged Node back into list in same place
             	backingList.set(index, selected);
 
-            	iv1.setTranslateX(event.getSceneX() - plot.getLayoutX());
-            	iv1.setTranslateY(event.getSceneY() - plot.getLayoutY());
+            	iv1.setTranslateX(event.getSceneX() - plot.getLayoutX() - imDiameter/2);
+            	iv1.setTranslateY(event.getSceneY() - plot.getLayoutY() - imDiameter);
             	
             	p.setX(iv1.getTranslateX());
             	p.setY(iv1.getTranslateY());
@@ -225,9 +237,9 @@ public class GardenWindow extends Window{
             }
         });
         
-		
+		outerPlot.getChildren().add(plot);
         border.setTop(countBar);
-        border.setCenter(plot);
+        border.setCenter(outerPlot);
         border.setRight(favs);
         
         gardenNext.setPrefSize(width * favWidth, height * .2);
@@ -250,10 +262,10 @@ public class GardenWindow extends Window{
 	public void drag(MouseEvent event) {
 		System.out.println(event.getSource().getClass().getName());
 		Node n = (Node)event.getSource();
-		n.setTranslateX(n.getTranslateX() + event.getX());
-		n.setTranslateY(n.getTranslateY() + event.getY());
-		PlantImageViews.get(n).setX(n.getTranslateX());
-		PlantImageViews.get(n).setY(n.getTranslateY());
+		n.setTranslateX(n.getTranslateX() + event.getX() - plantImageViews.get(n).getDiameter()/2);
+		n.setTranslateY(n.getTranslateY() + event.getY() - plantImageViews.get(n).getDiameter()/2);
+		plantImageViews.get(n).setX(n.getTranslateX());
+		plantImageViews.get(n).setY(n.getTranslateY());
 	}    
     public void released(MouseEvent event) {
     	System.out.println("released");
