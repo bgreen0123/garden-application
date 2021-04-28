@@ -109,7 +109,8 @@ public class EndWindow extends Window{
         Stage previewStage = new Stage();
         
         preview = new Button("Garden Preview");	
-        preview.setPrefSize(width*.1, height*.1);
+        preview.setPrefSize(width*.15, height*.1);
+        preview.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
 		preview.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -167,7 +168,7 @@ public class EndWindow extends Window{
         });
         
     	ListView<String> plantSummary = new ListView<String>(plantsSummaryList);
-    	plantSummary.setMaxSize(width * .3, height * .3);
+    	plantSummary.setMaxSize(width * .2, height * .2);
         
         // leps
         
@@ -191,11 +192,13 @@ public class EndWindow extends Window{
         downloading.setPreserveRatio(true);
         
         save.setPrefSize(width*.1, height*.1);
+        save.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
         HBox saveBut = new HBox(save);
         saveBut.setAlignment(Pos.CENTER);
         
         download = new Button("Download");
         download.setPrefSize(width*.1, height*.1);
+        download.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save");
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
@@ -205,14 +208,18 @@ public class EndWindow extends Window{
         	}
         });
         
+        
         HBox downloadBox = new HBox();
         downloadBox.getChildren().addAll(download, preview, save);
         downloadBox.setAlignment(Pos.CENTER);
         downloadBox.setPadding(new Insets(height *.05));
+        downloadBox.setSpacing(width * .1);
         
         VBox plantBox = new VBox();
         plantBox.getChildren().addAll(plantsHBox, plantSummary);
         plantBox.setAlignment(Pos.CENTER);
+        plantBox.setSpacing(10);
+        
         VBox summaryBox = new VBox();
         summaryBox.getChildren().addAll(amountSpentBox, lepsBox, plantBox);
         summaryBox.setSpacing(height * .05);
