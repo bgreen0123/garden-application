@@ -13,6 +13,7 @@ import enums.CurrentScreen;
 import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -195,16 +196,7 @@ public class Controller{
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
-		marketNext.setOnAction(e -> {
-			if(model.getThread().isAlive() == false) {
-				System.out.println("HERE");
-				view.changeScreen(CurrentScreen.GARDEN);
-				return;
-			}
-			view.changeScreen(CurrentScreen.LOADINGSCREEN);
-			while(model.getThread().isAlive());
-			view.changeScreen(CurrentScreen.GARDEN);
-		});
+		marketNext.setOnAction(e -> loading());
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
@@ -260,6 +252,30 @@ public class Controller{
 		
 
 	}
+	private void loading() {
+		if(model.getThread().isAlive()) {
+			view.changeScreen(CurrentScreen.LOADINGSCREEN);
+			Thread endLoad = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					while(model.getThread().isAlive());
+					Platform.runLater(new Runnable() {
+			            @Override
+			            public void run() {
+			              view.changeScreen(CurrentScreen.GARDEN);
+			            }
+			          });
+				}
+				
+			});
+			endLoad.start();
+		}else {
+			view.changeScreen(CurrentScreen.GARDEN);
+		}
+	}
+	
+	//Error Handling
 	private void duplicateError() {
 		Alert dupError = new Alert(AlertType.ERROR);
 		dupError.setHeaderText("Plant Already Added");

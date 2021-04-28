@@ -265,7 +265,7 @@ public class GardenWindow extends Window{
     	    Line line = new Line(centerWidth/2 - gardenWidth/2 + n*(gardenWidth/model.getWidth()), 
     	    		centerHeight/2 - gardenHeight/2, 
     	    		centerWidth/2 - gardenWidth/2 + n*(gardenWidth/model.getWidth()), 
-    	    		height);
+    	    		height - (centerHeight / 2) + (gardenHeight / 2) - (gardenHeight/model.getHeight()));
     	    outerPlot.getChildren().add(line);
     	});
     	IntStream.range(0, model.getHeight()).forEach(n -> {
