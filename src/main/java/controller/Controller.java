@@ -230,19 +230,6 @@ public class Controller{
 			}
 		});
 		
-
-		
-//		Popup gardenPreview = new Popup();
-//		
-//		preview.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//				gardenPreview.show(view.changeScreen(CurrentScreen.GARDEN)); // needs the garden stage
-//			}
-//		});
-		
-		
-		
 		//Creating the drop down menu
 		sun = new ChoiceBox<>();
 		soil = new ChoiceBox<>();
