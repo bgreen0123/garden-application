@@ -25,8 +25,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 import model.Model;
 import model.Plant;
+import view.GardenWindow;
 import view.MarketItem;
 import view.View;
 
@@ -49,7 +51,6 @@ public class Controller{
 	Button save;
 	Button load;
 	Button toWelcome;
-	Button preview;
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -76,6 +77,10 @@ public class Controller{
   	
   	//Load file
   	String fileName;
+  	
+  	// garden
+  	GardenWindow gw;
+    Stage gwStage;
   	
 
 	public Controller(View view){
@@ -135,7 +140,6 @@ public class Controller{
 		save = new Button("Save");
 		load = new Button("Load");
 		toWelcome = new Button("Back to Start");
-		preview = new Button("Garden Preview");
 		
 		//Making text box
 		budget = new TextField();
@@ -225,6 +229,8 @@ public class Controller{
 				return;
 			}
 		});
+		
+
 		
 //		Popup gardenPreview = new Popup();
 //		

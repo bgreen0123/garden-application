@@ -23,6 +23,7 @@ public class View extends Application {
 	ConditionsWindow conditions;
 	Favs favs;
 	LoadWindow load;
+	View view;
 	
 	Model model;
 	
@@ -33,7 +34,7 @@ public class View extends Application {
 		model = cont.getModel();
 		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton(), cont.getToLoadButton());
 		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getXSlider(), cont.getYSlider(), cont.getBudget());
-		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont, cont.getFileName(), cont.getSave(), cont.getSaveButton(),cont.getPlantsList(), cont.getFavoriteList());
+		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont, cont.getFileName(), cont.getSave(),cont.getPlantsList(), cont.getFavoriteList(), this);
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());

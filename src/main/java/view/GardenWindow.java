@@ -47,6 +47,9 @@ public class GardenWindow extends Window{
     int totalLeps = 0;
     Button toMarket;
     Pane faveList;
+    
+    Pane outerPlot;
+    
     Scene scene;
     int width, height;
     Stage stage;
@@ -73,6 +76,10 @@ public class GardenWindow extends Window{
         this.cont = cont;
         this.gardenNext = gardenNext;
         plantImageViews = new HashMap<ImageView, Plant>();
+    }
+    
+    public Pane getOuterPlot() {
+    	return outerPlot;
     }
     
     @Override
@@ -132,7 +139,7 @@ public class GardenWindow extends Window{
     	int centerHeight = height - countBarHeight;
     	int gardenWidth = 400;
     	int gardenHeight = 300;
-    	Pane outerPlot = new Pane();
+    	outerPlot = new Pane();
     	GridPane plot = new GridPane();
     	plot.setPrefSize(gardenWidth, gardenHeight);
     	//plot.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:transparent;");
