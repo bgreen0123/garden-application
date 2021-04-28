@@ -109,7 +109,7 @@ public class EndWindow extends Window{
         Stage previewStage = new Stage();
         
         preview = new Button("Garden Preview");	
-        preview.setPrefSize(width*.15, height*.1);
+        preview.setPrefSize(width*.2, height*.1);
         preview.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
 		preview.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
