@@ -2,13 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
-public class DataThread implements Runnable{
+public class DataThread extends Thread{
 	Model m;
 	Thread t;
 	public DataThread(Model m) {
 		this.m = m;
 		t = new Thread(this, "Thread");
-		t.start();
 	}
 	@Override
 	public void run() {

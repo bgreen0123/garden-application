@@ -11,7 +11,8 @@ public enum CurrentScreen {
 	END("END"),
     GARDEN("GARDEN"),
 	FAVS("FAVS"),
-	LOAD("LOAD");
+	LOAD("LOAD"),
+	LOADINGSCREEN("LOADINGSCREEN");
 	
 	private String name = null;
 	

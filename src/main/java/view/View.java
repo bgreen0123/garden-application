@@ -23,6 +23,7 @@ public class View extends Application {
 	ConditionsWindow conditions;
 	Favs favs;
 	LoadWindow load;
+	LoadingScreen ls;
 	
 	Model model;
 	View view;
@@ -39,6 +40,7 @@ public class View extends Application {
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
 		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont.getBackToConditions(), cont);
 		load = new LoadWindow(width, height, stage, cont.getFileName(), cont.getToWelcomeButton());
+		ls = new LoadingScreen(stage, width, height);
 		
 		stage.setTitle("Garden");
 		currentScreen = CurrentScreen.WELCOME;
@@ -81,6 +83,10 @@ public class View extends Application {
 		case LOAD:
 			System.out.println("Load");
 			load.draw();
+			break;
+		case LOADINGSCREEN:
+			System.out.println("Loading");
+			ls.draw();
 			break;
 		default:
 			welcome.draw();

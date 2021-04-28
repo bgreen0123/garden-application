@@ -82,6 +82,7 @@ public class Controller{
 	public Controller(View view){
 		this.view = view;
 		model = new Model();
+		model.getThread().start();
 		
 		model.getData().getWoody().forEach(p ->{
 			Button fav = new Button();
@@ -194,7 +195,16 @@ public class Controller{
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
-		marketNext.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
+		marketNext.setOnAction(e -> {
+			if(model.getThread().isAlive() == false) {
+				System.out.println("HERE");
+				view.changeScreen(CurrentScreen.GARDEN);
+				return;
+			}
+			view.changeScreen(CurrentScreen.LOADINGSCREEN);
+			while(model.getThread().isAlive());
+			view.changeScreen(CurrentScreen.GARDEN);
+		});
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
