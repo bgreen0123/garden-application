@@ -8,3 +8,4 @@ gradle*
 settings*
 .idea
 *.json*
+garden.ser
