@@ -11,7 +11,7 @@ public class Plant implements Cloneable{
 	private String comName;
 	private String sciName;
 	private int lepsSupported;
-	private int diameter;
+	private double diameter;
 	private double xloc;
 	private double yloc;
 	private PlantType type;
@@ -71,7 +71,7 @@ public class Plant implements Cloneable{
 		return sciName;
 	}
 	
-	public int getDiameter() {
+	public double getDiameter() {
 		return diameter;
 	}
 	
@@ -124,7 +124,7 @@ public class Plant implements Cloneable{
 	}
 
 	
-	public void setDiameter(int d) {
+	public void setDiameter(double d) {
 		diameter = d;
 	}
 	
