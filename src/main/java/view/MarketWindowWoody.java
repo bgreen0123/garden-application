@@ -39,7 +39,7 @@ public class MarketWindowWoody extends Window{
     Stage stage;
     Controller cont;
     
-    private boolean filter = false;
+    private boolean filter = true;
     private int count;
 
 	public MarketWindowWoody(int width, int height, Stage stage, ArrayList<MarketItem> woody, Button herb, Button nextPage, Button applyConditions, Button viewFavs, Button cond, Controller cont) {

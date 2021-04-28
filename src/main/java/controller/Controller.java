@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -200,9 +202,12 @@ public class Controller{
 		toWelcome.setOnAction(e -> view.changeScreen(CurrentScreen.WELCOME));
 		
 		save.setOnAction(e -> {
-			fileName = saveBox.getText();
 			try {
-				save(model, fileName);
+				FileOutputStream fos = new FileOutputStream("garden.ser");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(model);
+				oos.flush();
+				oos.close();
 			}
 			catch(Exception exc) {
 				System.out.println("Couldn't save file");
@@ -212,10 +217,11 @@ public class Controller{
 		});
 		
 		load.setOnAction(e -> {
-			fileName = loadBox.getText();
 			try {
-				Model newM = (Model) load(fileName);
-				model = newM;
+				FileInputStream fis = new FileInputStream("garden.ser");
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				model = (Model) ois.readObject();
+				ois.close();
 			}
 			catch(Exception exc) {
 				System.out.println("Couldn't load file");
@@ -374,6 +380,10 @@ public class Controller{
 		return model;
 	}
 	
+	public View getView() {
+		return view;
+	}
+	
 	//Setter to set the users choice of conditions
 	public void setChoice(ChoiceBox<Sun> sun, ChoiceBox<Soil> soil, ChoiceBox<Moisture> moisture ) {
 		sunChoice = sun.getValue();
@@ -402,17 +412,6 @@ public class Controller{
 		model.addPlant(p);
 	}
 	
-	public static void save(Serializable data, String fileName) throws Exception{
-		try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
-			oos.writeObject(data);
-		}
-	}
-	
-	public static Object load(String fileName) throws Exception{
-		try(ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))){
-			return ois.readObject();
-		}
-	}
 	
 	public EventHandler dragPlant() {
 		return new EventHandler<MouseEvent>() {

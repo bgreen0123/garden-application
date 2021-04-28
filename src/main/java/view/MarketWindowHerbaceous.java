@@ -37,7 +37,7 @@ public class MarketWindowHerbaceous extends Window{
     Scene scene;
     int width, height;
     Stage stage;
-    private boolean filter = false;
+    private boolean filter = true;
     private int count;
     Controller cont;
 

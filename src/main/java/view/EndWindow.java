@@ -47,6 +47,7 @@ public class EndWindow extends Window{
     String fileName;
     TextField saveBox;
     Button save;
+    View view;
    
     int budget;
     ArrayList<Plant> plantsList;
@@ -54,7 +55,7 @@ public class EndWindow extends Window{
     
     Button download;
 
-    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, Button save) {
+    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, Button save, View view) {
         this.width = width;
         this.height = height;
         this.stage = stage;
@@ -63,6 +64,7 @@ public class EndWindow extends Window{
         this.fileName = fileName;
         this.saveBox = saveBox;
         this.save = save;
+        this.view = view;
     }
     
     @Override
@@ -151,12 +153,16 @@ public class EndWindow extends Window{
 //        MenuItem item = new MenuItem("Download", downloading);
 //        file.getItems().addAll(item);
         
-        
+       
         download = new Button();
         download.setTranslateX(330);
         download.setTranslateY(25);
         download.setPrefSize(20, 20);
         download.setGraphic(downloading);
+        
+        save.setPrefSize(width*.1, height*.1);
+        HBox saveBut = new HBox(save);
+        saveBut.setAlignment(Pos.CENTER);
         
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save");
@@ -169,13 +175,11 @@ public class EndWindow extends Window{
         
         
         
-        
-        
 //        MenuBar menuBar = new MenuBar(file);
         
         VBox downloadBox = new VBox();
         VBox.setMargin(downloadBox, new Insets(0,0,0,0));
-        downloadBox.getChildren().addAll(gardenBox, download);
+        downloadBox.getChildren().addAll(gardenBox, download,save);
         
         VBox summaryBox = new VBox();
         VBox.setMargin(summaryBox, new Insets(150, 50, 0 ,0));
