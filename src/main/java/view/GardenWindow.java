@@ -62,10 +62,12 @@ public class GardenWindow extends Window{
     int countBarItemHeight = 30;
     Label lepLabel;
     Label budgetLabel;
+    Label goBackToMarket;
     Insets countBarItemSpacing;
     Button gardenNext;
     HashMap <ImageView, Plant> plantImageViews;
 	HBox listbox;
+	HBox marketBox;
 	double favHeight = .8;
 	double favWidth = .3;
 	double gardenWidth;
@@ -109,6 +111,8 @@ public class GardenWindow extends Window{
     	HBox lepBox = drawLeps();
     	
         //Market Stand Button
+    	goBackToMarket = new Label("Click this icon to return \n to market.");
+    	goBackToMarket.setStyle("-fx-font-weight: bold;-fx-font-size:" + Integer.toString(Integer.valueOf(fontSize)) + ";-fx-text-fill:" + fontColor + ";");
     	ImageView marketiv = makeMarketButton();
     	
     	//Top bar
@@ -361,7 +365,8 @@ public class GardenWindow extends Window{
     	HBox countBar = new HBox();
     	countBar.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + countBarColor + ";");
         countBar.setPrefHeight(countBarHeight);
-        countBar.getChildren().addAll(marketiv, budgetBox, lepBox);
+        marketBox = new HBox(marketiv,goBackToMarket);
+        countBar.getChildren().addAll(marketBox, budgetBox, lepBox);
         return countBar;
     }
     
