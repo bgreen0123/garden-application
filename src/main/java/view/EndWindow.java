@@ -5,8 +5,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JList;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,18 +18,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -35,6 +43,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.Plant;
 
@@ -46,16 +55,27 @@ public class EndWindow extends Window{
     Stage stage;
     String fileName;
     TextField saveBox;
-    Button save;
+    Button preview;
+    ObservableList<String> plantsSummaryList;
+    
+    GardenWindow gw;
+    Stage gwStage;
+    Scene gwScene;
     View view;
+    
+    Label plantInfo;
    
     int budget;
     ArrayList<Plant> plantsList;
+    ArrayList<Plant> favoritePlants;
     int leps;
     
     Button download;
+    Button save;
 
-    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, Button save, View view) {
+    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, 
+    				ArrayList<Plant> plantsList, ArrayList<Plant> favoritePlants, View view, Button save) {
+    	
         this.width = width;
         this.height = height;
         this.stage = stage;
@@ -63,8 +83,10 @@ public class EndWindow extends Window{
         this.download = download;
         this.fileName = fileName;
         this.saveBox = saveBox;
-        this.save = save;
+        this.plantsList = plantsList;
+        this.favoritePlants = favoritePlants;
         this.view = view;
+        this.save = save;
     }
     
     @Override
@@ -81,6 +103,30 @@ public class EndWindow extends Window{
         border.setBackground(background);
         
         
+        // gets garden window scene
+        gw = view.garden;
+        
+        Stage previewStage = new Stage();
+        
+        preview = new Button("Garden Preview");	
+        preview.setPrefSize(width*.1, height*.1);
+		preview.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				Pane outerPlot = gw.getOuterPlot();
+//				outerPlot.removeEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED);
+				FlowPane garden = new FlowPane();
+				garden.getChildren().addAll(outerPlot);
+				
+				Scene gardenScene = new Scene(garden, width * .7, height); 
+				previewStage.setScene(gardenScene);
+				previewStage.show();
+			}
+		});
+
+        // TODO: make button that previews ^
+        
         // summary information about garden
         
         // budget summary 
@@ -90,28 +136,38 @@ public class EndWindow extends Window{
         dollar.setImage(dollarimg);
         dollar.setPreserveRatio(true);;
         dollar.setFitHeight(45);
-        Label spent = new Label("     Money Remaining: " + budget);
+        Label spent = new Label("Money Remaining: $" + budget);
         spent.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox amountSpentBox = new VBox();
-        VBox.setMargin(amountSpentBox, new Insets(25,25,0,0));
-        amountSpentBox.setSpacing(10);;
+        HBox amountSpentBox = new HBox();
+        amountSpentBox.setSpacing(20);;
         amountSpentBox.setAlignment(Pos.CENTER);
         amountSpentBox.getChildren().addAll(dollar, spent);
         
-        // plants
+        // plants with list view that shows plants in garden.
         
         Image flowerimg = new Image(getClass().getResourceAsStream("/images/flower.png.png"));
         ImageView plants = new ImageView();
         plants.setImage(flowerimg);
-        plants.setPreserveRatio(true);;
-        plants.setFitHeight(40);
-        Label plant = new Label("Plants chosen: ");
-        plant.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox plantsBox = new VBox();
-        VBox.setMargin(plantsBox, new Insets(50,0,0,0));
-        plantsBox.setSpacing(10);
-        plantsBox.setAlignment(Pos.CENTER);
-        plantsBox.getChildren().addAll(plants, plant);
+        plants.setPreserveRatio(true);
+        plants.setFitHeight(30);
+        
+        
+        Label plantLabel = new Label("Plants:");
+        plantLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
+        HBox plantsHBox = new HBox();
+        plantsHBox.setSpacing(20);
+        plantsHBox.setAlignment(Pos.CENTER);
+        plantsHBox.getChildren().addAll(plants, plantLabel);
+        
+        plantsSummaryList = FXCollections.observableArrayList();
+       
+        plantsList.forEach(m -> {
+        	plantsSummaryList.add(m.toString());
+        	
+        });
+        
+    	ListView<String> plantSummary = new ListView<String>(plantsSummaryList);
+    	plantSummary.setMaxSize(width * .3, height * .3);
         
         // leps
         
@@ -122,9 +178,8 @@ public class EndWindow extends Window{
         theLep.setFitHeight(30);
         Label totalLeps = new Label("Leps supported: " + leps);
         totalLeps.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox lepsBox = new VBox();
-        VBox.setMargin(lepsBox, new Insets(75,0,0,20));
-        lepsBox.setSpacing(10);;
+        HBox lepsBox = new HBox();
+        lepsBox.setSpacing(20);;
         lepsBox.setAlignment(Pos.CENTER);
         lepsBox.getChildren().addAll(theLep, totalLeps);
         
@@ -135,35 +190,12 @@ public class EndWindow extends Window{
         downloading.setFitHeight(30);
         downloading.setPreserveRatio(true);
         
-        
-        Image garden = new Image(getClass().getResourceAsStream("/images/temporary_garden.jpg"));
-        ImageView gardenimg = new ImageView();
-        gardenimg.setImage(garden);
-        gardenimg.setPreserveRatio(true);
-        gardenimg.setFitHeight(height * .1);
-        gardenimg.setFitWidth(width * .1);
-        VBox gardenBox = new VBox();
-        VBox.setMargin(gardenBox, new Insets(0,0,0,0));
-        gardenBox.setSpacing(10);
-        gardenBox.setAlignment(Pos.TOP_CENTER);
-        gardenBox.getChildren().addAll(gardenimg);
-        
-        
-//        Menu file = new Menu("File");
-//        MenuItem item = new MenuItem("Download", downloading);
-//        file.getItems().addAll(item);
-        
-       
-        download = new Button();
-        download.setTranslateX(330);
-        download.setTranslateY(25);
-        download.setPrefSize(20, 20);
-        download.setGraphic(downloading);
-        
         save.setPrefSize(width*.1, height*.1);
         HBox saveBut = new HBox(save);
         saveBut.setAlignment(Pos.CENTER);
         
+        download = new Button("Download");
+        download.setPrefSize(width*.1, height*.1);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save");
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
@@ -173,70 +205,36 @@ public class EndWindow extends Window{
         	}
         });
         
+        HBox downloadBox = new HBox();
+        downloadBox.getChildren().addAll(download, preview, save);
+        downloadBox.setAlignment(Pos.CENTER);
+        downloadBox.setPadding(new Insets(height *.05));
         
-        
-//        MenuBar menuBar = new MenuBar(file);
-        
-        VBox downloadBox = new VBox();
-        VBox.setMargin(downloadBox, new Insets(0,0,0,0));
-        downloadBox.getChildren().addAll(gardenBox, download,save);
-        
+        VBox plantBox = new VBox();
+        plantBox.getChildren().addAll(plantsHBox, plantSummary);
+        plantBox.setAlignment(Pos.CENTER);
         VBox summaryBox = new VBox();
-        VBox.setMargin(summaryBox, new Insets(150, 50, 0 ,0));
-        summaryBox.getChildren().addAll(amountSpentBox, plantsBox, lepsBox); 
+        summaryBox.getChildren().addAll(amountSpentBox, lepsBox, plantBox);
+        summaryBox.setSpacing(height * .05);
+        summaryBox.setAlignment(Pos.CENTER);
         
         Label summary = new Label("SUMMARY");
         summary.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 48));
         border.setAlignment(summary, Pos.CENTER);
-        border.setMargin(summary,  new Insets(50,0,0,0));
-        
-        border.setMargin(downloadBox, new Insets(150,0,0,0));
 
         border.setTop(summary);
-        border.setLeft(summaryBox);
-        border.setCenter(downloadBox);
+        border.setCenter(summaryBox);  
+        border.setBottom(downloadBox);
         
         scene = new Scene(border, width, height);
         stage.setScene(scene);
         stage.setTitle("Summary Screen");
         stage.show(); 
 
+
         
     }
     
-//    public void saveFile(Image image) {
-//    	Menu file = new Menu("File");
-//    	
-//    	MenuItem item = new MenuItem("Save", downloadimg);
-//    	
-//    	FileChooser fileChooser = new FileChooser();
-//    	fileChooser.setTitle("Open Resource File");
-//    	File selectedFile = fileChooser.showSaveDialog(stage);
-//    	if (selectedFile != null) {
-//    		Image img = SwingFXUtils.toFXImage(bImg, null);
-//    		saveToFile(img, selectedFile);
-//    	}
-//    }
-    
-//    public static void saveToFile(Image image) {
-//    	File gardenFile = new File("C:/Garden/");
-//    	BufferedImage bImage = fromFXImage(image, null);
-//    	try {
-//    		ImageIO.write(bImage, getFileExtension(gardenFile), gardenFile);
-//    	} catch (IOException e) {
-//    		throw new RuntimeException(e);
-//    	}
-//    }
-//    
-//    private static String getFileExtension(File file) {
-//    	String name = file.getName();
-//    	int lastIndexOf = name.lastIndexOf(".") + 1;
-//    	if (lastIndexOf == -1) {
-//    		return "";
-//    	}
-//    	return name.substring(lastIndexOf);
-//    }
-    
-    
 }
+
 

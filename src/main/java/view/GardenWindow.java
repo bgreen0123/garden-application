@@ -50,6 +50,7 @@ public class GardenWindow extends Window{
     int totalLeps = 0;
     Button toMarket;
     Pane faveList;
+    Pane outerPlot;
     Scene scene;
     int width, height;
     Stage stage;
@@ -86,6 +87,10 @@ public class GardenWindow extends Window{
         plantImageViews = new HashMap<ImageView, Plant>();
     }
     
+    
+    public Pane getOuterPlot() {
+    	return outerPlot;
+    }
     @Override
     public void draw() {
     	model = cont.getModel();
@@ -159,7 +164,7 @@ public class GardenWindow extends Window{
     		gardenWidth = (gardenWidth*growth);
     	}
 
-    	Pane outerPlot = new Pane();
+    	outerPlot = new Pane();
     	GridPane plot = new GridPane();
     	plot.setPrefSize(gardenWidth, gardenHeight);
     	plot.setBackground(background);

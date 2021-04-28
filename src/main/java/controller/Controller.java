@@ -302,6 +302,15 @@ public class Controller{
 	}
 
 	//Getters
+	
+	public ArrayList<Plant> getPlantsList(){
+		return model.getPlants();
+	}
+	
+	public ArrayList<Plant> getFavoriteList(){
+		return model.getFavorites();
+	}
+	
 	public Button getBackToConditions() {
 		return backToConditions;
 	}
