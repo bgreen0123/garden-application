@@ -5,8 +5,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JList;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,9 +18,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,15 +51,22 @@ public class EndWindow extends Window{
     Stage stage;
     String fileName;
     TextField saveBox;
-    Button save;
+    Button preview;
+    ObservableList<String> plantsSummaryList;
+    
+    
+    Label plantInfo;
    
     int budget;
     ArrayList<Plant> plantsList;
+    ArrayList<Plant> favoritePlants;
     int leps;
     
     Button download;
 
-    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, Button save) {
+    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, 
+    				Button preview, ArrayList<Plant> plantsList, ArrayList<Plant> favoritePlants) {
+    	
         this.width = width;
         this.height = height;
         this.stage = stage;
@@ -62,7 +74,9 @@ public class EndWindow extends Window{
         this.download = download;
         this.fileName = fileName;
         this.saveBox = saveBox;
-        this.save = save;
+        this.preview = preview;
+        this.plantsList = plantsList;
+        this.favoritePlants = favoritePlants;
     }
     
     @Override
@@ -88,28 +102,32 @@ public class EndWindow extends Window{
         dollar.setImage(dollarimg);
         dollar.setPreserveRatio(true);;
         dollar.setFitHeight(45);
-        Label spent = new Label("     Money Remaining: " + budget);
+        Label spent = new Label("Money Remaining: " + budget);
         spent.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox amountSpentBox = new VBox();
-        VBox.setMargin(amountSpentBox, new Insets(25,25,0,0));
+        HBox amountSpentBox = new HBox();
+//        VBox.setMargin(amountSpentBox, new Insets(25,25,0,0));
         amountSpentBox.setSpacing(10);;
         amountSpentBox.setAlignment(Pos.CENTER);
         amountSpentBox.getChildren().addAll(dollar, spent);
         
-        // plants
+        // plants with list view that shows plants in garden.
         
         Image flowerimg = new Image(getClass().getResourceAsStream("/images/flower.png.png"));
         ImageView plants = new ImageView();
         plants.setImage(flowerimg);
-        plants.setPreserveRatio(true);;
-        plants.setFitHeight(40);
-        Label plant = new Label("Plants chosen: ");
-        plant.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox plantsBox = new VBox();
-        VBox.setMargin(plantsBox, new Insets(50,0,0,0));
-        plantsBox.setSpacing(10);
-        plantsBox.setAlignment(Pos.CENTER);
-        plantsBox.getChildren().addAll(plants, plant);
+        plants.setPreserveRatio(true);
+        Label plantLabel = new Label("Plants!");
+        plantLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
+        
+        plantsSummaryList = FXCollections.observableArrayList();
+       
+        plantsList.forEach(m -> {
+        	plantsSummaryList.add(m.toString());
+        	
+        });
+        
+    	ListView<String> plantSummary = new ListView<String>(plantsSummaryList);
+    	plantSummary.setMaxSize(300, 300);
         
         // leps
         
@@ -120,8 +138,8 @@ public class EndWindow extends Window{
         theLep.setFitHeight(30);
         Label totalLeps = new Label("Leps supported: " + leps);
         totalLeps.setFont(Font.font("Courier New", FontWeight.BOLD, 26));
-        VBox lepsBox = new VBox();
-        VBox.setMargin(lepsBox, new Insets(75,0,0,20));
+        HBox lepsBox = new HBox();
+//        VBox.setMargin(lepsBox, new Insets(75,0,0,20));
         lepsBox.setSpacing(10);;
         lepsBox.setAlignment(Pos.CENTER);
         lepsBox.getChildren().addAll(theLep, totalLeps);
@@ -134,27 +152,12 @@ public class EndWindow extends Window{
         downloading.setPreserveRatio(true);
         
         
-        Image garden = new Image(getClass().getResourceAsStream("/images/temporary_garden.jpg"));
-        ImageView gardenimg = new ImageView();
-        gardenimg.setImage(garden);
-        gardenimg.setPreserveRatio(true);
-        gardenimg.setFitHeight(height * .1);
-        gardenimg.setFitWidth(width * .1);
-        VBox gardenBox = new VBox();
-        VBox.setMargin(gardenBox, new Insets(0,0,0,0));
-        gardenBox.setSpacing(10);
-        gardenBox.setAlignment(Pos.TOP_CENTER);
-        gardenBox.getChildren().addAll(gardenimg);
-        
-        
 //        Menu file = new Menu("File");
 //        MenuItem item = new MenuItem("Download", downloading);
 //        file.getItems().addAll(item);
         
         
         download = new Button();
-        download.setTranslateX(330);
-        download.setTranslateY(25);
         download.setPrefSize(20, 20);
         download.setGraphic(downloading);
         
@@ -167,30 +170,22 @@ public class EndWindow extends Window{
         	}
         });
         
-        
-        
-        
-        
-//        MenuBar menuBar = new MenuBar(file);
-        
         VBox downloadBox = new VBox();
-        VBox.setMargin(downloadBox, new Insets(0,0,0,0));
-        downloadBox.getChildren().addAll(gardenBox, download);
+        downloadBox.getChildren().addAll(download);
         
         VBox summaryBox = new VBox();
-        VBox.setMargin(summaryBox, new Insets(150, 50, 0 ,0));
-        summaryBox.getChildren().addAll(amountSpentBox, plantsBox, lepsBox); 
+        VBox.setMargin(summaryBox, new Insets(150, 150, 0 ,0));
+        summaryBox.getChildren().addAll(amountSpentBox, plantLabel, plantSummary, lepsBox);
+        summaryBox.setAlignment(Pos.CENTER);
         
         Label summary = new Label("SUMMARY");
         summary.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 48));
         border.setAlignment(summary, Pos.CENTER);
         border.setMargin(summary,  new Insets(50,0,0,0));
-        
-        border.setMargin(downloadBox, new Insets(150,0,0,0));
 
         border.setTop(summary);
-        border.setLeft(summaryBox);
-        border.setCenter(downloadBox);
+        border.setCenter(summaryBox);  
+        border.setBottom(downloadBox);
         
         scene = new Scene(border, width, height);
         stage.setScene(scene);
@@ -199,40 +194,6 @@ public class EndWindow extends Window{
 
         
     }
-    
-//    public void saveFile(Image image) {
-//    	Menu file = new Menu("File");
-//    	
-//    	MenuItem item = new MenuItem("Save", downloadimg);
-//    	
-//    	FileChooser fileChooser = new FileChooser();
-//    	fileChooser.setTitle("Open Resource File");
-//    	File selectedFile = fileChooser.showSaveDialog(stage);
-//    	if (selectedFile != null) {
-//    		Image img = SwingFXUtils.toFXImage(bImg, null);
-//    		saveToFile(img, selectedFile);
-//    	}
-//    }
-    
-//    public static void saveToFile(Image image) {
-//    	File gardenFile = new File("C:/Garden/");
-//    	BufferedImage bImage = fromFXImage(image, null);
-//    	try {
-//    		ImageIO.write(bImage, getFileExtension(gardenFile), gardenFile);
-//    	} catch (IOException e) {
-//    		throw new RuntimeException(e);
-//    	}
-//    }
-//    
-//    private static String getFileExtension(File file) {
-//    	String name = file.getName();
-//    	int lastIndexOf = name.lastIndexOf(".") + 1;
-//    	if (lastIndexOf == -1) {
-//    		return "";
-//    	}
-//    	return name.substring(lastIndexOf);
-//    }
-    
     
 }
 

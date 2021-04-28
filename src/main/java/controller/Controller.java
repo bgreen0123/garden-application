@@ -24,6 +24,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
 import model.Model;
 import model.Plant;
 import view.MarketItem;
@@ -48,7 +49,7 @@ public class Controller{
 	Button save;
 	Button load;
 	Button toWelcome;
-	
+	Button preview;
 	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
@@ -134,6 +135,7 @@ public class Controller{
 		save = new Button("Save");
 		load = new Button("Load");
 		toWelcome = new Button("Back to Start");
+		preview = new Button("Garden Preview");
 		
 		//Making text box
 		budget = new TextField();
@@ -224,6 +226,15 @@ public class Controller{
 			}
 		});
 		
+//		Popup gardenPreview = new Popup();
+//		
+//		preview.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				gardenPreview.show(view.changeScreen(CurrentScreen.GARDEN)); // needs the garden stage
+//			}
+//		});
+		
 		
 		
 		//Creating the drop down menu
@@ -298,6 +309,14 @@ public class Controller{
 	
 	public ArrayList<MarketItem> getHerbaceousMarket(){
 		return herbaceousMarket;
+	}
+	
+	public ArrayList<Plant> getPlantsList(){
+		return model.getPlants();
+	}
+	
+	public ArrayList<Plant> getFavoriteList(){
+		return model.getFavorites();
 	}
 	
 	public ArrayList<MarketItem> getWoodyMarket(){
