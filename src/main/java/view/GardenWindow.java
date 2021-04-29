@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import javax.imageio.ImageIO;
@@ -10,6 +11,8 @@ import javax.imageio.ImageIO;
 import controller.Controller;
 import enums.CurrentScreen;
 import enums.PlantType;
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -39,6 +42,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Model;
 import model.Plant;
 
@@ -315,6 +319,7 @@ public class GardenWindow extends Window{
         gardenNext.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
         favs.getChildren().add(gardenNext);
         
+        initializeCircles();
         scene = new Scene(border, width, height);
         stage.setScene(scene);
         stage.show(); 
@@ -415,11 +420,40 @@ public class GardenWindow extends Window{
     
     public void updateLeps(int l) {
     	totalLeps += l;
-    	/*
-    	lepBox.getChildren().clear();
-    	lepBox.getChildren().addAll(iv, new Label("Leps Supported: " + Integer.toString(totalLeps)));
-    	*/
-    	System.out.println("updating leps" + Integer.toString(totalLeps));
+    	while(l >= 100) {
+    		lepAnimation();
+    		l -= 100;
+    	}
+    	System.out.println("updating leps " + Integer.toString(totalLeps));
+    }
+    public void initializeCircles() {
+    	for(int i = 100; i <= totalLeps; i = i+100) {
+    		lepAnimation();
+    	}
+    }
+    public void lepAnimation() {
+    	Random rand = new Random();
+    	int x = rand.nextInt((int)(width / 3));
+    	int y = rand.nextInt((int)(height / 2));
+    	int tox = rand.nextInt((int)(width / 3));
+    	int toy = rand.nextInt((int)(height / 2));
+    	System.out.println(x + "," + y + "," + tox + "," + toy);
+    	ImageView c = new ImageView(new Image(getClass().getResourceAsStream("/images/lepAnimation.png"), width, height, false, true));
+    	c.setPreserveRatio(true);
+    	c.setFitHeight(30);
+    	c.setFitWidth(40);
+    	c.setLayoutX(x);
+    	c.setLayoutY(y);
+    	
+    	TranslateTransition trans = new TranslateTransition();
+    	trans.setDuration(Duration.seconds(5));
+    	trans.setToX(tox);
+    	trans.setToY(toy);
+    	trans.setAutoReverse(true);
+    	trans.setCycleCount(Animation.INDEFINITE);   	
+    	trans.setNode(c);
+    	trans.play();
+    	outerPlot.getChildren().add(c);
     }
     
     
