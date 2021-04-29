@@ -234,7 +234,7 @@ public class Controller{
 				return;
 			}
 			//after loading go to garden
-			view.changeScreen(CurrentScreen.GARDEN);
+			loading();
 		});
 		
 		
