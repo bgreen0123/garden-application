@@ -4,9 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import enums.CurrentScreen;
@@ -20,12 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Model;
 import model.Plant;
@@ -51,6 +48,7 @@ public class Controller{
 	Button save;
 	Button load;
 	Button toWelcome;
+	Button endToGarden;
 	
 	
 	//Favorite buttons
@@ -138,6 +136,7 @@ public class Controller{
 		save = new Button("Save");
 		load = new Button("Load");
 		toWelcome = new Button("Back to Start");
+		endToGarden = new Button("Back to Garden");
 		
 		//Making text box
 		budget = new TextField();
@@ -202,7 +201,7 @@ public class Controller{
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
 		toLoad.setOnAction(e ->  view.changeScreen(CurrentScreen.LOAD));
 		toWelcome.setOnAction(e -> view.changeScreen(CurrentScreen.WELCOME));
-		
+		endToGarden.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
 		save.setOnAction(e -> {
 			try {
 				FileOutputStream fos = new FileOutputStream("garden.ser");
@@ -302,6 +301,9 @@ public class Controller{
 	}
 
 	//Getters
+	public Button getEndToGarden() {
+		return endToGarden;
+	}
 	
 	public ArrayList<Plant> getPlantsList(){
 		return model.getPlants();

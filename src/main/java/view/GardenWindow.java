@@ -420,6 +420,11 @@ public class GardenWindow extends Window{
     }
     
     public void updateLeps(int l) {
+    	if(l < 100) {
+    		if((totalLeps % 100) + l >= 100) {
+    			lepAnimation();
+    		}
+    	}
     	totalLeps += l;
     	while(l >= 100) {
     		lepAnimation();
