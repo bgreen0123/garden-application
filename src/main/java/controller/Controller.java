@@ -233,9 +233,10 @@ public class Controller{
 				loadError();
 				return;
 			}
+			//after loading go to garden
+			view.changeScreen(CurrentScreen.GARDEN);
 		});
-		//after loading go to garden
-		//load.setOnAction(e ->  view.changeScreen(CurrentScreen.GARDEN));
+		
 		
 		
 		
