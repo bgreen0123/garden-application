@@ -100,7 +100,14 @@ public class View extends Application {
 		currentScreen = s;
 		drawScreen();
 	}
-
+	
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
+	
 	public static void main(String[] args) {
 		launch();
 	}

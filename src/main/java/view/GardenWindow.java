@@ -101,7 +101,7 @@ public class GardenWindow extends Window{
     	model = cont.getModel();
     	budget = model.getBudget();
     	//Background Image
-    	System.out.println("Draw garden!");
+    	System.out.println("Draw garden!: " + width + ", " + height);
     	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(bgimg, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
@@ -197,10 +197,23 @@ public class GardenWindow extends Window{
     	
     	//Add the plants
     	ImageView plantiv;
+    	double imDiameter;
     	for(Plant p : model.getPlants()) {
+    		if(p.getType() == PlantType.HERBACIOUS) {
+    			imDiameter = herbDiameter;
+    		}else {
+    			imDiameter = woodyDiameter;
+    		}
+    		//updateLeps(p.getLepsSupported());
     		plantiv = p.getImageView();
+    		plantiv.setPreserveRatio(true);
+        	plantiv.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
     		plantiv.setTranslateX(p.getX());
     		plantiv.setTranslateY(p.getY());
+    		plantiv.setOnMousePressed(event1 -> pressed(event1));
+        	plantiv.setOnMouseDragged(event2 -> drag(event2));
+        	plantiv.setOnMouseReleased(event3 -> released(event3));
+    		plantImageViews.put(plantiv, p);
     		plot.getChildren().add(plantiv);
         	plantiv.toFront();
     	}
@@ -241,6 +254,7 @@ public class GardenWindow extends Window{
 	            		imDiameter = woodyDiameter;
 	            	}
 	            	iv1.setPreserveRatio(true);
+	            	System.out.println(imDiameter*(gardenWidth/model.getWidth()));
 	            	iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
 	            	
 	            	Plant p = (Plant)(favorited.get(index).clone());
@@ -358,7 +372,7 @@ public class GardenWindow extends Window{
         lepiv.setImage(lepImg);
         lepiv.setPreserveRatio(true);
     	lepiv.setFitHeight(countBarItemHeight);
-    	lepLabel = new Label("Leps Supported: " + Integer.toString(totalLeps));
+    	lepLabel = new Label("Leps Supported: " + Integer.toString(cont.getModel().getNumLeps()));
     	lepLabel.setStyle("-fx-font-weight: bold;-fx-font-size:" + fontSize + ";-fx-text-fill:" + fontColor + ";");
     	HBox lepBox = new HBox();
     	HBox.setMargin(lepBox, countBarItemSpacing);
@@ -433,16 +447,34 @@ public class GardenWindow extends Window{
     	System.out.println("updating leps " + Integer.toString(totalLeps));
     }
     public void initializeCircles() {
-    	for(int i = 100; i <= totalLeps; i = i+100) {
+    	for(int i = 100; i <= cont.getModel().getNumLeps(); i = i+100) {
     		lepAnimation();
     	}
     }
     public void lepAnimation() {
     	Random rand = new Random();
-    	int x = rand.nextInt((int)(width / 3));
-    	int y = rand.nextInt((int)(height / 2));
-    	int tox = rand.nextInt((int)(width / 3));
-    	int toy = rand.nextInt((int)(height / 2));
+    	//X
+    	int x = rand.nextInt((int)(plot.getLayoutX() + gardenWidth));
+    	while(x < plot.getLayoutX() || x > (plot.getLayoutX() + gardenWidth)) {
+    		x = rand.nextInt((int)(plot.getLayoutX() + gardenWidth));
+    	}
+    	//Y
+    	int y = rand.nextInt((int)(plot.getLayoutY() + gardenHeight));
+    	while(y < plot.getLayoutY() || y > (plot.getLayoutY() + gardenHeight)) {
+    		y = rand.nextInt((int)(plot.getLayoutY() + gardenHeight));
+    	}
+    	//ToX
+    	int tox = rand.nextInt((int)(plot.getLayoutX() + gardenWidth));
+    	while(tox < plot.getLayoutX() || tox > (plot.getLayoutX() + gardenWidth)) {
+    		tox = rand.nextInt((int)(plot.getLayoutX() + gardenWidth));
+    	}
+    	//ToY
+    	int toy = rand.nextInt((int)(plot.getLayoutY() + gardenHeight));
+    	while(toy < plot.getLayoutY() || y > (plot.getLayoutY() + gardenHeight)) {
+    		toy = rand.nextInt((int)(plot.getLayoutY() + gardenHeight));
+    	}
+    	
+    	
     	System.out.println(x + "," + y + "," + tox + "," + toy);
     	ImageView c = new ImageView(new Image(getClass().getResourceAsStream("/images/lepAnimation.png"), width, height, false, true));
     	c.setPreserveRatio(true);
@@ -453,8 +485,8 @@ public class GardenWindow extends Window{
     	
     	TranslateTransition trans = new TranslateTransition();
     	trans.setDuration(Duration.seconds(5));
-    	trans.setToX(tox);
-    	trans.setToY(toy);
+    	trans.setToX(tox - (gardenWidth / 2));
+    	trans.setToY(toy - (gardenHeight / 2));
     	trans.setAutoReverse(true);
     	trans.setCycleCount(Animation.INDEFINITE);   	
     	trans.setNode(c);
