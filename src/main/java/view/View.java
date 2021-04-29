@@ -32,7 +32,7 @@ public class View extends Application {
     public void start(Stage stage) {
 		cont = new Controller(this);
 		model = cont.getModel();
-		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton(), cont.getToLoadButton());
+		welcome = new WelcomeScreen(width, height, stage, cont.getWelcomeButton(), cont.getToLoadButton(), cont.getLoadButton());
 		conditions = new ConditionsWindow(width, height, stage, cont.getSun(), cont.getSoil(), cont.getMoisture(), cont.getConditionsButton(), cont.getXSlider(), cont.getYSlider(), cont.getBudget());
 		endWindow = new EndWindow(width, height, stage, cont.getDownloadButton(), cont, cont.getFileName(), cont.getSave(),cont.getPlantsList(), cont.getFavoriteList(), this, cont.getSaveButton(), cont.getEndToGarden());
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);

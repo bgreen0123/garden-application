@@ -25,16 +25,18 @@ import javafx.stage.Stage;
 public class WelcomeScreen extends Window{
     Button nextPage;
     Button toLoad;
+    Button load;
 	Scene scene;
     int width, height;
     Stage stage;
 
-    public WelcomeScreen(int width, int height, Stage stage, Button nextPage, Button toLoad){
+    public WelcomeScreen(int width, int height, Stage stage, Button nextPage, Button toLoad, Button load){
         this.width = width;
         this.height = height;
         this.stage = stage;
         this.nextPage = nextPage;
         this.toLoad = toLoad;
+        this.load = load;
     }
     
     @Override
@@ -56,9 +58,9 @@ public class WelcomeScreen extends Window{
         
         nextPage.setPrefSize(width * .3, height * .1);
         nextPage.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
-        toLoad.setPrefSize(width * .3, height * .1);
-        toLoad.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
-        buttons.getChildren().addAll(nextPage,toLoad);
+        load.setPrefSize(width * .3, height * .1);
+        load.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
+        buttons.getChildren().addAll(nextPage,load);
         buttons.setAlignment(Pos.CENTER);
         
         //spacers

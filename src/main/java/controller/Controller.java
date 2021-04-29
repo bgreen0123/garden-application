@@ -199,7 +199,6 @@ public class Controller{
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
-		toLoad.setOnAction(e ->  view.changeScreen(CurrentScreen.LOAD));
 		toWelcome.setOnAction(e -> view.changeScreen(CurrentScreen.WELCOME));
 		endToGarden.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
 		save.setOnAction(e -> {
@@ -207,21 +206,26 @@ public class Controller{
 				FileOutputStream fos = new FileOutputStream("garden.ser");
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(model);
+				System.out.println("Saved");
 				oos.flush();
 				oos.close();
 			}
 			catch(Exception exc) {
 				System.out.println("Couldn't save file");
+				exc.printStackTrace();
 				saveError();
 				return;
 			}
 		});
-		
 		load.setOnAction(e -> {
 			try {
 				FileInputStream fis = new FileInputStream("garden.ser");
 				ObjectInputStream ois = new ObjectInputStream(fis);
-				model = (Model) ois.readObject();
+				Model nm = (Model)ois.readObject();
+				model = new Model(nm.getWidth(),nm.getHeight(),nm.getData(),nm.getNumLeps(),nm.getPlants(),nm.getFavorites(),nm.getSun(),nm.getSoil(),nm.getMoisture(),
+						nm.getBudget());
+				
+				System.out.println("Loaded");
 				ois.close();
 			}
 			catch(Exception exc) {
@@ -230,6 +234,8 @@ public class Controller{
 				return;
 			}
 		});
+		//after loading go to garden
+		//load.setOnAction(e ->  view.changeScreen(CurrentScreen.GARDEN));
 		
 		
 		

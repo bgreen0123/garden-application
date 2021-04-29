@@ -3,6 +3,7 @@ package data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.Plant;
@@ -20,8 +21,10 @@ import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 
-public class Data {
-    private ArrayList<Plant> herb;
+public class Data implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private ArrayList<Plant> herb;
     private ArrayList<Plant> wood;
 
     public Data(){

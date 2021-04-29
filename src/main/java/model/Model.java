@@ -33,6 +33,22 @@ public class Model implements Serializable{
 		dt = new DataThread(this);
 	}
 	
+	public Model(int width, int height, Data d, int lepSupported, ArrayList<Plant> plants, ArrayList<Plant>favoritedPlants, Sun sun, Soil soil, Moisture moist,
+			int budgetLeft) {
+		this.width = width;
+		this.height = height;
+		this.d = d;
+		this.lepsSupported = lepSupported;
+		this.plants = plants;
+		this.favoritedPlants = favoritedPlants;
+		this.sun = sun;
+		this.soil = soil;
+		this.moist = moist;
+		this.budgetLeft = budgetLeft;
+		this.dt = new DataThread(this);
+		dt.start();
+	}
+	
 	public void addPlant(Plant p) {
 		plants.add(p);
 		return;
@@ -40,10 +56,6 @@ public class Model implements Serializable{
 	
 	public void addFavoritePlant(Plant p) {
 		favoritedPlants.add(p);
-	}
-	
-	public void removePlant(Plant p) {
-		return;
 	}
 	
 	//Getters

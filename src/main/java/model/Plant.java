@@ -6,8 +6,11 @@ import enums.Soil;
 import enums.Sun;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.Serializable;
 
-public class Plant implements Cloneable{
+public class Plant implements Cloneable, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private String comName;
 	private String sciName;
 	private int lepsSupported;
@@ -19,7 +22,7 @@ public class Plant implements Cloneable{
 	private Soil soil;
 	private Moisture moist;
 	private String image;
-	private ImageView iv;
+	transient private ImageView iv;
 	
 	public void move() {
 		return;

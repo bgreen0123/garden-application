@@ -1,10 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DataThread extends Thread{
+public class DataThread extends Thread implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	Model m;
-	Thread t;
+	transient Thread t;
 	public DataThread(Model m) {
 		this.m = m;
 		t = new Thread(this, "Thread");
