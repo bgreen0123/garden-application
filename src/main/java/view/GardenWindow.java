@@ -435,16 +435,16 @@ public class GardenWindow extends Window{
     
     public void updateLeps(int l) {
     	if(l < 100) {
-    		if((totalLeps % 100) + l >= 100) {
+    		if((cont.getModel().getNumLeps() % 100) + l >= 100) {
     			lepAnimation();
     		}
     	}
-    	totalLeps += l;
+    	cont.getModel().updateLepCount((cont.getModel().getNumLeps() + l));
     	while(l >= 100) {
     		lepAnimation();
     		l -= 100;
     	}
-    	System.out.println("updating leps " + Integer.toString(totalLeps));
+    	System.out.println("updating leps " + Integer.toString(cont.getModel().getNumLeps()));
     }
     public void initializeCircles() {
     	for(int i = 100; i <= cont.getModel().getNumLeps(); i = i+100) {
