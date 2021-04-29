@@ -23,6 +23,7 @@ public class Model implements Serializable{
 	private Moisture moist = Moisture.DRY;
 	private int budgetLeft;
 	private DataThread dt;
+	private boolean warned = false;
 
 	
 	public Model(){
@@ -34,7 +35,7 @@ public class Model implements Serializable{
 	}
 	
 	public Model(int width, int height, Data d, int lepSupported, ArrayList<Plant> plants, ArrayList<Plant>favoritedPlants, Sun sun, Soil soil, Moisture moist,
-			int budgetLeft) {
+			int budgetLeft, boolean warned) {
 		this.width = width;
 		this.height = height;
 		this.d = d;
@@ -46,6 +47,7 @@ public class Model implements Serializable{
 		this.moist = moist;
 		this.budgetLeft = budgetLeft;
 		this.dt = new DataThread(this);
+		this.warned = warned;
 		dt.start();
 	}
 	
@@ -102,9 +104,15 @@ public class Model implements Serializable{
 	public int getBudget() {
 		return budgetLeft;
 	}
+	
+	public boolean getWarned() {
+		return warned;
+	}
 
 	//Setters
-	
+	public void setWarned() {
+		warned = !warned;
+	}
 	public void setWidth(int w) {
 		width = w;
 	}
@@ -133,6 +141,7 @@ public class Model implements Serializable{
 	public void updateLepCount(int l) {
 		lepsSupported += l;
 	}
+
 }
 
 

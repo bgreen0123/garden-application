@@ -51,7 +51,6 @@ public class GardenWindow extends Window{
     Model model;
 	Image background;
     int budget;
-    int totalLeps = 0;
     Button toMarket;
     Pane faveList;
     Pane outerPlot;
@@ -260,8 +259,7 @@ public class GardenWindow extends Window{
 	            	Plant p = (Plant)(favorited.get(index).clone());
 	            	p.setDiameter(imDiameter);
 	            	plantImageViews.put(iv1, p);
-	            	
-	            	cont.updateLeps(p.getLepsSupported());
+	            
 	            	updateLeps(p.getLepsSupported());
 	            	cont.updateBudget(price);
 	            	updateBudget(price);
@@ -439,7 +437,7 @@ public class GardenWindow extends Window{
     			lepAnimation();
     		}
     	}
-    	cont.getModel().updateLepCount((cont.getModel().getNumLeps() + l));
+    	cont.getModel().updateLepCount(l);
     	while(l >= 100) {
     		lepAnimation();
     		l -= 100;
@@ -480,13 +478,13 @@ public class GardenWindow extends Window{
     	c.setPreserveRatio(true);
     	c.setFitHeight(30);
     	c.setFitWidth(40);
-    	c.setLayoutX(x);
-    	c.setLayoutY(y);
+    	c.setLayoutX(x - (gardenWidth / 8));
+    	c.setLayoutY(y - (gardenHeight / 8));
     	
     	TranslateTransition trans = new TranslateTransition();
     	trans.setDuration(Duration.seconds(5));
-    	trans.setToX(tox - (gardenWidth / 2));
-    	trans.setToY(toy - (gardenHeight / 2));
+    	trans.setToX(tox - (gardenWidth / 8));
+    	trans.setToY(toy - (gardenHeight / 8));
     	trans.setAutoReverse(true);
     	trans.setCycleCount(Animation.INDEFINITE);   	
     	trans.setNode(c);

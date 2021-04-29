@@ -223,7 +223,7 @@ public class Controller{
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				Model nm = (Model)ois.readObject();
 				model = new Model(nm.getWidth(),nm.getHeight(),nm.getData(),nm.getNumLeps(),nm.getPlants(),nm.getFavorites(),nm.getSun(),nm.getSoil(),nm.getMoisture(),
-						nm.getBudget());
+						nm.getBudget(), nm.getWarned());
 				
 				System.out.println("Loaded");
 				ois.close();
@@ -305,6 +305,12 @@ public class Controller{
 		saveError.setHeaderText("Could not load garden");
 		saveError.setContentText("The garden could not be loaded at this time. Please try again later.");
 		saveError.showAndWait();
+	}
+	private void warn() {
+		Alert warnUser = new Alert(AlertType.WARNING);
+		warnUser.setHeaderText("Budget below 0");
+		warnUser.setContentText("Oh no! You have gone over budget. Select finish to finish, or keep placing plants and go farther over your budget.");
+		warnUser.showAndWait();
 	}
 
 	//Getters
@@ -449,6 +455,10 @@ public class Controller{
 	}
 	
 	public void updateBudget(int cost) {
+		if(model.getBudget() - cost < 0 && !model.getWarned()) {
+			warn();
+			model.setWarned();
+		}
 		model.updateBudget(model.getBudget() - cost);
 	}
 	
