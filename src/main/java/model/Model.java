@@ -12,8 +12,6 @@ public class Model implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Data d;
-	private Gridspace[][] garden;
-	private ArrayList<Lep> leps;
 	private int lepsSupported = 0;
 	private ArrayList<Plant> plants;
 	private ArrayList<Plant> favoritedPlants;
@@ -30,7 +28,6 @@ public class Model implements Serializable{
 	public Model(){
 		d = new Data();
 		budgetLeft = 0;
-		leps = new ArrayList<Lep>();
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
 		dt = new DataThread(this);
@@ -45,16 +42,7 @@ public class Model implements Serializable{
 		favoritedPlants.add(p);
 	}
 	
-	public void addLeps(Lep lep) {
-		leps.add(lep);
-		return;
-	}
-	
 	public void removePlant(Plant p) {
-		return;
-	}
-	
-	public void removeLep(Lep l) {
 		return;
 	}
 	
@@ -73,18 +61,6 @@ public class Model implements Serializable{
 	
 	public ArrayList<Plant> getFavorites(){
 		return favoritedPlants;
-	}
-	
-	public Gridspace[][] getGarden() {
-		return garden;
-	}
-	
-	public void setGarden(Gridspace [][] g) {
-		garden = g;
-	}
-	
-	public ArrayList<Lep> getLeps() {
-		return leps;
 	}
 	
 	public int getWidth() {

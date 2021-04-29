@@ -77,6 +77,7 @@ public class GardenWindow extends Window{
 	double centerHeight;
 	double herbDiameter = 1.0;
 	double woodyDiameter = 1.5;
+	GridPane plot;
 
     public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
     	this.width = width;
@@ -165,7 +166,7 @@ public class GardenWindow extends Window{
     	}
 
     	outerPlot = new Pane();
-    	GridPane plot = new GridPane();
+    	plot = new GridPane();
     	plot.setPrefSize(gardenWidth, gardenHeight);
     	plot.setBackground(background);
     	plot.setLayoutX((centerWidth/2) - gardenWidth/2);
@@ -215,57 +216,77 @@ public class GardenWindow extends Window{
 		{
             public void handle(MouseDragEvent event)
             {	
-            	System.out.println("dragging released!");
-            	int index = plantList.getSelectionModel().getSelectedIndex();
-            	HBox selected = plantList.getSelectionModel().getSelectedItem();
-
-            	//make a copy of selected ImageView to put in plot Pane
-            	ImageView iv1;
-            	int price;
-            	double imDiameter;
-            	if(favorited.get(index).getType() == PlantType.HERBACIOUS) {
-            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
-            		price = 6;
-            		imDiameter = herbDiameter;
-            	} else  {
-            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
-            		price = 20;
-            		imDiameter = woodyDiameter;
+            	//Checking for in bounds
+            	if(event.getSceneX() > centerWidth/2 - gardenWidth/2 && event.getSceneX() < centerWidth/2 + gardenWidth/2 &&
+            			event.getSceneY() > height - centerHeight/2 - gardenHeight/2 && 
+            			event.getSceneY() < height - centerHeight/2 + gardenHeight/2) {
+	            	int index = plantList.getSelectionModel().getSelectedIndex();
+	            	HBox selected = plantList.getSelectionModel().getSelectedItem();
+	
+	            	//make a copy of selected ImageView to put in plot Pane
+	            	ImageView iv1;
+	            	int price;
+	            	double imDiameter;
+	            	if(favorited.get(index).getType() == PlantType.HERBACIOUS) {
+	            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
+	            		price = 6;
+	            		imDiameter = herbDiameter;
+	            	} else  {
+	            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
+	            		price = 20;
+	            		imDiameter = woodyDiameter;
+	            	}
+	            	iv1.setPreserveRatio(true);
+	            	iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
+	            	
+	            	Plant p = (Plant)(favorited.get(index).clone());
+	            	p.setDiameter(imDiameter);
+	            	plantImageViews.put(iv1, p);
+	            	
+	            	cont.updateLeps(p.getLepsSupported());
+	            	updateLeps(p.getLepsSupported());
+	            	cont.updateBudget(price);
+	            	updateBudget(price);
+	            	
+	            	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
+	
+	            	
+	            	//put dragged Node back into list in same place
+	            	backingList.set(index, selected);
+	
+	            	int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
+	            	int placeY = (int)(event.getSceneY() - plot.getLayoutY() - imDiameter*(gardenWidth/model.getWidth()) - 40);
+	            	iv1.setTranslateX(placeX);
+	            	iv1.setTranslateY(placeY);
+	            	
+//	            	double rad = imDiameter*(gardenWidth/model.getWidth());
+//	            	if(placeX - rad < (centerWidth/2 - gardenWidth/2)) {
+//	            		iv1.setTranslateX(iv1.getTranslateX() + placeX - (centerWidth/2 - gardenWidth/2));
+//	            	}
+//	            	if(placeX + rad > (centerWidth/2 + gardenWidth/2)) {
+//	            		iv1.setTranslateX(iv1.getTranslateX() - ((centerWidth/2 + gardenWidth/2) - placeX));
+//	            	}
+//	            	if(placeY - rad < (height - centerWidth/2 - gardenWidth/2)) {
+//	            		iv1.setTranslateY(iv1.getTranslateY() + placeY - (height - centerHeight/2 - gardenHeight/2));
+//	            	}
+//	            	if(placeY + rad > (height - centerWidth/2 + gardenWidth/2)) {
+//	            		iv1.setTranslateY(iv1.getTranslateY() - ((height - centerHeight/2 + gardenWidth/2) - placeY));
+//	            	}
+	            	
+	            	p.setX(iv1.getTranslateX());
+	            	p.setY(iv1.getTranslateY());
+	            	p.setImageView(iv1);
+	            	cont.addPlant(p);
+	
+	            	iv1.setOnMousePressed(event1 -> pressed(event1));
+	            	iv1.setOnMouseDragged(event2 -> drag(event2));
+	            	iv1.setOnMouseReleased(event3 -> released(event3));     
+	
+	            	plot.getChildren().add(iv1);
+	            	iv1.toFront();
+	 
+	            	event.consume();
             	}
-            	iv1.setPreserveRatio(true);
-            	iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
-            	
-            	Plant p = (Plant)(favorited.get(index).clone());
-            	p.setDiameter(imDiameter);
-            	plantImageViews.put(iv1, p);
-            	
-            	cont.updateLeps(p.getLepsSupported());
-            	updateLeps(p.getLepsSupported());
-            	cont.updateBudget(price);
-            	updateBudget(price);
-            	
-            	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
-
-            	
-            	//put dragged Node back into list in same place
-            	backingList.set(index, selected);
-
-            	iv1.setTranslateX((int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2));
-            	iv1.setTranslateY((int)(event.getSceneY() - plot.getLayoutY() - imDiameter*(gardenWidth/model.getWidth()) - 40));
-            	
-            	p.setX(iv1.getTranslateX());
-            	p.setY(iv1.getTranslateY());
-            	p.setImageView(iv1);
-            	cont.addPlant(p);
-
-            	iv1.setOnMousePressed(event1 -> pressed(event1));
-            	iv1.setOnMouseDragged(event2 -> drag(event2));
-            	iv1.setOnMouseReleased(event3 -> released(event3));     
-
-            	plot.getChildren().add(iv1);
-            	iv1.toFront();
- 
-            	event.consume();
             }
         });
         
@@ -308,8 +329,16 @@ public class GardenWindow extends Window{
 	public void drag(MouseEvent event) {
 		System.out.println(event.getSource().getClass().getName());
 		Node n = (Node)event.getSource();
-		n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
-		n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+		if(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 > (gardenWidth) && 
+				n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 < (gardenWidth/2 + 100)) {
+			n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+		}
+		if(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 > (gardenHeight/2 - 100) && 
+				n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 < (gardenWidth/2 + 100)) {
+			n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+		}
+		//n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+		//n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
 		plantImageViews.get(n).setX(n.getTranslateX());
 		plantImageViews.get(n).setY(n.getTranslateY());
 	}    
