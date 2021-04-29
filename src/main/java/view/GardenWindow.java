@@ -263,7 +263,7 @@ public class GardenWindow extends Window{
 	            	iv1.setTranslateX(placeX);
 	            	iv1.setTranslateY(placeY);
 	            	
-//	            	double rad = imDiameter*(gardenWidth/model.getWidth());
+//	            	double rad = imDiameter*(gardenWidth/model.getWidth())/2;
 //	            	if(placeX - rad < (centerWidth/2 - gardenWidth/2)) {
 //	            		iv1.setTranslateX(iv1.getTranslateX() + placeX - (centerWidth/2 - gardenWidth/2));
 //	            	}
@@ -332,18 +332,19 @@ public class GardenWindow extends Window{
     }
     
 	public void drag(MouseEvent event) {
-		System.out.println(event.getSource().getClass().getName());
 		Node n = (Node)event.getSource();
-		if(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 > (gardenWidth) && 
-				n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 < (gardenWidth/2 + 100)) {
+		System.out.println("Location: " + event.getSceneX()
+				 + ", " + event.getSceneY());
+		System.out.println("Border: " + plot.getLayoutX() + ", " + (plot.getLayoutX() + gardenWidth));
+		System.out.println(centerWidth/2 - gardenWidth/2 + " ... " + centerWidth/2 + gardenWidth/2);
+		double rad = plantImageViews.get(n).getDiameter()/2*gardenWidth/model.getWidth();
+		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
 			n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
 		}
-		if(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 > (gardenHeight/2 - 100) && 
-				n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2 < (gardenWidth/2 + 100)) {
+		if(event.getSceneY() - rad > (height - centerHeight/2 - gardenHeight/2) 
+				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
 			n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
 		}
-		//n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
-		//n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
 		plantImageViews.get(n).setX(n.getTranslateX());
 		plantImageViews.get(n).setY(n.getTranslateY());
 	}    
