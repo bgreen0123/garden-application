@@ -13,6 +13,7 @@ import enums.CurrentScreen;
 import enums.Moisture;
 import enums.Soil;
 import enums.Sun;
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -52,7 +53,6 @@ public class Controller{
 	Button load;
 	Button toWelcome;
 	
-	
 	//Favorite buttons
 	ArrayList<MarketItem> woodyMarket = new ArrayList<MarketItem>();
 	ArrayList<MarketItem> herbaceousMarket = new ArrayList<MarketItem>(); 
@@ -79,7 +79,6 @@ public class Controller{
   	//Load file
   	String fileName;
   	
-
 	public Controller(View view){
 		this.view = view;
 		model = new Model();
@@ -247,11 +246,8 @@ public class Controller{
 		sun.setValue(Sun.SUN);
 		soil.setValue(Soil.SOIL);
 		moisture.setValue(Moisture.MOISTURE);
-
-		
-		
-
 	}
+
 	private void loading() {
 		if(model.getThread().isAlive()) {
 			view.changeScreen(CurrentScreen.LOADINGSCREEN);
@@ -302,7 +298,6 @@ public class Controller{
 	}
 
 	//Getters
-	
 	public ArrayList<Plant> getPlantsList(){
 		return model.getPlants();
 	}
@@ -447,28 +442,13 @@ public class Controller{
 		model.addPlant(p);
 	}
 	
-	
+	//Event Handlers
 	public EventHandler dragPlant() {
 		return new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {}
 		};
-	}
-	
-	/*
-	 * Change Listeners for Sliders can be added after those sliders are created
-	 * Need them for: 
-	 *     Choosing width
-	 *     Choosing height
-	 */
-	
-	public EventHandler enterBudget() {
-		return new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {}
-		};
-	}
-	
+	}	
 	public EventHandler toOtherPlantType() {
 		return new EventHandler<ActionEvent>() {
 			@Override
@@ -476,12 +456,7 @@ public class Controller{
 		};
 	}
 	
-	public EventHandler favoritePlant() {
-		return new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {}
-		};
-	}
+
 }
 
 

@@ -100,7 +100,11 @@ public class View extends Application {
 		currentScreen = s;
 		drawScreen();
 	}
-
+	
+	public GardenWindow getGW() {
+		return garden;
+	}
+	
 	public static void main(String[] args) {
 		launch();
 	}
