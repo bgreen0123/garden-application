@@ -28,11 +28,11 @@ public class ConditionsWindow extends Window{
     ChoiceBox sun, soil, moisture; 
     Button conditionsNext;
     Slider x, y;
-    TextField budget;
+    TextField budget, widthBox, heightBox;
     
     //Constructor
     public ConditionsWindow(int width, int height, Stage stage, ChoiceBox sun, ChoiceBox soil, ChoiceBox moisture, Button conditionsNext, 
-    		Slider x, Slider y, TextField text){
+    		Slider x, Slider y, TextField text, TextField widthBox, TextField heightBox){
         this.width = width;
         this.height = height;
         this.stage = stage;
@@ -43,6 +43,8 @@ public class ConditionsWindow extends Window{
         this.y = y;
         this.conditionsNext = conditionsNext;
         this.budget = text;
+        this.widthBox = widthBox;
+        this.heightBox = heightBox;
     }
     
     @Override
@@ -115,19 +117,19 @@ public class ConditionsWindow extends Window{
         
         VBox xBox = new VBox();
         xBox.setPrefWidth(width * .3);
-        Label l1 = new Label("Width");
+        Label l1 = new Label("Width (in ft.)");
         HBox l1Box = new HBox(l1);
         l1Box.setAlignment(Pos.CENTER);
-        HBox s1Box = new HBox(x);
+        HBox s1Box = new HBox(widthBox);
         s1Box.setAlignment(Pos.CENTER);
         xBox.getChildren().addAll(l1Box, s1Box);
         
         VBox yBox = new VBox();
         yBox.setPrefWidth(width * .3);
-        Label l2 = new Label("Height");
+        Label l2 = new Label("Height (in ft.)");
         HBox l2Box = new HBox(l2);
         l2Box.setAlignment(Pos.CENTER);
-        HBox s2Box = new HBox(y);
+        HBox s2Box = new HBox(heightBox);
         s2Box.setAlignment(Pos.CENTER);
         yBox.getChildren().addAll(l2Box, s2Box);
         

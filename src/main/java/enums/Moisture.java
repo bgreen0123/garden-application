@@ -2,6 +2,7 @@ package enums;
 public enum Moisture {
 	MOISTURE("MOISTURE"),
     DRY("DRY"),
+    MEDIUM("MEDIUM"),
     WET("WET");
 
     private String name = null;

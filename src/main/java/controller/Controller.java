@@ -68,6 +68,8 @@ public class Controller{
 	TextField budget;
 	TextField saveBox;
 	TextField loadBox;
+	TextField widthBox;
+	TextField heightBox;
 	
 	//User answers
   	Sun sunChoice;
@@ -141,6 +143,8 @@ public class Controller{
 		//Making text box
 		budget = new TextField();
 		saveBox = new TextField();
+		widthBox = new TextField();
+		heightBox = new TextField();
 		
 		//Making sliders
 		x = new Slider();
@@ -172,18 +176,37 @@ public class Controller{
 		conditionsNext.setOnAction(e -> {
 			setChoice(sun,soil,moisture);
 			String input = budget.getText();
+			String widthInput = widthBox.getText();
+			String heightInput = heightBox.getText();
 			int budget;
+			int width;
+			int height;
 			if(input == "") {
 				budgetError();
 				return;
 			}
+			if(widthInput == "" || heightInput == "") {
+				dimenstionError();
+				return;
+			}
 			try {
 				budget = Integer.parseInt(input);
+				
 			}catch (Exception exc){
 				budgetError();
 				return;
 			}
+			try {
+				width = Integer.parseInt(widthInput);
+				height = Integer.parseInt(heightInput);
+			}catch (Exception exc){
+				dimenstionError();
+				return;
+			}
+			
 			model.updateBudget(budget);
+			model.setWidth(width);
+			model.setHeight(height);
 			view.changeScreen(CurrentScreen.MARKET_H); //Move to market screen
 			System.out.println("Onto market");
 		});
@@ -203,6 +226,7 @@ public class Controller{
 		endToGarden.setOnAction(e -> view.changeScreen(CurrentScreen.GARDEN));
 		save.setOnAction(e -> {
 			try {
+				saveSuccess();
 				FileOutputStream fos = new FileOutputStream("garden.ser");
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(model);
@@ -219,6 +243,7 @@ public class Controller{
 		});
 		load.setOnAction(e -> {
 			try {
+				confirmLoad();
 				FileInputStream fis = new FileInputStream("garden.ser");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				Model nm = (Model)ois.readObject();
@@ -247,7 +272,7 @@ public class Controller{
 		//Adding choices into the drop menu
 		sun.getItems().addAll(Sun.SUN,Sun.FULLSUN,Sun.PARTSUN,Sun.SHADE);
 		soil.getItems().addAll(Soil.SOIL,Soil.CLAY,Soil.DIRT,Soil.ROCK);
-		moisture.getItems().addAll(Moisture.MOISTURE,Moisture.WET,Moisture.DRY);
+		moisture.getItems().addAll(Moisture.MOISTURE,Moisture.WET,Moisture.MEDIUM,Moisture.DRY);
 		
 		//Starting value that the user sees
 		sun.setValue(Sun.SUN);
@@ -294,6 +319,12 @@ public class Controller{
 		budgetError.setContentText("Budget must be an integer and cannot be empty.");
 		budgetError.showAndWait();
 	}
+	private void dimenstionError() {
+		Alert dimenstionError = new Alert(AlertType.ERROR);
+		dimenstionError.setHeaderText("Invalid width or height");
+		dimenstionError.setContentText("width and height must be an integer and cannot be empty.");
+		dimenstionError.showAndWait();
+	}
 	private void saveError() {
 		Alert saveError = new Alert(AlertType.ERROR);
 		saveError.setHeaderText("Could not save garden");
@@ -311,6 +342,18 @@ public class Controller{
 		warnUser.setHeaderText("Budget below 0");
 		warnUser.setContentText("Oh no! You have gone over budget. Select finish to finish, or keep placing plants and go farther over your budget.");
 		warnUser.showAndWait();
+	}
+	private void saveSuccess() {
+		Alert confirmSave = new Alert(AlertType.INFORMATION);
+		confirmSave.setHeaderText("Saving your garden");
+		confirmSave.setContentText("Your garden has been saved successfully");
+		confirmSave.showAndWait();
+	}
+	private void confirmLoad() {
+		Alert confirmSave = new Alert(AlertType.CONFIRMATION);
+		confirmSave.setHeaderText("Loading Garden");
+		confirmSave.setContentText("You are about to load a garden, would you like to continue?");
+		confirmSave.showAndWait();
 	}
 
 	//Getters
@@ -412,6 +455,14 @@ public class Controller{
 		return saveBox;
 	}
 	
+	public TextField getWidth() {
+		return widthBox;
+	}
+	
+	public TextField getHeight() {
+		return heightBox;
+	}
+	
 	public Slider getXSlider() {
 		return x;
 	}
@@ -473,13 +524,6 @@ public class Controller{
 			public void handle(MouseEvent event) {}
 		};
 	}
-	
-	/*
-	 * Change Listeners for Sliders can be added after those sliders are created
-	 * Need them for: 
-	 *     Choosing width
-	 *     Choosing height
-	 */
 	
 	public EventHandler enterBudget() {
 		return new EventHandler<MouseEvent>() {
