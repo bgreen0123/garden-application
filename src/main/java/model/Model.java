@@ -22,7 +22,6 @@ public class Model implements Serializable{
 	private Soil soil = Soil.CLAY;
 	private Moisture moist = Moisture.DRY;
 	private int budgetLeft;
-	private DataThread dt;
 	private boolean warned = false;
 
 	
@@ -31,7 +30,6 @@ public class Model implements Serializable{
 		budgetLeft = 0;
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
-		dt = new DataThread(this);
 	}
 	
 	public Model(int width, int height, Data d, int lepSupported, ArrayList<Plant> plants, ArrayList<Plant>favoritedPlants, Sun sun, Soil soil, Moisture moist,
@@ -46,9 +44,7 @@ public class Model implements Serializable{
 		this.soil = soil;
 		this.moist = moist;
 		this.budgetLeft = budgetLeft;
-		this.dt = new DataThread(this);
 		this.warned = warned;
-		dt.start();
 	}
 	
 	public void addPlant(Plant p) {
@@ -61,9 +57,6 @@ public class Model implements Serializable{
 	}
 	
 	//Getters
-	public DataThread getThread() {
-		return dt;
-	}
 	
 	public Data getData() {
 		return d;

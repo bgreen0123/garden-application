@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import model.DataThread;
 import model.Model;
 import model.Plant;
 import view.MarketItem;
@@ -83,7 +84,6 @@ public class Controller{
 	public Controller(View view){
 		this.view = view;
 		model = new Model();
-		model.getThread().start();
 		
 		model.getData().getWoody().forEach(p ->{
 			Button fav = new Button();
@@ -284,13 +284,15 @@ public class Controller{
 
 	}
 	private void loading() {
-		if(model.getThread().isAlive()) {
+		DataThread dt = new DataThread(model);
+		dt.start();
+		if(dt.isAlive()) {
 			view.changeScreen(CurrentScreen.LOADINGSCREEN);
 			Thread endLoad = new Thread(new Runnable() {
 
 				@Override
 				public void run() {
-					while(model.getThread().isAlive());
+					while(dt.isAlive());
 					Platform.runLater(new Runnable() {
 			            @Override
 			            public void run() {

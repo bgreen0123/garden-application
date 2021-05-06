@@ -3,6 +3,7 @@ package model;
 import enums.Moisture;
 import enums.PlantType;
 import enums.Soil;
+import enums.Spread;
 import enums.Sun;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,13 +22,15 @@ public class Plant implements Cloneable, Serializable{
 	private Sun sun;
 	private Soil soil;
 	private Moisture moist;
+	private Spread spread;
 	private String image;
-	transient private ImageView iv;
+	private String details;
+	transient ImageView iv;
 	
 	public void move() {
 		return;
 	}
-	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, String image){
+	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, Spread spread, String image, String details){
 		this.comName = comName;
 		this.sciName = sciName;
 		this.lepsSupported = lepsSupported;
@@ -35,12 +38,16 @@ public class Plant implements Cloneable, Serializable{
 		this.sun = sun;
 		this.soil = soil;
 		this.moist = moist;
+		this.spread = spread;
 		this.image = image;
+		this.details = details;
 	}
 	
 	public void makeImageView() {
 		try {
-			iv = new ImageView(new Image(image));
+			if(iv == null) {
+				iv = new ImageView(new Image(image));
+			}
 		} catch(Exception e){
 			if(type == PlantType.HERBACIOUS) {
         		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));

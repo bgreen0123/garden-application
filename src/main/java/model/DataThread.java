@@ -26,11 +26,6 @@ public class DataThread extends Thread implements Serializable{
 	@Override
 	public void run() {
 		System.out.println("START THREAD");
-		ArrayList<Plant> herb = m.getData().getHerbacious();
-		ArrayList<Plant> wood = m.getData().getWoody();
-		
-		herb.forEach(p -> p.makeImageView());
-		wood.forEach(p -> p.makeImageView());
 		
 		for(Plant p : m.getPlants()) {
 			if(p.getType() == PlantType.HERBACIOUS) {

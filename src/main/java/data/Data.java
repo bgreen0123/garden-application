@@ -10,6 +10,7 @@ import model.Plant;
 import enums.Moisture;
 import enums.PlantType;
 import enums.Soil;
+import enums.Spread;
 import enums.Sun;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,68 +47,56 @@ public class Data implements Serializable{
       
         	for(int i = 0; i < nodeList.getLength(); i++) {
         		Node node = nodeList.item(i);
-        		String common, scientific, l, image, s, so, m, pType;
-        		int leps;
+        		String common, scientific, image, pType, edible, details;
+        		int leps, s, so, m, sp, avg_height;
     			Sun sun;
     			Moisture moist;
     			Soil soil;
+    			Spread spread;
     			PlantType plantType;
         		if (node.getNodeType() == Node.ELEMENT_NODE) {
         			Element eElement = (Element) node; 
         			common = eElement.getElementsByTagName("common").item(0).getTextContent();
         			scientific = eElement.getElementsByTagName("scientific").item(0).getTextContent();
         			leps = Integer.parseInt(eElement.getElementsByTagName("leps").item(0).getTextContent());
-        			s = eElement.getElementsByTagName("sun").item(0).getTextContent();
-        			switch(s) {
-            		case "f":
-            			sun = Sun.FULLSUN;
-            			break;
-            		case "p":
-            			sun = Sun.PARTSUN;
-            			break;
-            		case "s":
-            			sun = Sun.SHADE;
-            			break;
-            		default:
-            			sun = Sun.FULLSUN;
-            			break;
+        			
+        			//SUN
+        			s = Integer.parseInt(eElement.getElementsByTagName("sun").item(0).getTextContent());
+        			if(s < 4) {
+        				sun = Sun.SHADE;
+        			}else if(s > 7) {
+        				sun = Sun.FULLSUN;
+        			}else {
+        				sun = Sun.PARTSUN;
         			}
         			
-        			so = eElement.getElementsByTagName("soil").item(0).getTextContent();
-        			switch(so) {
-            		case "c":
-            			soil = Soil.CLAY;
-            			break;
-            		case "d":
-            			soil = Soil.DIRT;
-            			break;
-            		case "r":
-            			soil = Soil.ROCK;
-            			break;
-            		default:
-            			soil = Soil.ROCK;
-            			break;
-    				}
+        			//SOIL
+        			so = Integer.parseInt(eElement.getElementsByTagName("soil").item(0).getTextContent());
+        			if(so < 4) {
+        				soil = Soil.ROCK;
+        			}else if(so > 7) {
+        				soil = Soil.CLAY;
+        			}else {
+        				soil = Soil.DIRT;
+        			}
         			
-        			m = eElement.getElementsByTagName("moist").item(0).getTextContent();
-        			switch(m) {
-            		case "w":
-            			moist = Moisture.WET;
-            			break;
-            		case "d":
-            			moist = Moisture.DRY;
-            			break;
-            		default:
-            			moist = Moisture.DRY;
-            			break;
-    				}
+        			//MOISTURE
+        			m = Integer.parseInt(eElement.getElementsByTagName("moist").item(0).getTextContent());
+        			if(m < 4) {
+        				moist = Moisture.DRY;
+        			}else if(m > 7) {
+        				moist = Moisture.WET;
+        			}else {
+        				moist = Moisture.MEDIUM;
+        			}
         			
+        			//PLANT TYPE
         			pType = eElement.getElementsByTagName("type").item(0).getTextContent();
     				switch(pType) {
-            		case "w":
+            		case "WOOD":
             			plantType = PlantType.WOODY;
             			break;
-            		case "h":
+            		case "HERB":
             			plantType = PlantType.HERBACIOUS;
             			break;
             		default:
@@ -115,9 +104,36 @@ public class Data implements Serializable{
             			break;
     				}
     				
+    				//IMAGE
         			image = eElement.getElementsByTagName("image").item(0).getTextContent();
         			
-        			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, image);
+        			//SPREAD
+        			sp = Integer.parseInt(eElement.getElementsByTagName("spread").item(0).getTextContent());
+        			if(sp <= 40) {
+        				spread = Spread.SMALL;
+        			}else if(sp <= 100) {
+        				spread = Spread.MEDIUM;
+        			}else if(sp <= 200) {
+        				spread = Spread.LARGE;
+        			}else {
+        				spread = Spread.XL;
+        			}
+        			
+        			//AVG HEIGHT
+        			if(eElement.getElementsByTagName("average_height").item(0).getTextContent() == "") {
+        				avg_height = -1;
+        			}else {
+        				avg_height = Integer.parseInt(eElement.getElementsByTagName("average_height").item(0).getTextContent());
+        			}
+        			
+        			//EDIBLE
+        			edible = eElement.getElementsByTagName("edible").item(0).getTextContent();
+        			
+        			//DETAILS
+        			details = "Plant name: " + common + ". Avg Height: " + avg_height + ". Is Edible: " + edible;
+        			
+        			//CREATE NEW PLANT OBJECT
+        			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, spread, image, details);
             		if(plantType == PlantType.WOODY) {
             			wood.add(newPlant);
             		}else {
