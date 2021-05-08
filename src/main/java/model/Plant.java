@@ -7,6 +7,9 @@ import enums.Spread;
 import enums.Sun;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+
 import java.io.Serializable;
 
 public class Plant implements Cloneable, Serializable{
@@ -25,6 +28,7 @@ public class Plant implements Cloneable, Serializable{
 	private Spread spread;
 	private String image;
 	private String details;
+	transient Circle circ;
 	transient ImageView iv;
 	
 	public void move() {
@@ -45,14 +49,20 @@ public class Plant implements Cloneable, Serializable{
 	
 	public void makeImageView() {
 		try {
-			if(iv == null) {
+			if(circ == null) {
 				iv = new ImageView(new Image(image));
+				circ = new Circle();
+				circ.setFill(new ImagePattern(new Image(image)));
 			}
 		} catch(Exception e){
 			if(type == PlantType.HERBACIOUS) {
-        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
+				iv = new ImageView(new Image(image));
+        		circ = new Circle();
+        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/plant.png"))));
         	} else  {
-        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
+        		iv = new ImageView(new Image(image));
+        		circ = new Circle();
+        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/tree.png"))));
         	}    		
 		}
 	}
@@ -72,6 +82,10 @@ public class Plant implements Cloneable, Serializable{
 	
 	public ImageView getImageView() {
 		return iv;
+	}
+	
+	public Circle getCircle() {
+		return circ;
 	}
 	public String getComName() {
 		return comName;
@@ -114,7 +128,15 @@ public class Plant implements Cloneable, Serializable{
 		return moist;
 	}
 	
+	public Spread getSpread() {
+		return spread;
+	}
+	
 	//Setters
+	
+	public void setCircle(Circle c) {
+		circ = c;
+	}
 	
 	public void setImageView(ImageView i) {
 		iv = i;

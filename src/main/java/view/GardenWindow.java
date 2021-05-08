@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import controller.Controller;
 import enums.CurrentScreen;
 import enums.PlantType;
+import enums.Spread;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -38,6 +39,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -69,7 +72,7 @@ public class GardenWindow extends Window{
     Label goBackToMarket;
     Insets countBarItemSpacing;
     Button gardenNext;
-    HashMap <ImageView, Plant> plantImageViews;
+    HashMap <Circle, Plant> plantCircles;
 	HBox listbox;
 	HBox marketBox;
 	double favHeight = .8;
@@ -88,7 +91,7 @@ public class GardenWindow extends Window{
         this.stage = stage;
         this.cont = cont;
         this.gardenNext = gardenNext;
-        plantImageViews = new HashMap<ImageView, Plant>();
+        plantCircles = new HashMap<Circle, Plant>();
     }
     
     
@@ -151,20 +154,20 @@ public class GardenWindow extends Window{
     	favs.getChildren().add(favTitle);
     	
     	centerWidth = width - (favWidth*width);
-    	centerHeight = height - countBarHeight;
+    	centerHeight = height - countBarHeight - 20;
     	gardenWidth = (double)model.getWidth();
     	gardenHeight = (double) model.getHeight();
     	double growth;
     	if(gardenWidth/centerWidth > gardenHeight/centerHeight) {
     		//Fit garden width to fit the frame size
-    		growth = centerWidth/gardenWidth;
-    		gardenWidth = centerWidth;
+    		growth = (centerWidth/gardenWidth);
+    		gardenWidth = gardenWidth*growth;
     		gardenHeight = (gardenHeight*growth);
     	}
     	else {
     		//Fit garden height to fit the frame size
-    		growth = centerHeight/gardenHeight;
-    		gardenHeight = centerHeight;
+    		growth = (centerHeight/gardenHeight);
+    		gardenHeight = gardenHeight*growth;
     		gardenWidth = (gardenWidth*growth);
     	}
 
@@ -195,7 +198,7 @@ public class GardenWindow extends Window{
     	favs.getChildren().add(plantList);
     	
     	//Add the plants
-    	ImageView plantiv;
+    	Circle circ;
     	double imDiameter;
     	for(Plant p : model.getPlants()) {
     		if(p.getType() == PlantType.HERBACIOUS) {
@@ -204,17 +207,16 @@ public class GardenWindow extends Window{
     			imDiameter = woodyDiameter;
     		}
     		//updateLeps(p.getLepsSupported());
-    		plantiv = p.getImageView();
-    		plantiv.setPreserveRatio(true);
-        	plantiv.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
-    		plantiv.setTranslateX(p.getX());
-    		plantiv.setTranslateY(p.getY());
-    		plantiv.setOnMousePressed(event1 -> pressed(event1));
-        	plantiv.setOnMouseDragged(event2 -> drag(event2));
-        	plantiv.setOnMouseReleased(event3 -> released(event3));
-    		plantImageViews.put(plantiv, p);
-    		plot.getChildren().add(plantiv);
-        	plantiv.toFront();
+    		circ = p.getCircle();
+        	circ.setRadius(imDiameter*(gardenWidth/model.getWidth()));
+    		circ.setCenterX(p.getX());
+    		circ.setCenterY(p.getY());
+    		circ.setOnMousePressed(event1 -> pressed(event1));
+        	circ.setOnMouseDragged(event2 -> drag(event2));
+        	circ.setOnMouseReleased(event3 -> released(event3));
+    		plantCircles.put(circ, p);
+    		plot.getChildren().add(circ);
+        	circ.toFront();
     	}
     	
     	// Add mouse event handler for the source
@@ -240,25 +242,44 @@ public class GardenWindow extends Window{
 	            	HBox selected = plantList.getSelectionModel().getSelectedItem();
 	
 	            	//make a copy of selected ImageView to put in plot Pane
-	            	ImageView iv1;
 	            	int price;
-	            	double imDiameter;
+	            	double imDiameter = 0;
 	            	if(favorited.get(index).getType() == PlantType.HERBACIOUS) {
-	            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
 	            		price = 6;
-	            		imDiameter = herbDiameter;
 	            	} else  {
-	            		iv1 = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
 	            		price = 20;
-	            		imDiameter = woodyDiameter;
 	            	}
-	            	iv1.setPreserveRatio(true);
-	            	System.out.println(imDiameter*(gardenWidth/model.getWidth()));
-	            	iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
+	            	
+	            	Circle circ1 = new Circle();
+	            	try {
+	            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
+	            	} catch(Exception e) {
+	            		circ1.setFill(javafx.scene.paint.Color.WHITE);
+	            	}
+	            	
+            		switch(favorited.get(index).getSpread()) {
+	            		case SMALL:
+	            			imDiameter = .75;
+	            			break;
+	            		case MEDIUM:
+	            			imDiameter = 1;
+	            			break;
+	            		case LARGE:
+	            			imDiameter = 1.25;
+	            			break;
+	            		case XL:
+	            			imDiameter = 1.5;
+	            			break;
+	            	}
+	            	circ1.setCenterX(event.getSceneX());
+	            	circ1.setCenterY(event.getSceneY());
+	            	circ1.setRadius((imDiameter/2)*gardenWidth/model.getWidth());
+	            	//iv1.setPreserveRatio(true);
+	            	//iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
 	            	
 	            	Plant p = (Plant)(favorited.get(index).clone());
 	            	p.setDiameter(imDiameter);
-	            	plantImageViews.put(iv1, p);
+	            	plantCircles.put(circ1, p);
 	            
 	            	updateLeps(p.getLepsSupported());
 	            	cont.updateBudget(price);
@@ -271,9 +292,10 @@ public class GardenWindow extends Window{
 	            	backingList.set(index, selected);
 	
 	            	int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
-	            	int placeY = (int)(event.getSceneY() - plot.getLayoutY() - imDiameter*(gardenWidth/model.getWidth()) - 40);
-	            	iv1.setTranslateX(placeX);
-	            	iv1.setTranslateY(placeY);
+	            	int placeY = (int)(event.getSceneY() - countBarHeight - 45);
+	            	System.out.println("placeX is " + placeX);
+	            	circ1.setTranslateX(placeX);
+	            	circ1.setTranslateY(placeY);
 	            	
 //	            	double rad = imDiameter*(gardenWidth/model.getWidth())/2;
 //	            	if(placeX - rad < (centerWidth/2 - gardenWidth/2)) {
@@ -289,17 +311,17 @@ public class GardenWindow extends Window{
 //	            		iv1.setTranslateY(iv1.getTranslateY() - ((height - centerHeight/2 + gardenWidth/2) - placeY));
 //	            	}
 	            	
-	            	p.setX(iv1.getTranslateX());
-	            	p.setY(iv1.getTranslateY());
-	            	p.setImageView(iv1);
+	            	p.setX(circ1.getTranslateX());
+	            	p.setY(circ1.getTranslateY());
+	            	p.setCircle(circ1);
 	            	cont.addPlant(p);
 	
-	            	iv1.setOnMousePressed(event1 -> pressed(event1));
-	            	iv1.setOnMouseDragged(event2 -> drag(event2));
-	            	iv1.setOnMouseReleased(event3 -> released(event3));     
+	            	circ1.setOnMousePressed(event1 -> pressed(event1));
+	            	circ1.setOnMouseDragged(event2 -> drag(event2));
+	            	circ1.setOnMouseReleased(event3 -> released(event3));     
 	
-	            	plot.getChildren().add(iv1);
-	            	iv1.toFront();
+	            	plot.getChildren().add(circ1);
+	            	circ1.toFront();
 	 
 	            	event.consume();
             	}
@@ -311,7 +333,8 @@ public class GardenWindow extends Window{
     	    Line line = new Line(centerWidth/2 - gardenWidth/2 + n*(gardenWidth/model.getWidth()), 
     	    		centerHeight/2 - gardenHeight/2, 
     	    		centerWidth/2 - gardenWidth/2 + n*(gardenWidth/model.getWidth()), 
-    	    		height - (centerHeight / 2) + (gardenHeight / 2) - (gardenHeight/model.getHeight()));
+    	    		(centerHeight / 2) + (gardenHeight / 2));
+    	    //height - (centerHeight / 2) + (gardenHeight / 2) - (gardenHeight/model.getHeight())
     	    outerPlot.getChildren().add(line);
     	});
     	IntStream.range(0, model.getHeight()).forEach(n -> {
@@ -345,20 +368,18 @@ public class GardenWindow extends Window{
     
 	public void drag(MouseEvent event) {
 		Node n = (Node)event.getSource();
-		System.out.println("Location: " + event.getSceneX()
-				 + ", " + event.getSceneY());
-		System.out.println("Border: " + plot.getLayoutX() + ", " + (plot.getLayoutX() + gardenWidth));
-		System.out.println(centerWidth/2 - gardenWidth/2 + " ... " + centerWidth/2 + gardenWidth/2);
-		double rad = plantImageViews.get(n).getDiameter()/2*gardenWidth/model.getWidth();
+		System.out.println("getSceneX: " + event.getSceneX() + ", layoutX: " + n.getLayoutX());
+		double rad = plantCircles.get(n).getDiameter()/2*gardenWidth/model.getWidth();
+		System.out.println("Event getx is  " + event.getX());
 		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
-			n.setTranslateX(n.getTranslateX() + event.getX() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+			n.setTranslateX(event.getSceneX() - plot.getLayoutX() - rad);
 		}
 		if(event.getSceneY() - rad > (height - centerHeight/2 - gardenHeight/2) 
 				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
-			n.setTranslateY(n.getTranslateY() + event.getY() - ((plantImageViews.get(n).getDiameter())*(gardenWidth/model.getWidth()))/2);
+			n.setTranslateY(event.getSceneY() - countBarHeight - 45);
 		}
-		plantImageViews.get(n).setX(n.getTranslateX());
-		plantImageViews.get(n).setY(n.getTranslateY());
+		plantCircles.get(n).setX(n.getTranslateX());
+		plantCircles.get(n).setY(n.getTranslateY());
 	}    
     public void released(MouseEvent event) {
     	System.out.println("released");
