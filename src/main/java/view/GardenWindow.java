@@ -239,6 +239,7 @@ public class GardenWindow extends Window{
             	if(event.getSceneX() > centerWidth/2 - gardenWidth/2 && event.getSceneX() < centerWidth/2 + gardenWidth/2 &&
             			event.getSceneY() > height - centerHeight/2 - gardenHeight/2 && 
             			event.getSceneY() < height - centerHeight/2 + gardenHeight/2) {
+            		
 	            	int index = plantList.getSelectionModel().getSelectedIndex();
 	            	HBox selected = plantList.getSelectionModel().getSelectedItem();
 	
@@ -249,13 +250,6 @@ public class GardenWindow extends Window{
 	            		price = 6;
 	            	} else  {
 	            		price = 20;
-	            	}
-	            	
-	            	Circle circ1 = new Circle();
-	            	try {
-	            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
-	            	} catch(Exception e) {
-	            		circ1.setFill(javafx.scene.paint.Color.WHITE);
 	            	}
 	            	
             		switch(favorited.get(index).getSpread()) {
@@ -272,59 +266,85 @@ public class GardenWindow extends Window{
 	            			imDiameter = 1.5;
 	            			break;
 	            	}
-	            	circ1.setCenterX(event.getSceneX());
-	            	circ1.setCenterY(event.getSceneY());
-	            	circ1.setRadius((imDiameter/2)*gardenWidth/model.getWidth());
-	            	//iv1.setPreserveRatio(true);
-	            	//iv1.setFitHeight(imDiameter*(gardenWidth/model.getWidth()));
-	            	
-	            	Plant p = (Plant)(favorited.get(index).clone());
-	            	p.setDiameter(imDiameter);
-	            	plantCircles.put(circ1, p);
-	            
-	            	updateLeps(p.getLepsSupported());
-	            	cont.updateBudget(price);
-	            	updateBudget(price);
-	            	
-	            	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
-	
-	            	
-	            	//put dragged Node back into list in same place
-	            	backingList.set(index, selected);
-	
-	            	int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
+            		double rad = (imDiameter/2)*gardenWidth/model.getWidth();
+            		boolean intersect = false;
+            		int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
 	            	int placeY = (int)(event.getSceneY() - countBarHeight - 45);
-	            	System.out.println("placeX is " + placeX);
-	            	circ1.setTranslateX(placeX);
-	            	circ1.setTranslateY(placeY);
-	            	
-//	            	double rad = imDiameter*(gardenWidth/model.getWidth())/2;
-//	            	if(placeX - rad < (centerWidth/2 - gardenWidth/2)) {
-//	            		iv1.setTranslateX(iv1.getTranslateX() + placeX - (centerWidth/2 - gardenWidth/2));
-//	            	}
-//	            	if(placeX + rad > (centerWidth/2 + gardenWidth/2)) {
-//	            		iv1.setTranslateX(iv1.getTranslateX() - ((centerWidth/2 + gardenWidth/2) - placeX));
-//	            	}
-//	            	if(placeY - rad < (height - centerWidth/2 - gardenWidth/2)) {
-//	            		iv1.setTranslateY(iv1.getTranslateY() + placeY - (height - centerHeight/2 - gardenHeight/2));
-//	            	}
-//	            	if(placeY + rad > (height - centerWidth/2 + gardenWidth/2)) {
-//	            		iv1.setTranslateY(iv1.getTranslateY() - ((height - centerHeight/2 + gardenWidth/2) - placeY));
-//	            	}
-	            	
-	            	p.setX(circ1.getTranslateX());
-	            	p.setY(circ1.getTranslateY());
-	            	p.setCircle(circ1);
-	            	cont.addPlant(p);
+            		for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
+                		Circle e = (Circle) entry.getKey();
+        	    		double distSq = (placeX - e.getCenterX()) * (placeX - e.getCenterX()) + 
+        	    				(placeY - e.getCenterY()) * (placeY - e.getCenterY());
+        	    	    double radSumSq = (rad + e.getRadius()) * (rad + e.getRadius());
+        	    	    if(distSq < radSumSq) {
+        	    	    	System.out.println("They intersect...");
+        	    	    	intersect = true;
+        	    	    }
+            		}
+            		
+            		if(!intersect) {
+	            		Circle circ1 = new Circle();
+		            	try {
+		            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
+		            	} catch(Exception e) {
+		            		circ1.setFill(javafx.scene.paint.Color.WHITE);
+		            	}
+	            		
+		            	circ1.setCenterX(event.getSceneX());
+		            	circ1.setCenterY(event.getSceneY());
+		            	circ1.setRadius(rad);
+		            	
+		            	Plant p = (Plant)(favorited.get(index).clone());
+		            	p.setDiameter(imDiameter);
+		            	plantCircles.put(circ1, p);
+		            
+		            	updateLeps(p.getLepsSupported());
+		            	cont.updateBudget(price);
+		            	updateBudget(price);
+		            	
+		            	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
+		
+		            	
+		            	//put dragged Node back into list in same place
+		            	backingList.set(index, selected);
 	
-	            	circ1.setOnMousePressed(event1 -> pressed(event1));
-	            	circ1.setOnMouseDragged(event2 -> drag(event2));
-	            	circ1.setOnMouseReleased(event3 -> released(event3));     
-	
-	            	plot.getChildren().add(circ1);
-	            	circ1.toFront();
-	 
-	            	event.consume();
+		            	System.out.println("placeX is " + placeX);
+		            	circ1.setTranslateX(placeX);
+		            	circ1.setCenterX(placeX);
+		            	circ1.setTranslateY(placeY);
+		            	circ1.setCenterY(placeY);
+		            	
+//		            	System.out.println((placeX-rad)+", "+(placeX+rad)+", "+plot.getLayoutX()+", "+(plot.getLayoutX()+gardenWidth));
+//		            	if(placeX - rad < 0) {
+//		            		System.out.println("left");
+//		            		circ1.setTranslateX((rad - (circ1.getTranslateX() - plot.getLayoutX())));
+//		            	}
+//		            	if(placeX + rad > (plot.getLayoutX() + gardenWidth)) {
+//		            		System.out.println("right");
+//		            		circ1.setTranslateX(circ1.getTranslateX() - (rad - (plot.getLayoutX() + gardenWidth - circ1.getTranslateX())));
+//		            	}
+//		            	if(placeY - rad < plot.getLayoutY()) {
+//		            		System.out.println("top");
+//		            		circ1.setTranslateY(circ1.getTranslateY() + (rad - (circ1.getTranslateY() - plot.getLayoutY())));
+//		            	}
+//		            	if(placeY + rad > (plot.getLayoutY() + gardenHeight)) {
+//		            		System.out.println("botton");
+//		            		circ1.setTranslateY(circ1.getTranslateY() - (rad - (plot.getLayoutY() + gardenHeight - circ1.getTranslateY())));
+//		            	}
+		            	
+		            	p.setX(circ1.getTranslateX());
+		            	p.setY(circ1.getTranslateY());
+		            	p.setCircle(circ1);
+		            	cont.addPlant(p);
+		
+		            	circ1.setOnMousePressed(event1 -> pressed(event1));
+		            	circ1.setOnMouseDragged(event2 -> drag(event2));
+		            	circ1.setOnMouseReleased(event3 -> released(event3));     
+		
+		            	plot.getChildren().add(circ1);
+		            	circ1.toFront();
+		 
+		            	event.consume();
+            		}
             	}
             }
         });
@@ -369,6 +389,9 @@ public class GardenWindow extends Window{
     
 	public void drag(MouseEvent event) {
 		Circle n = (Circle)event.getSource();
+		boolean intersect = false;
+		double prevX = n.getTranslateX();
+		double prevY = n.getTranslateY();
 		double rad = plantCircles.get(n).getDiameter()/2*gardenWidth/model.getWidth();
 		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
 			n.setTranslateX(event.getSceneX() - plot.getLayoutX() - rad);
@@ -379,25 +402,33 @@ public class GardenWindow extends Window{
 			n.setTranslateY(event.getSceneY() - countBarHeight - 45);
 			n.setCenterY(n.getTranslateY());
 		}
+
 		plantCircles.get(n).setX(n.getTranslateX());
 		plantCircles.get(n).setY(n.getTranslateY());
-	}    
-    public void released(MouseEvent event) {
-    	System.out.println("released");
-    	Circle n = (Circle)event.getSource();
-    	for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
+		for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
     		Circle e = (Circle) entry.getKey();
     		if(e != n) {
-	    		System.out.println(n.getCenterX() + ", " + n.getCenterY() + ", " + n.getRadius());
-	    		System.out.println(e.getCenterX() + ", " + e.getCenterY() + ", " + e.getRadius());
 	    		double distSq = (n.getCenterX() - e.getCenterX()) * (n.getCenterX() - e.getCenterX()) + 
 	    				(n.getCenterY() - e.getCenterY()) * (n.getCenterY() - e.getCenterY());
 	    	    double radSumSq = (n.getRadius() + e.getRadius()) * (n.getRadius() + e.getRadius());
 	    	    if(distSq < radSumSq) {
 	    	    	System.out.println("They intersect!");
+	    	    	intersect = true;
 	    	    }
     		}
+		}
+    	if(intersect) {
+			n.setTranslateX(prevX);
+			n.setCenterX(n.getTranslateX());
+			n.setTranslateY(prevY);
+			n.setCenterY(n.getTranslateY());
+			plantCircles.get(n).setX(n.getTranslateX());
+			plantCircles.get(n).setY(n.getTranslateY());
     	}
+	}    
+	
+    public void released(MouseEvent event) {
+    	System.out.println("released");
     }
     
     public HBox drawLeps() {
