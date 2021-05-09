@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -367,22 +368,36 @@ public class GardenWindow extends Window{
     }
     
 	public void drag(MouseEvent event) {
-		Node n = (Node)event.getSource();
-		System.out.println("getSceneX: " + event.getSceneX() + ", layoutX: " + n.getLayoutX());
+		Circle n = (Circle)event.getSource();
 		double rad = plantCircles.get(n).getDiameter()/2*gardenWidth/model.getWidth();
-		System.out.println("Event getx is  " + event.getX());
 		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
 			n.setTranslateX(event.getSceneX() - plot.getLayoutX() - rad);
+			n.setCenterX(n.getTranslateX());
 		}
 		if(event.getSceneY() - rad > (height - centerHeight/2 - gardenHeight/2) 
 				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
 			n.setTranslateY(event.getSceneY() - countBarHeight - 45);
+			n.setCenterY(n.getTranslateY());
 		}
 		plantCircles.get(n).setX(n.getTranslateX());
 		plantCircles.get(n).setY(n.getTranslateY());
 	}    
     public void released(MouseEvent event) {
     	System.out.println("released");
+    	Circle n = (Circle)event.getSource();
+    	for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
+    		Circle e = (Circle) entry.getKey();
+    		if(e != n) {
+	    		System.out.println(n.getCenterX() + ", " + n.getCenterY() + ", " + n.getRadius());
+	    		System.out.println(e.getCenterX() + ", " + e.getCenterY() + ", " + e.getRadius());
+	    		double distSq = (n.getCenterX() - e.getCenterX()) * (n.getCenterX() - e.getCenterX()) + 
+	    				(n.getCenterY() - e.getCenterY()) * (n.getCenterY() - e.getCenterY());
+	    	    double radSumSq = (n.getRadius() + e.getRadius()) * (n.getRadius() + e.getRadius());
+	    	    if(distSq < radSumSq) {
+	    	    	System.out.println("They intersect!");
+	    	    }
+    		}
+    	}
     }
     
     public HBox drawLeps() {
