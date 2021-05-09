@@ -269,7 +269,7 @@ public class GardenWindow extends Window{
             		double rad = (imDiameter/2)*gardenWidth/model.getWidth();
             		boolean intersect = false;
             		int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
-	            	int placeY = (int)(event.getSceneY() - countBarHeight - 45);
+	            	int placeY = (int)(event.getSceneY() - countBarHeight - 45 - (centerHeight - gardenHeight)/2);
             		for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
                 		Circle e = (Circle) entry.getKey();
         	    		double distSq = (placeX - e.getCenterX()) * (placeX - e.getCenterX()) + 
@@ -307,7 +307,6 @@ public class GardenWindow extends Window{
 		            	//put dragged Node back into list in same place
 		            	backingList.set(index, selected);
 	
-		            	System.out.println("placeX is " + placeX);
 		            	circ1.setTranslateX(placeX);
 		            	circ1.setCenterX(placeX);
 		            	circ1.setTranslateY(placeY);
@@ -399,7 +398,7 @@ public class GardenWindow extends Window{
 		}
 		if(event.getSceneY() - rad > (height - centerHeight/2 - gardenHeight/2) 
 				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
-			n.setTranslateY(event.getSceneY() - countBarHeight - 45);
+			n.setTranslateY(event.getSceneY() - countBarHeight - 45 - (centerHeight-gardenHeight)/2);
 			n.setCenterY(n.getTranslateY());
 		}
 
