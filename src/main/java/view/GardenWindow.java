@@ -50,6 +50,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Model;
 import model.Plant;
+import javafx.scene.control.Tooltip;
 
 public class GardenWindow extends Window{
     Controller cont;
@@ -236,6 +237,9 @@ public class GardenWindow extends Window{
     		plantCircles.put(circ, p);
     		plot.getChildren().add(circ);
         	circ.toFront();
+        	Tooltip hoverOver = new Tooltip(p.getComName());
+        	hoverOver.setText(p.getComName());
+        	Tooltip.install(circ, hoverOver);        	
     	}
     	
     	// Add mouse event handler for the source
@@ -314,6 +318,15 @@ public class GardenWindow extends Window{
 		            	Plant p = (Plant)(favorited.get(index).clone());
 		            	p.setDiameter(imDiameter);
 		            	plantCircles.put(circ1, p);
+		            	
+		            	//Hover over
+		            	Tooltip hoverOver = new Tooltip(p.getComName());
+		            	hoverOver.setText(p.toString());
+		            	Tooltip.install(circ1, hoverOver);
+		            	ImageView newImg = new ImageView(new Image(p.getImageUrl()));
+		            	newImg.setPreserveRatio(true);
+		            	newImg.setFitWidth(100);
+		            	hoverOver.setGraphic(newImg);
 		            
 		            	updateLeps(p.getLepsSupported());
 		            	cont.updateBudget(price);

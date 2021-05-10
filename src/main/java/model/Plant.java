@@ -57,13 +57,15 @@ public class Plant implements Cloneable, Serializable{
 			}
 		} catch(Exception e){
 			if(type == PlantType.HERBACIOUS) {
-				iv = new ImageView(new Image("/images/plant.png"));
+				image = "/images/plant.png";
+				iv = new ImageView(new Image(image));
         		circ = new Circle();
-        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/plant.png"))));
+        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream(image))));
         	} else  {
-        		iv = new ImageView(new Image("/images/tree.png"));
+        		image = "/images/tree.png";
+        		iv = new ImageView(new Image(image));
         		circ = new Circle();
-        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/tree.png"))));
+        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream((image)))));
         	}    		
 		}
 	}
