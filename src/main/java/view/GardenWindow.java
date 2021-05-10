@@ -208,6 +208,7 @@ public class GardenWindow extends Window{
     			imDiameter = woodyDiameter;
     		}
     		//updateLeps(p.getLepsSupported());
+    		System.out.println(p.toString());
     		circ = p.getCircle();
         	circ.setRadius(imDiameter*(gardenWidth/model.getWidth()));
     		circ.setCenterX(p.getX());

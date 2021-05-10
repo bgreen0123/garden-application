@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -247,7 +248,9 @@ public class Controller{
 		});
 		load.setOnAction(e -> {
 			try {
-				confirmLoad();
+				if(confirmLoad()==ButtonType.CANCEL) {
+					return;
+				}
 				FileInputStream fis = new FileInputStream("garden.ser");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				Model nm = (Model)ois.readObject();
@@ -355,11 +358,12 @@ public class Controller{
 		confirmSave.setContentText("Your garden has been saved successfully");
 		confirmSave.showAndWait();
 	}
-	private void confirmLoad() {
+	private ButtonType confirmLoad() {
 		Alert confirmSave = new Alert(AlertType.CONFIRMATION);
 		confirmSave.setHeaderText("Loading Garden");
 		confirmSave.setContentText("You are about to load a garden, would you like to continue?");
 		confirmSave.showAndWait();
+		return confirmSave.getResult();
 	}
 
 	//Getters
