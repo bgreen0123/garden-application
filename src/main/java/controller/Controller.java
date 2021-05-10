@@ -155,6 +155,9 @@ public class Controller{
 		//Actions
 		welcomeNext.setOnAction(e -> {
 			view.changeScreen(CurrentScreen.CONDITIONS); // change back to CONDITIONS
+			budget.setText("");
+			widthBox.setText("");
+			heightBox.setText("");
 			System.out.println("Button Pressed");
 		});
 		
