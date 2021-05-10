@@ -50,20 +50,19 @@ public class Plant implements Cloneable, Serializable{
 	public void makeImageView() {
 		try {
 			System.out.println(image);
-			iv = new ImageView(new Image(image));
+			Image im = new Image(image);
+			iv = new ImageView(im);
 			if(circ == null) {
 				circ = new Circle();
 				circ.setFill(new ImagePattern(new Image(image)));
 			}
 		} catch(Exception e){
 			if(type == PlantType.HERBACIOUS) {
-				image = "/images/plant.png";
-				iv = new ImageView(new Image(image));
+				iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
         		circ = new Circle();
         		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream(image))));
         	} else  {
-        		image = "/images/tree.png";
-        		iv = new ImageView(new Image(image));
+        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
         		circ = new Circle();
         		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream((image)))));
         	}    		
@@ -79,6 +78,10 @@ public class Plant implements Cloneable, Serializable{
 	}
 	
 	//Getters
+	public String getDetails() {
+		return details;
+	}
+	
 	public String getImageUrl(){
 		return image;
 	}
