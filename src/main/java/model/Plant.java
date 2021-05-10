@@ -49,8 +49,9 @@ public class Plant implements Cloneable, Serializable{
 	
 	public void makeImageView() {
 		try {
+			System.out.println(image);
+			iv = new ImageView(new Image(image));
 			if(circ == null) {
-				iv = new ImageView(new Image(image));
 				circ = new Circle();
 				circ.setFill(new ImagePattern(new Image(image)));
 			}

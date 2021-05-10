@@ -103,6 +103,12 @@ public class GardenWindow extends Window{
     public void draw() {
     	model = cont.getModel();
     	budget = model.getBudget();
+    	model.getFavorites().forEach(p -> {
+    		if(p.getImageView() == null) {
+    			System.out.println("Image no load");
+    			p.makeImageView();
+    		}
+    	});
     	//Background Image
     	System.out.println("Draw garden!: " + width + ", " + height);
     	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"), width, height, false, true);
