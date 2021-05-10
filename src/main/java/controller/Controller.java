@@ -36,7 +36,6 @@ public class Controller{
 	View view;
 	//Buttons
 	Button welcomeNext;
-	Button download;
 	Button conditionsNext;
 	Button woody;
 	Button herbaceous;
@@ -51,6 +50,7 @@ public class Controller{
 	Button load;
 	Button toWelcome;
 	Button endToGarden;
+	Button restart;
 	
 	
 	//Favorite buttons
@@ -140,6 +140,7 @@ public class Controller{
 		load = new Button("Load");
 		toWelcome = new Button("Back to Start");
 		endToGarden = new Button("Back to Garden");
+		restart = new Button("Restart");
 		
 		//Making text box
 		budget = new TextField();
@@ -186,7 +187,7 @@ public class Controller{
 				budgetError();
 				return;
 			}
-			if(widthInput == "" || heightInput == "") {
+			if((widthInput == "" || heightInput == "")) {
 				dimenstionError();
 				return;
 			}
@@ -200,6 +201,10 @@ public class Controller{
 			try {
 				width = Integer.parseInt(widthInput);
 				height = Integer.parseInt(heightInput);
+				if((width > 50 || height > 50) || (width < 5 || height < 5)) {
+					dimenstionError();
+					return;
+				}
 			}catch (Exception exc){
 				dimenstionError();
 				return;
@@ -269,7 +274,10 @@ public class Controller{
 			loading();
 		});
 		
-		
+		restart.setOnAction(e -> {
+			model = new Model();
+			view.changeScreen(CurrentScreen.WELCOME);
+		});
 		
 		
 		//Creating the drop down menu
@@ -331,7 +339,7 @@ public class Controller{
 	private void dimenstionError() {
 		Alert dimenstionError = new Alert(AlertType.ERROR);
 		dimenstionError.setHeaderText("Invalid width or height");
-		dimenstionError.setContentText("width and height must be an integer and cannot be empty.");
+		dimenstionError.setContentText("width and height must be an integer between 5 and 50");
 		dimenstionError.showAndWait();
 	}
 	private void saveError() {
@@ -367,6 +375,10 @@ public class Controller{
 	}
 
 	//Getters
+	public Button getRestart() {
+		return restart;
+	}
+	
 	public Button getEndToGarden() {
 		return endToGarden;
 	}
@@ -415,10 +427,6 @@ public class Controller{
 	
 	public Button getWelcomeButton(){
 		return welcomeNext;
-	}
-	
-	public Button getDownloadButton() {
-		return download;
 	}
 
 	public Button getConditionsButton(){

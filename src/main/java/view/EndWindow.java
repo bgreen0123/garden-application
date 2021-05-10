@@ -42,10 +42,8 @@ public class EndWindow extends Window{
     Stage stage;
     String fileName;
     TextField saveBox;
-    Button preview;
-    ObservableList<String> plantsSummaryList;
-    Button endToGarden;
     
+    ObservableList<String> plantsSummaryList;
     GardenWindow gw;
     Stage gwStage;
     Scene gwScene;
@@ -58,17 +56,19 @@ public class EndWindow extends Window{
     ArrayList<Plant> favoritePlants;
     int leps;
     
-    Button download;
+    Button preview;
+    Button endToGarden;
+    Button restart;
     Button save;
 
-    public EndWindow(int width, int height, Stage stage, Button download, Controller cont, String fileName, TextField saveBox, 
+    public EndWindow(int width, int height, Stage stage, Button restart, Controller cont, String fileName, TextField saveBox, 
     				ArrayList<Plant> plantsList, ArrayList<Plant> favoritePlants, View view, Button save, Button endToGarden) {
     	
         this.width = width;
         this.height = height;
         this.stage = stage;
         this.cont = cont;
-        this.download = download;
+        this.restart = restart;
         this.fileName = fileName;
         this.saveBox = saveBox;
         this.plantsList = plantsList;
@@ -185,24 +185,15 @@ public class EndWindow extends Window{
         HBox saveBut = new HBox(save);
         saveBut.setAlignment(Pos.CENTER);
         
-        download = new Button("Download");
-        download.setPrefSize(width*.1, height*.1);
-        download.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save");
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
-        download.setOnAction(new EventHandler<ActionEvent>(){
-        	public void handle(ActionEvent event) {
-        		fileChooser.showSaveDialog(stage);
-        	}
-        });
+        restart.setPrefSize(width * .1, height * .1);
+        restart.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
         
         endToGarden.setPrefSize(width * .2, height * .1);
         endToGarden.setFont(Font.font("Courier New", FontWeight.BOLD, 24));
         
         
         HBox downloadBox = new HBox();
-        downloadBox.getChildren().addAll(download, preview, save, endToGarden);
+        downloadBox.getChildren().addAll(restart, preview, save, endToGarden);
         downloadBox.setAlignment(Pos.CENTER);
         downloadBox.setPadding(new Insets(height *.05));
         downloadBox.setSpacing(width * .05);
