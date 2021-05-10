@@ -84,26 +84,6 @@ public class ConditionsWindow extends Window{
         
         conditions.getChildren().addAll(condBox, choiceBox);
         
-        //Enter Dimensions area
-        x.setMin(5);
-        y.setMin(5);
-        x.setMax(25);
-        y.setMax(25);
-        x.setValue(10);
-        y.setValue(10);
-        x.setShowTickLabels(true);
-        y.setShowTickLabels(true);
-        x.setShowTickMarks(true);
-        y.setShowTickMarks(true);
-        x.setMajorTickUnit(10);
-        y.setMajorTickUnit(10);
-        x.setMinorTickCount(1);
-        y.setMinorTickCount(1);
-        x.setBlockIncrement(5);
-        y.setBlockIncrement(5);
-        x.setSnapToTicks(true);
-        y.setSnapToTicks(true);
-        
         VBox sliderBox = new VBox();
         sliderBox.setSpacing(height * .05);
         sliderBox.setPrefWidth(width * .6);

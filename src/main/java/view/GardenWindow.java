@@ -13,6 +13,7 @@ import controller.Controller;
 import enums.CurrentScreen;
 import enums.PlantType;
 import enums.Spread;
+import enums.Soil;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -66,6 +67,7 @@ public class GardenWindow extends Window{
     String favBarColor = "white";
     int heartSize = 28;
     String countBarColor = "rgb(102,201,52)";
+    String imageBack;
     int countBarHeight = 50;
     int countBarItemHeight = 30;
     Label lepLabel;
@@ -111,7 +113,16 @@ public class GardenWindow extends Window{
     	});
     	//Background Image
     	System.out.println("Draw garden!: " + width + ", " + height);
-    	Image bgimg = new Image(getClass().getResourceAsStream("/images/dirt-background-transparent.jpg"), width, height, false, true);
+    	if(cont.getSoilType() == Soil.CLAY) {
+    		imageBack = "/images/claySoil.png";
+    	}
+    	else if(cont.getSoilType() == Soil.ROCK) {
+    		imageBack = "/images/rockySoil.png";
+    	}
+    	else {
+    		imageBack = "/images/dirt-background-transparent.jpg";
+    	}
+    	Image bgimg = new Image(getClass().getResourceAsStream(imageBack), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(bgimg, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
         

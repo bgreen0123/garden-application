@@ -506,6 +506,10 @@ public class Controller{
 		return view;
 	}
 	
+	public Soil getSoilType() {
+		return soil.getValue();
+	}
+	
 	//Setter to set the users choice of conditions
 	public void setChoice(ChoiceBox<Sun> sun, ChoiceBox<Soil> soil, ChoiceBox<Moisture> moisture ) {
 		sunChoice = sun.getValue();
