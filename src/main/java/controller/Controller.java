@@ -158,6 +158,18 @@ public class Controller{
 			budget.setText("");
 			widthBox.setText("");
 			heightBox.setText("");
+			woodyMarket.forEach(m -> {
+				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
+				i.setFitHeight(30);
+				i.setPreserveRatio(true);
+				m.getButton().setGraphic(i);
+			});
+			herbaceousMarket.forEach(m -> {
+				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
+				i.setFitHeight(30);
+				i.setPreserveRatio(true);
+				m.getButton().setGraphic(i);
+			});
 			System.out.println("Button Pressed");
 		});
 		
