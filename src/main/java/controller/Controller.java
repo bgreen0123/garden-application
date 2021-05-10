@@ -203,6 +203,10 @@ public class Controller{
 				dimenstionError();
 				return;
 			}
+			if(budget<0) {
+				budgetError();
+				return;
+			}
 			
 			model.updateBudget(budget);
 			model.setWidth(width);
@@ -318,7 +322,7 @@ public class Controller{
 	private void budgetError() {
 		Alert budgetError = new Alert(AlertType.ERROR);
 		budgetError.setHeaderText("Invalid budget");
-		budgetError.setContentText("Budget must be an integer and cannot be empty.");
+		budgetError.setContentText("Budget must be an integer, cannot be negative and cannot be\nempty.");
 		budgetError.showAndWait();
 	}
 	private void dimenstionError() {
