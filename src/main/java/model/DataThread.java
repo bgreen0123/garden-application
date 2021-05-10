@@ -11,13 +11,6 @@ public class DataThread extends Thread implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Model m;
-	double centerWidth;
-	double centerHeight;
-	double gardenWidth;
-	double gardenHeight;
-	int width;
-	int height;
-	double imDiameter;
 	
 	transient Thread t;
 	public DataThread(Model m) {
@@ -26,14 +19,7 @@ public class DataThread extends Thread implements Serializable{
 	@Override
 	public void run() {
 		System.out.println("START THREAD");
-		
-		for(Plant p : m.getPlants()) {
-			if(p.getType() == PlantType.HERBACIOUS) {
-				p.setImageView(new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png"))));
-			}else {
-				p.setImageView(new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png"))));
-			}
-		}
+		m.getPlants().forEach(p -> p.makeImageView());
 		m.getFavorites().forEach(p -> p.makeImageView());
 		System.out.println("END THREAD");
 	}

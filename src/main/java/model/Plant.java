@@ -28,6 +28,7 @@ public class Plant implements Cloneable, Serializable{
 	private Spread spread;
 	private String image;
 	private String details;
+	transient Image im;
 	transient Circle circ;
 	transient ImageView iv;
 	
@@ -48,24 +49,41 @@ public class Plant implements Cloneable, Serializable{
 	}
 	
 	public void makeImageView() {
-		try {
-			System.out.println(image);
-			Image im = new Image(image);
+		try{
+			im = new Image(getClass().getResourceAsStream("/plants/" + comName + ".jpg"));
 			iv = new ImageView(im);
 			if(circ == null) {
 				circ = new Circle();
-				circ.setFill(new ImagePattern(new Image(image)));
+				circ.setFill(new ImagePattern(im));
 			}
-		} catch(Exception e){
-			if(type == PlantType.HERBACIOUS) {
-				iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
-        		circ = new Circle();
-        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream(image))));
-        	} else  {
-        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
-        		circ = new Circle();
-        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream((image)))));
-        	}    		
+		}catch(Exception e){
+			try {
+				im = new Image(getClass().getResourceAsStream("/plants/" + comName + ".jfif"));
+				iv = new ImageView(im);
+				if(circ == null) {
+					circ = new Circle();
+					circ.setFill(new ImagePattern(im));
+				}
+			}catch(Exception ex) {
+				try {
+					im = new Image(getClass().getResourceAsStream("/plants/" + comName + ".jpeg"));
+					iv = new ImageView(im);
+					if(circ == null) {
+						circ = new Circle();
+						circ.setFill(new ImagePattern(im));
+					}
+				}catch (Exception exc) {
+					if(type == PlantType.HERBACIOUS) {
+						iv = new ImageView(new Image(getClass().getResourceAsStream("/images/plant.png")));
+		        		circ = new Circle();
+		        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/plant.png"))));
+		        	} else  {
+		        		iv = new ImageView(new Image(getClass().getResourceAsStream("/images/tree.png")));
+		        		circ = new Circle();
+		        		circ.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/tree.png"))));
+		        	}
+				}
+			}
 		}
 	}
 	
@@ -78,12 +96,12 @@ public class Plant implements Cloneable, Serializable{
 	}
 	
 	//Getters
-	public String getDetails() {
-		return details;
+	public Image getIm() {
+		return im;
 	}
 	
-	public String getImageUrl(){
-		return image;
+	public String getDetails() {
+		return details;
 	}
 	
 	public ImageView getImageView() {

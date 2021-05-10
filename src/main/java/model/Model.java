@@ -22,7 +22,7 @@ public class Model implements Serializable{
 	private Soil soil = Soil.CLAY;
 	private Moisture moist = Moisture.DRY;
 	private int budgetLeft;
-	private boolean warned = false;
+	private boolean warned;
 
 	
 	public Model(){
@@ -30,6 +30,8 @@ public class Model implements Serializable{
 		budgetLeft = 0;
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
+		warned = false;
+		
 	}
 	
 	public Model(int width, int height, Data d, int lepSupported, ArrayList<Plant> plants, ArrayList<Plant>favoritedPlants, Sun sun, Soil soil, Moisture moist,

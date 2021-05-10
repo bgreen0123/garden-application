@@ -291,6 +291,7 @@ public class Controller{
 		
 		restart.setOnAction(e -> {
 			model = new Model();
+			view.getGardenWindow().newHash();
 			view.changeScreen(CurrentScreen.WELCOME);
 		});
 		

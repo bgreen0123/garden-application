@@ -98,6 +98,9 @@ public class GardenWindow extends Window{
         plantCircles = new HashMap<Circle, Plant>();
     }
     
+    public void newHash() {
+    	plantCircles = new HashMap<Circle, Plant>();
+    }
     
     public Pane getOuterPlot() {
     	return outerPlot;
@@ -218,12 +221,25 @@ public class GardenWindow extends Window{
     	
     	//Add the plants
     	Circle circ;
-    	double imDiameter;
+    	
     	for(Plant p : model.getPlants()) {
-    		if(p.getType() == PlantType.HERBACIOUS) {
-    			imDiameter = herbDiameter;
-    		}else {
-    			imDiameter = woodyDiameter;
+    		double imDiameter;
+    		switch(p.getSpread()) {
+	    		case SMALL:
+	    			imDiameter = .75;
+	    			break;
+	    		case MEDIUM:
+	    			imDiameter = 1;
+	    			break;
+	    		case LARGE:
+	    			imDiameter = 1.25;
+	    			break;
+	    		case XL:
+	    			imDiameter = 1.5;
+	    			break;
+	    		default:
+	    			imDiameter = .75;
+	    			break;
     		}
     		//updateLeps(p.getLepsSupported());
     		System.out.println(p.toString());
@@ -304,13 +320,14 @@ public class GardenWindow extends Window{
             		}
             		
             		if(!intersect) {
-	            		Circle circ1 = new Circle();
+	            		Circle circ1 = favorited.get(index).getCircle();
+	            		/**
 		            	try {
 		            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
 		            	} catch(Exception e) {
 		            		circ1.setFill(javafx.scene.paint.Color.WHITE);
 		            	}
-	            		
+	            		**/
 		            	circ1.setCenterX(event.getSceneX());
 		            	circ1.setCenterY(event.getSceneY());
 		            	circ1.setRadius(rad);
@@ -323,7 +340,7 @@ public class GardenWindow extends Window{
 		            	Tooltip hoverOver = new Tooltip(p.getComName());
 		            	hoverOver.setText(p.toString());
 		            	Tooltip.install(circ1, hoverOver);
-		            	ImageView newImg = new ImageView(new Image(p.getImageUrl()));
+		            	ImageView newImg = new ImageView(p.getIm());
 		            	newImg.setPreserveRatio(true);
 		            	newImg.setFitWidth(100);
 		            	hoverOver.setGraphic(newImg);

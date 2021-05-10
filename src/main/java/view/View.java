@@ -108,6 +108,10 @@ public class View extends Application {
 		return width;
 	}
 	
+	public GardenWindow getGardenWindow() {
+		return garden;
+	}
+	
 	public static void main(String[] args) {
 		launch();
 	}
