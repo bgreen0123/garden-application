@@ -87,9 +87,11 @@ public class Plant implements Cloneable, Serializable{
 		}
 	}
 	
-	public Object clone(){  
+	public Plant clone(){  
 	    try{  
-	        return super.clone();  
+	    	Plant p = (Plant) super.clone();
+	    	p.makeImageView();
+	        return p;  
 	    }catch(Exception e){ 
 	        return null; 
 	    }

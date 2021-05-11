@@ -244,19 +244,30 @@ public class GardenWindow extends Window{
     		//updateLeps(p.getLepsSupported());
     		System.out.println(p.toString());
     		circ = p.getCircle();
-        	circ.setRadius(imDiameter*(gardenWidth/model.getWidth()));
+        	circ.setRadius((imDiameter/2)*(gardenWidth/model.getWidth()));
     		circ.setCenterX(p.getX());
+    		circ.setTranslateX(p.getX());
     		circ.setCenterY(p.getY());
+    		circ.setTranslateY(p.getY());
     		circ.setOnMousePressed(event1 -> pressed(event1));
         	circ.setOnMouseDragged(event2 -> drag(event2));
         	circ.setOnMouseReleased(event3 -> released(event3));
-    		plantCircles.put(circ, p);
-    		plot.getChildren().add(circ);
+        	plantCircles.put(circ, p);
+        
         	circ.toFront();
         	Tooltip hoverOver = new Tooltip(p.getComName());
-        	hoverOver.setText(p.getComName());
-        	Tooltip.install(circ, hoverOver);        	
+        	hoverOver.setText(p.toString() + "\n" + p.getDetails());
+        	Tooltip.install(circ, hoverOver);     
+        	ImageView newImg = new ImageView(p.getIm());
+        	newImg.setPreserveRatio(true);
+        	newImg.setFitWidth(100);
+        	hoverOver.setGraphic(newImg);
     	}
+    	
+    	plot.getChildren().clear();
+    	plantCircles.forEach((c,plant)  -> {
+    		plot.getChildren().add(c);
+    	});
     	
     	// Add mouse event handler for the source
 		plantList.setOnDragDetected(new EventHandler <MouseEvent>()
@@ -320,7 +331,13 @@ public class GardenWindow extends Window{
             		}
             		
             		if(!intersect) {
-	            		Circle circ1 = favorited.get(index).getCircle();
+            			//Plant p = (Plant)(favorited.get(index).clone());
+		            	//Circle circ1 = p.getCircle();
+//		            	circ1.setRadius(favorited.get(index).getCircle().getRadius());
+//		            	circ1.setCenterX(favorited.get(index).getCircle().getCenterX());
+//		            	circ1.setCenterY(favorited.get(index).getCircle().getCenterY());
+//		            	circ1.setFill(new ImagePattern(favorited.get(index).getIm()));
+		            	
 	            		/**
 		            	try {
 		            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
@@ -328,17 +345,23 @@ public class GardenWindow extends Window{
 		            		circ1.setFill(javafx.scene.paint.Color.WHITE);
 		            	}
 	            		**/
-		            	circ1.setCenterX(event.getSceneX());
-		            	circ1.setCenterY(event.getSceneY());
-		            	circ1.setRadius(rad);
+            			Plant p = favorited.get(index).clone();
+		            	p.setX(placeX);
+		            	p.setY(placeY);
 		            	
-		            	Plant p = (Plant)(favorited.get(index).clone());
-		            	p.setDiameter(imDiameter);
+		            	Circle circ1 = new Circle();
+		            	circ1.setRadius(rad);
+		            	circ1.setCenterX(placeX);
+		            	circ1.setTranslateX(placeX);
+		            	circ1.setCenterY(placeY);
+		            	circ1.setTranslateY(placeY);
+		            	circ1.setFill(new ImagePattern(p.getIm()));
+		            	
 		            	plantCircles.put(circ1, p);
 		            	
 		            	//Hover over
 		            	Tooltip hoverOver = new Tooltip(p.getComName());
-		            	hoverOver.setText(p.toString());
+		            	hoverOver.setText(p.toString() + "\n" + p.getDetails());
 		            	Tooltip.install(circ1, hoverOver);
 		            	ImageView newImg = new ImageView(p.getIm());
 		            	newImg.setPreserveRatio(true);
@@ -354,11 +377,6 @@ public class GardenWindow extends Window{
 		            	
 		            	//put dragged Node back into list in same place
 		            	backingList.set(index, selected);
-	
-		            	circ1.setTranslateX(placeX);
-		            	circ1.setCenterX(placeX);
-		            	circ1.setTranslateY(placeY);
-		            	circ1.setCenterY(placeY);
 		            	
 //		            	System.out.println((placeX-rad)+", "+(placeX+rad)+", "+plot.getLayoutX()+", "+(plot.getLayoutX()+gardenWidth));
 //		            	if(placeX - rad < 0) {
@@ -380,7 +398,6 @@ public class GardenWindow extends Window{
 		            	
 		            	p.setX(circ1.getTranslateX());
 		            	p.setY(circ1.getTranslateY());
-		            	p.setCircle(circ1);
 		            	cont.addPlant(p);
 		
 		            	circ1.setOnMousePressed(event1 -> pressed(event1));

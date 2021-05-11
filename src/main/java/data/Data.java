@@ -130,7 +130,12 @@ public class Data implements Serializable{
         			edible = eElement.getElementsByTagName("edible").item(0).getTextContent();
         			
         			//DETAILS
-        			details = "Plant name: " + common + ". Avg Height: " + avg_height + ". Is Edible: " + edible;
+        			if(avg_height == -1) {
+            			details = "Type: " + pType + "\nIs Edible: " + edible;
+        			}
+        			else {
+        				details = "Type: " + pType + "\nAvg Height: " + avg_height + "\nIs Edible: " + edible;
+        			}
         			
         			//CREATE NEW PLANT OBJECT
         			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, spread, image, details);
