@@ -8,21 +8,45 @@ import javafx.scene.layout.HBox;
 import model.Plant;
 
 public class MarketItem {
+	boolean favorited;
 	HBox comp;
 	Label l;
 	Button b;
 	Plant p;
+	ImageView iv;
+	HBox imageBox;
 	public MarketItem(Plant pl, Button but) {
+		this.favorited = false;
 		this.b = but;
 		this.p = pl;
+		this.iv = new ImageView(pl.getIm());
+		this.imageBox = new HBox(iv);
 		l = new Label(p.toString());
-		Image img = new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg"));
-		ImageView v = new ImageView(img);
-		v.setFitHeight(30);
-		v.setPreserveRatio(true);
-		b.setGraphic(v);
 		comp = new HBox();
-		comp.getChildren().addAll(l, b);
+		comp.getChildren().addAll(imageBox, l, b);
+	}
+	public boolean getFavorited() {
+		return favorited;
+	}
+	
+	public void setDefault() {
+		favorited = false;
+		ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
+		i.setFitHeight(30);
+		i.setFitWidth(30);
+		b.setGraphic(i);
+	}
+	public void setButton() {
+		favorited = !favorited;
+		ImageView i; 
+		if(favorited) {
+			i = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
+		}else {
+			i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
+		}
+		i.setFitHeight(30);
+		i.setFitWidth(30);
+		b.setGraphic(i);
 	}
 	public Plant getPlant() {
 		return p;
@@ -35,5 +59,11 @@ public class MarketItem {
 	}
 	public Button getButton() {
 		return b;
+	}
+	public ImageView getIV() {
+		return iv;
+	}
+	public HBox getImageBox() {
+		return imageBox;
 	}
 }

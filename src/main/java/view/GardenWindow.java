@@ -1,18 +1,14 @@
 package view;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import javax.imageio.ImageIO;
-
 import controller.Controller;
 import enums.CurrentScreen;
 import enums.PlantType;
-import enums.Spread;
 import enums.Soil;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
@@ -26,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
@@ -40,7 +37,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -50,7 +46,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Model;
 import model.Plant;
-import javafx.scene.control.Tooltip;
 
 public class GardenWindow extends Window{
     Controller cont;

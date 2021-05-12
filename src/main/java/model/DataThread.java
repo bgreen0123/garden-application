@@ -19,8 +19,26 @@ public class DataThread extends Thread implements Serializable{
 	@Override
 	public void run() {
 		System.out.println("START THREAD");
-		m.getPlants().forEach(p -> p.makeImageView());
-		m.getFavorites().forEach(p -> p.makeImageView());
+		m.getData().getWoody().forEach(p -> {
+			if(p.getImageView() == null) {
+				p.makeImageView();
+			}
+		});
+		m.getData().getHerbacious().forEach(p -> {
+			if(p.getImageView() == null) {
+				p.makeImageView();
+			}
+		});
+		m.getPlants().forEach(p -> {
+			if(p.getImageView() == null) {
+				p.makeImageView();
+			}
+		});
+		m.getFavorites().forEach(p -> {
+			if(p.getImageView() == null) {
+				p.makeImageView();
+			}
+		});
 		System.out.println("END THREAD");
 	}
 

@@ -79,12 +79,20 @@ public class MarketWindowHerbaceous extends Window{
         		if((cont.getModel().getSun() == m.getPlant().getSun() || cont.getModel().getSun() == Sun.SUN)) {
         			count++;
         			list.getItems().add(m.getComp());
-    	        	m.getLabel().setPrefWidth(width * .4);
+        			m.getIV().setPreserveRatio(true);
+        			m.getIV().setFitHeight(height * .1);
+        			m.getIV().setFitWidth(width * .1);
+        			m.getImageBox().setPrefWidth(width * .15);
+    	        	m.getLabel().setPrefWidth(width * .3);
         		}
         	}else {
         		count++;
 	        	list.getItems().add(m.getComp());
-	        	m.getLabel().setPrefWidth(width * .4);
+	        	m.getIV().setPreserveRatio(true);
+    			m.getIV().setFitHeight(height * .1);
+    			m.getIV().setFitWidth(width * .1);
+    			m.getImageBox().setPrefWidth(width * .15);
+	        	m.getLabel().setPrefWidth(width * .3);
         	}
         });
         if(count == 0) {

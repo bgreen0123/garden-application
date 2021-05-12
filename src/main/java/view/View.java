@@ -38,7 +38,7 @@ public class View extends Application {
 		marketH = new MarketWindowHerbaceous(width, height, stage, cont.getHerbaceousMarket(), cont.getWoody(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		marketW = new MarketWindowWoody(width, height, stage, cont.getWoodyMarket(), cont.getHerbaceous(), cont.getMarketNext(), cont.getApplyConditions(), cont.getViewFavs(), cont.getBackToConditions(), cont);
 		garden = new GardenWindow(width, height, stage, cont, cont.getEndButton());
-		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont.getBackToConditions(), cont);
+		favs = new Favs(width, height, stage, cont.getBackToMarket(), cont.getMarketNext(), cont);
 		load = new LoadWindow(width, height, stage, cont.getFileName(), cont.getToWelcomeButton());
 		ls = new LoadingScreen(stage, width, height);
 		

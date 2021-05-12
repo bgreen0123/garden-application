@@ -26,7 +26,6 @@ public class Plant implements Cloneable, Serializable{
 	private Soil soil;
 	private Moisture moist;
 	private Spread spread;
-	private String image;
 	private String details;
 	transient Image im;
 	transient Circle circ;
@@ -35,7 +34,7 @@ public class Plant implements Cloneable, Serializable{
 	public void move() {
 		return;
 	}
-	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, Spread spread, String image, String details){
+	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, Spread spread, String details){
 		this.comName = comName;
 		this.sciName = sciName;
 		this.lepsSupported = lepsSupported;
@@ -44,7 +43,6 @@ public class Plant implements Cloneable, Serializable{
 		this.soil = soil;
 		this.moist = moist;
 		this.spread = spread;
-		this.image = image;
 		this.details = details;
 	}
 	

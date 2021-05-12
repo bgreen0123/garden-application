@@ -138,7 +138,7 @@ public class Data implements Serializable{
         			}
         			
         			//CREATE NEW PLANT OBJECT
-        			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, spread, image, details);
+        			Plant newPlant = new Plant(scientific, common, leps, plantType, soil, sun, moist, spread, details);
             		if(plantType == PlantType.WOODY) {
             			wood.add(newPlant);
             		}else {

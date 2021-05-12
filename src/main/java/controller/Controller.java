@@ -91,44 +91,6 @@ public class Controller{
 		this.view = view;
 		model = new Model();
 		
-		model.getData().getWoody().forEach(p ->{
-			Button fav = new Button();
-			fav.setOnAction(e -> {
-				for(Plant pl : model.getFavorites()) {
-					if(pl.getComName().equals(p.getComName())) {
-						duplicateError();
-						return;
-					}
-				}
-				model.addFavoritePlant(p);
-				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
-				i.setFitHeight(30);
-				i.setFitWidth(30);
-				fav.setGraphic(i);
-			});
-			MarketItem m = new MarketItem(p, fav);
-			woodyMarket.add(m);
-		});
-		
-		model.getData().getHerbacious().forEach(p ->{
-			Button fav = new Button();
-			fav.setOnAction(e -> {
-				for(Plant pl : model.getFavorites()) {
-					if(pl.getComName().equals(p.getComName())) {
-						duplicateError();
-						return;
-					}
-				}
-				model.addFavoritePlant(p);
-				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
-				i.setFitHeight(30);
-				i.setFitWidth(30);
-				fav.setGraphic(i);
-			});
-			MarketItem m = new MarketItem(p, fav);
-			herbaceousMarket.add(m);
-		});
-		
 		//Buttons
 		welcomeNext = new Button("New Garden");
 		conditionsNext = new Button("NEXT");
@@ -164,18 +126,12 @@ public class Controller{
 			widthBox.setText("");
 			heightBox.setText("");
 			woodyMarket.forEach(m -> {
-				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
-				i.setFitHeight(30);
-				i.setPreserveRatio(true);
-				m.getButton().setGraphic(i);
+				m.setDefault();
 			});
 			herbaceousMarket.forEach(m -> {
-				ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
-				i.setFitHeight(30);
-				i.setPreserveRatio(true);
-				m.getButton().setGraphic(i);
+				m.setDefault();
 			});
-			System.out.println("Button Pressed");
+			loading(CurrentScreen.CONDITIONS, true);
 		});
 		
 		backToConditions.setOnAction(e -> view.changeScreen(CurrentScreen.CONDITIONS));
@@ -222,8 +178,7 @@ public class Controller{
 			model.updateBudget(budget);
 			model.setWidth(width);
 			model.setHeight(height);
-			view.changeScreen(CurrentScreen.MARKET_H); //Move to market screen
-			System.out.println("Onto market");
+			view.changeScreen(CurrentScreen.MARKET_H);
 		});
 		
 		gardenNext.setOnAction(e -> {
@@ -233,7 +188,7 @@ public class Controller{
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
-		marketNext.setOnAction(e -> loading());
+		marketNext.setOnAction(e -> loading(CurrentScreen.GARDEN, false));
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
@@ -276,7 +231,9 @@ public class Controller{
 				return;
 			}
 			//after loading go to garden
-			loading();
+			herbaceousMarket.clear();
+			woodyMarket.clear();
+			loading(CurrentScreen.GARDEN, true);
 		});
 		
 		restart.setOnAction(e -> {
@@ -288,6 +245,8 @@ public class Controller{
 			soil.setValue(Soil.SOIL);
 			moisture.setValue(Moisture.MOISTURE);
 			view.defaultFilter();
+			woodyMarket.clear();
+			herbaceousMarket.clear();
 			view.changeScreen(CurrentScreen.WELCOME);
 		});
 		
@@ -310,7 +269,7 @@ public class Controller{
 		
 
 	}
-	private void loading() {
+	private void loading(CurrentScreen sc, Boolean applyMI) {
 		DataThread dt = new DataThread(model);
 		dt.start();
 		if(dt.isAlive()) {
@@ -323,7 +282,39 @@ public class Controller{
 					Platform.runLater(new Runnable() {
 			            @Override
 			            public void run() {
-			              view.changeScreen(CurrentScreen.GARDEN);
+			            	if(applyMI) {
+				            	//Set Market Items
+				            	model.getData().getWoody().forEach(p ->{
+				    				Button fav = new Button();
+				    				MarketItem m = new MarketItem(p, fav);
+				    				fav.setOnAction(ev -> {
+				    					if(m.getFavorited()) {
+				    						model.getFavorites().remove(p);
+				    					}else {
+				    						model.addFavoritePlant(p);
+				    					}
+				    					m.setButton();
+				    				});
+				    				m.setDefault();
+				    				woodyMarket.add(m);
+				    			});
+				    			
+				    			model.getData().getHerbacious().forEach(p ->{
+				    				Button fav = new Button();
+				    				MarketItem m = new MarketItem(p, fav);
+				    				fav.setOnAction(ev -> {
+				    					if(m.getFavorited()) {
+				    						model.getFavorites().remove(p);
+				    					}else {
+				    						model.addFavoritePlant(p);
+				    					}
+				    					m.setButton();
+				    				});
+				    				m.setDefault();
+				    				herbaceousMarket.add(m);
+				    			});
+			            	}
+			              view.changeScreen(sc);
 			            }
 			          });
 				}
@@ -331,17 +322,43 @@ public class Controller{
 			});
 			endLoad.start();
 		}else {
-			view.changeScreen(CurrentScreen.GARDEN);
+			if(applyMI) {
+            	//Set Market Items
+            	model.getData().getWoody().forEach(p ->{
+    				Button fav = new Button();
+    				MarketItem m = new MarketItem(p, fav);
+    				fav.setOnAction(ev -> {
+    					if(m.getFavorited()) {
+    						model.getFavorites().remove(p);
+    					}else {
+    						model.addFavoritePlant(p);
+    					}
+    					m.setButton();
+    				});
+    				m.setDefault();
+    				woodyMarket.add(m);
+    			});
+    			
+    			model.getData().getHerbacious().forEach(p ->{
+    				Button fav = new Button();
+    				MarketItem m = new MarketItem(p, fav);
+    				fav.setOnAction(ev -> {
+    					if(m.getFavorited()) {
+    						model.getFavorites().remove(p);
+    					}else {
+    						model.addFavoritePlant(p);
+    					}
+    					m.setButton();
+    				});
+    				m.setDefault();
+    				herbaceousMarket.add(m);
+    			});
+        	}
+			view.changeScreen(sc);
 		}
 	}
 	
 	//Error Handling
-	private void duplicateError() {
-		Alert dupError = new Alert(AlertType.ERROR);
-		dupError.setHeaderText("Plant Already Added");
-		dupError.setContentText("You can only add a plant to the favorite list 1 time.");
-		dupError.showAndWait();
-	}
 	private void budgetError() {
 		Alert budgetError = new Alert(AlertType.ERROR);
 		budgetError.setHeaderText("Invalid budget");
