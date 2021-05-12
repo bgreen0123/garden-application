@@ -2,7 +2,8 @@ package view;
 
 import static javafx.geometry.Pos.CENTER;
 
-import java.awt.Color;
+
+import javafx.scene.paint.Color;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WelcomeScreen extends Window{
@@ -32,6 +34,8 @@ public class WelcomeScreen extends Window{
 	Scene scene;
     int width, height;
     Stage stage;
+    Color titleFill = Color.BLACK;
+    Color titleOutline = Color.WHITE;
 
     public WelcomeScreen(int width, int height, Stage stage, Button nextPage, Button toLoad, Button load){
         this.width = width;
@@ -51,9 +55,11 @@ public class WelcomeScreen extends Window{
         Background background= new Background(bg);
  
         //GridPane layout with Button in the center, and label on top
-        Label title = new Label("Welcome To The Garden Builder");
-        title.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC,36));
-        title.setTextFill(Paint.valueOf("black"));
+        Text title = new Text("Welcome To The Garden Builder");
+        title.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC,55));
+        title.setFill(titleFill);
+        title.setStroke(titleOutline);
+        title.setStrokeWidth(1);
 
         GridPane gp = new GridPane();
         VBox buttons = new VBox();

@@ -54,6 +54,10 @@ public class Model implements Serializable{
 		return;
 	}
 	
+	public void removePlant(Plant p) {
+		plants.remove(p);
+	}
+	
 	public void addFavoritePlant(Plant p) {
 		favoritedPlants.add(p);
 	}

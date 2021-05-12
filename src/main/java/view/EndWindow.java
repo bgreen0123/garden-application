@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import controller.Controller;
 import javafx.collections.FXCollections;
@@ -53,6 +54,7 @@ public class EndWindow extends Window{
    
     int budget;
     ArrayList<Plant> plantsList;
+    HashSet<String> uniquePlants;
     ArrayList<Plant> favoritePlants;
     int leps;
     
@@ -151,8 +153,14 @@ public class EndWindow extends Window{
         
         plantsSummaryList = FXCollections.observableArrayList();
        
-        plantsList.forEach(m -> {
-        	plantsSummaryList.add(m.toString());
+        ArrayList<String> plantsToStrings = new ArrayList<String>();
+        for(Plant p : plantsList) {
+        	plantsToStrings.add(p.toString());
+        }
+        uniquePlants = new HashSet(plantsToStrings);
+        
+        uniquePlants.forEach(m -> {
+        	plantsSummaryList.add(m);
         	
         });
         

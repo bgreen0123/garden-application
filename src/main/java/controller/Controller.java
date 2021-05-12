@@ -568,6 +568,10 @@ public class Controller{
 		model.addPlant(p);
 	}
 	
+	public void removePlant(Plant p) {
+		model.removePlant(p);
+	}
+	
 	
 	public EventHandler dragPlant() {
 		return new EventHandler<MouseEvent>() {

@@ -25,6 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -216,7 +217,6 @@ public class GardenWindow extends Window{
     	
     	//Add the plants
     	Circle circ;
-    	
     	for(Plant p : model.getPlants()) {
     		double imDiameter;
     		switch(p.getSpread()) {
@@ -237,7 +237,6 @@ public class GardenWindow extends Window{
 	    			break;
     		}
     		//updateLeps(p.getLepsSupported());
-    		System.out.println(p.toString());
     		circ = p.getCircle();
         	circ.setRadius((imDiameter/2)*(gardenWidth/model.getWidth()));
     		circ.setCenterX(p.getX());
@@ -248,6 +247,9 @@ public class GardenWindow extends Window{
         	circ.setOnMouseDragged(event2 -> drag(event2));
         	circ.setOnMouseReleased(event3 -> released(event3));
         	plantCircles.put(circ, p);
+        	if(!plot.getChildren().contains(circ)) {
+        		plot.getChildren().add(circ);
+        	}
         
         	circ.toFront();
         	Tooltip hoverOver = new Tooltip(p.getComName());
@@ -259,10 +261,10 @@ public class GardenWindow extends Window{
         	hoverOver.setGraphic(newImg);
     	}
     	
-    	plot.getChildren().clear();
-    	plantCircles.forEach((c,plant)  -> {
-    		plot.getChildren().add(c);
-    	});
+    	//plot.getChildren().clear();
+    	//plantCircles.forEach((c,plant)  -> {
+    	//	plot.getChildren().add(c);
+    	//});
     	
     	// Add mouse event handler for the source
 		plantList.setOnDragDetected(new EventHandler <MouseEvent>()
@@ -343,6 +345,7 @@ public class GardenWindow extends Window{
             			Plant p = favorited.get(index).clone();
 		            	p.setX(placeX);
 		            	p.setY(placeY);
+		            	p.setDiameter(imDiameter);
 		            	
 		            	Circle circ1 = new Circle();
 		            	circ1.setRadius(rad);
@@ -351,6 +354,7 @@ public class GardenWindow extends Window{
 		            	circ1.setCenterY(placeY);
 		            	circ1.setTranslateY(placeY);
 		            	circ1.setFill(new ImagePattern(p.getIm()));
+		            	p.setCircle(circ1);
 		            	
 		            	plantCircles.put(circ1, p);
 		            	
@@ -397,7 +401,18 @@ public class GardenWindow extends Window{
 		
 		            	circ1.setOnMousePressed(event1 -> pressed(event1));
 		            	circ1.setOnMouseDragged(event2 -> drag(event2));
-		            	circ1.setOnMouseReleased(event3 -> released(event3));     
+		            	circ1.setOnMouseReleased(event3 -> released(event3));  
+		            	circ1.setOnMouseClicked(new EventHandler<MouseEvent>(){
+		                    public void handle(MouseEvent event) {
+		                        MouseButton button = event.getButton();
+		                        if(button==MouseButton.SECONDARY){
+		                        	plot.getChildren().remove(circ1);
+		                        	cont.removePlant(plantCircles.get(circ1));
+		                        	plantCircles.remove(circ1);
+		                        	//TODO: Check the unique plant structure and edit accordingly
+		                        }
+		                    }
+		                });
 		
 		            	plot.getChildren().add(circ1);
 		            	circ1.toFront();
@@ -452,11 +467,14 @@ public class GardenWindow extends Window{
 		double prevX = n.getTranslateX();
 		double prevY = n.getTranslateY();
 		double rad = plantCircles.get(n).getDiameter()/2*gardenWidth/model.getWidth();
+		System.out.println("plot getLayoutY: " + plot.getLayoutY());
+		System.out.println("outer getLayoutY: " + outerPlot.getLayoutY());
+		System.out.println("location: " + (event.getSceneY() - rad));
 		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
 			n.setTranslateX(event.getSceneX() - plot.getLayoutX() - rad);
 			n.setCenterX(n.getTranslateX());
 		}
-		if(event.getSceneY() - rad > (height - centerHeight/2 - gardenHeight/2) 
+		if(event.getSceneY() - rad > (outerPlot.getLayoutY() + plot.getLayoutY()) 
 				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
 			n.setTranslateY(event.getSceneY() - countBarHeight - 45 - (centerHeight-gardenHeight)/2);
 			n.setCenterY(n.getTranslateY());
