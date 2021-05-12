@@ -261,11 +261,6 @@ public class GardenWindow extends Window{
         	hoverOver.setGraphic(newImg);
     	}
     	
-    	//plot.getChildren().clear();
-    	//plantCircles.forEach((c,plant)  -> {
-    	//	plot.getChildren().add(c);
-    	//});
-    	
     	// Add mouse event handler for the source
 		plantList.setOnDragDetected(new EventHandler <MouseEvent>()
 		{
@@ -328,20 +323,6 @@ public class GardenWindow extends Window{
             		}
             		
             		if(!intersect) {
-            			//Plant p = (Plant)(favorited.get(index).clone());
-		            	//Circle circ1 = p.getCircle();
-//		            	circ1.setRadius(favorited.get(index).getCircle().getRadius());
-//		            	circ1.setCenterX(favorited.get(index).getCircle().getCenterX());
-//		            	circ1.setCenterY(favorited.get(index).getCircle().getCenterY());
-//		            	circ1.setFill(new ImagePattern(favorited.get(index).getIm()));
-		            	
-	            		/**
-		            	try {
-		            		circ1.setFill(new ImagePattern(new Image(favorited.get(index).getImageUrl())));
-		            	} catch(Exception e) {
-		            		circ1.setFill(javafx.scene.paint.Color.WHITE);
-		            	}
-	            		**/
             			Plant p = favorited.get(index).clone();
 		            	p.setX(placeX);
 		            	p.setY(placeY);
@@ -377,24 +358,6 @@ public class GardenWindow extends Window{
 		            	//put dragged Node back into list in same place
 		            	backingList.set(index, selected);
 		            	
-//		            	System.out.println((placeX-rad)+", "+(placeX+rad)+", "+plot.getLayoutX()+", "+(plot.getLayoutX()+gardenWidth));
-//		            	if(placeX - rad < 0) {
-//		            		System.out.println("left");
-//		            		circ1.setTranslateX((rad - (circ1.getTranslateX() - plot.getLayoutX())));
-//		            	}
-//		            	if(placeX + rad > (plot.getLayoutX() + gardenWidth)) {
-//		            		System.out.println("right");
-//		            		circ1.setTranslateX(circ1.getTranslateX() - (rad - (plot.getLayoutX() + gardenWidth - circ1.getTranslateX())));
-//		            	}
-//		            	if(placeY - rad < plot.getLayoutY()) {
-//		            		System.out.println("top");
-//		            		circ1.setTranslateY(circ1.getTranslateY() + (rad - (circ1.getTranslateY() - plot.getLayoutY())));
-//		            	}
-//		            	if(placeY + rad > (plot.getLayoutY() + gardenHeight)) {
-//		            		System.out.println("botton");
-//		            		circ1.setTranslateY(circ1.getTranslateY() - (rad - (plot.getLayoutY() + gardenHeight - circ1.getTranslateY())));
-//		            	}
-		            	
 		            	p.setX(circ1.getTranslateX());
 		            	p.setY(circ1.getTranslateY());
 		            	cont.addPlant(p);
@@ -409,7 +372,6 @@ public class GardenWindow extends Window{
 		                        	plot.getChildren().remove(circ1);
 		                        	cont.removePlant(plantCircles.get(circ1));
 		                        	plantCircles.remove(circ1);
-		                        	//TODO: Check the unique plant structure and edit accordingly
 		                        }
 		                    }
 		                });
