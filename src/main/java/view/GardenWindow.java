@@ -47,7 +47,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Model;
 import model.Plant;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class GardenWindow extends Window{
     Controller cont;
     Model model;

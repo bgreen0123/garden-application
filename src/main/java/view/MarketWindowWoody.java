@@ -25,7 +25,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class MarketWindowWoody extends Window{
     Image img;
     ArrayList<MarketItem> woody;

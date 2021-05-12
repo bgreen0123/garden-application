@@ -22,6 +22,12 @@ import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
+
 public class Data implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

@@ -8,7 +8,11 @@ import java.awt.*;
 import controller.Controller;
 
 import enums.CurrentScreen;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class View extends Application {
 	Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 	int height = (int) size.getHeight() - 65;

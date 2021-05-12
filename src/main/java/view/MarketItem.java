@@ -6,7 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import model.Plant;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class MarketItem {
 	boolean favorited;
 	HBox comp;

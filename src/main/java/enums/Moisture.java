@@ -1,4 +1,11 @@
 package enums;
+
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
+
 public enum Moisture {
 	MOISTURE("MOISTURE"),
     DRY("DRY"),

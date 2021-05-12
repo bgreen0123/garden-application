@@ -34,7 +34,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Plant;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class EndWindow extends Window{
     Image background;
     Controller cont;
@@ -117,7 +121,6 @@ public class EndWindow extends Window{
 			}
 		});
 
-        // TODO: make button that previews ^
         
         // summary information about garden
         

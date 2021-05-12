@@ -1,4 +1,11 @@
 package enums;
+
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
+
 public enum CurrentScreen {
     //Strings that identify what the current few is exm: "WELCOME"
     //We will have a switch in the drawScreen method in View that will have all this enum as options and we will have a variable in 

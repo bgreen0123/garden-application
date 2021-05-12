@@ -1,11 +1,18 @@
 package model;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import enums.PlantType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 
 public class DataThread extends Thread implements Serializable{
 	private static final long serialVersionUID = 1L;

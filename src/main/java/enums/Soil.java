@@ -1,4 +1,10 @@
 package enums;
+
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public enum Soil {
 	SOIL("SOIL"),
     ROCK("ROCK"),

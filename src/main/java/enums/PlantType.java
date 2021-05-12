@@ -1,4 +1,10 @@
 package enums;
+
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public enum PlantType {
     WOODY("Woody"),
     HERBACIOUS("Herbacious");

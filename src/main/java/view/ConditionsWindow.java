@@ -21,7 +21,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
 public class ConditionsWindow extends Window{
     Scene scene;
     int width, height;
@@ -85,6 +89,7 @@ public class ConditionsWindow extends Window{
         choiceBox.add(moistureBox, 3, 0);
         
         conditions.getChildren().addAll(condBox, choiceBox);
+        conditions.setAlignment(Pos.CENTER);
         
         VBox sliderBox = new VBox();
         sliderBox.setSpacing(height * .05);
@@ -159,7 +164,7 @@ public class ConditionsWindow extends Window{
         gp.add(spacer2, 0, 3);
         gp.add(budgetBox, 0, 4);
         gp.setAlignment(Pos.CENTER);
-        
+
         //Set the background
         gp.setBackground(background);
         

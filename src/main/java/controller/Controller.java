@@ -33,6 +33,12 @@ import view.View;
 import view.MarketWindowHerbaceous;
 import view.MarketWindowWoody;
 
+/**
+ * 
+ * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
+ *
+ */
+
 public class Controller{
 	Model model;
 	View view;
@@ -86,7 +92,13 @@ public class Controller{
   	//Load file
   	String fileName;
   	
-
+  	/**
+	 * Main controller method that creates all necessary buttons, text boxes, and sliders.
+	 * Contains logic for the buttons.
+	 * 
+	 * @param view, an instance of the view class
+	 */
+  	
 	public Controller(View view){
 		this.view = view;
 		model = new Model();
@@ -265,10 +277,16 @@ public class Controller{
 		soil.setValue(Soil.SOIL);
 		moisture.setValue(Moisture.MOISTURE);
 
-		
-		
-
 	}
+	
+  	/**
+	 * Loading class that contains data thread. Shows loading screen while data is loading. 
+	 * 
+	 * @param sc, the current screen that the user is viewing
+	 * @param applyMI, checks to see if loading screen is necessary
+	 */
+	
+	
 	private void loading(CurrentScreen sc, Boolean applyMI) {
 		DataThread dt = new DataThread(model);
 		dt.start();
@@ -359,42 +377,71 @@ public class Controller{
 	}
 	
 	//Error Handling
+	
+  	/**
+	 * Error that pops up if the inputed budget is invalid.
+	 * 
+	 */
 	private void budgetError() {
 		Alert budgetError = new Alert(AlertType.ERROR);
 		budgetError.setHeaderText("Invalid budget");
 		budgetError.setContentText("Budget must be an integer, cannot be negative and cannot be\nempty.");
 		budgetError.showAndWait();
 	}
+	/**
+	 * Error that pops up if the inputed budget is invalid.
+	 * 
+	 */
 	private void dimenstionError() {
 		Alert dimenstionError = new Alert(AlertType.ERROR);
 		dimenstionError.setHeaderText("Invalid width or height");
 		dimenstionError.setContentText("width and height must be an integer between 5 and 50");
 		dimenstionError.showAndWait();
 	}
+	/**
+	 * Error that pops up if user is unable to save the Garden.
+	 * 
+	 */
 	private void saveError() {
 		Alert saveError = new Alert(AlertType.ERROR);
 		saveError.setHeaderText("Could not save garden");
 		saveError.setContentText("The garden could not be saved at this time. Please try again later.");
 		saveError.showAndWait();
 	}
+	/**
+	 * Error that pops up if the garden cannot be loaded.
+	 * 
+	 */
 	private void loadError() {
 		Alert saveError = new Alert(AlertType.ERROR);
 		saveError.setHeaderText("Could not load garden");
 		saveError.setContentText("The garden could not be loaded at this time. Please try again later.");
 		saveError.showAndWait();
 	}
+	/**
+	 * Warning that shows up if user budget goes below 0.
+	 * 
+	 */
 	private void warn() {
 		Alert warnUser = new Alert(AlertType.WARNING);
 		warnUser.setHeaderText("Budget below 0");
 		warnUser.setContentText("Oh no! You have gone over budget. Select finish to finish, or keep placing plants and go farther over your budget.");
 		warnUser.showAndWait();
 	}
+	/**
+	 * Pop up that lets the user know that the saving was successful.
+	 * 
+	 */
 	private void saveSuccess() {
 		Alert confirmSave = new Alert(AlertType.INFORMATION);
 		confirmSave.setHeaderText("Saving your garden");
 		confirmSave.setContentText("Your garden has been saved successfully");
 		confirmSave.showAndWait();
 	}
+	/**
+	 * Message that asks to confirm if the user wants to load their garden.
+	 * 
+	 */
 	private ButtonType confirmLoad() {
 		Alert confirmSave = new Alert(AlertType.CONFIRMATION);
 		confirmSave.setHeaderText("Loading Garden");
@@ -404,139 +451,316 @@ public class Controller{
 	}
 
 	//Getters
+	
+	/**
+	 * gets the restart button
+	 * 
+	 * @return restart, the restart button
+	 */
 	public Button getRestart() {
 		return restart;
 	}
 	
+	/**
+	 * gets the button that allows the user to go back to the Garden.
+	 * 
+	 * @return endToGarden, back to Garden button.
+	 */
 	public Button getEndToGarden() {
 		return endToGarden;
 	}
 	
+	/**
+	 * gets the array list of plants.
+	 * 
+	 * @return plants list from Model
+	 */
 	public ArrayList<Plant> getPlantsList(){
 		return model.getPlants();
 	}
 	
+	/**
+	 * gets the array list of plants that user favorited.
+	 * 
+	 * @return favorite list from Model
+	 */
 	public ArrayList<Plant> getFavoriteList(){
 		return model.getFavorites();
 	}
 	
+	/**
+	 * gets the button that allows the user to go back to the Conditions screen.
+	 * 
+	 * @return backtoConditions, back to conditions button
+	 */
 	public Button getBackToConditions() {
 		return backToConditions;
 	}
 	
+	/**
+	 * gets the button that allows the user to go the market.
+	 * 
+	 * @return MarketNext, market button
+	 */
 	public Button getMarketNext() {
 		return marketNext;
 	}
 	
+	/**
+	 * gets the button that allows the user show herbaceous plants
+	 * 
+	 * @return herbaceous, button to show herbaceous plants
+	 */
 	public Button getHerbaceous() {
 		return herbaceous;
 	}
 	
+	/**
+	 * gets the button that allows the user show woody plants
+	 * 
+	 * @return woody, button to show woody plants
+	 */
 	public Button getWoody() {
 		return woody;
 	}
 	
+	/**
+	 * gets the button that allows the user apply conditions
+	 * 
+	 * @return apply conditions button.
+	 */
 	public Button getApplyConditions() {
 		return applyConditions;
 	}
+	
+	/**
+	 * gets the button that allows the view favorited plants
+	 * 
+	 * @return viewFavs, button that shows favorites
+	 */
 	public Button getViewFavs() {
 		return viewFavs;
 	}
+	
+	/**
+	 * gets the button that allows the user to go back to market.
+	 * 
+	 * @return the back to market button
+	 */
 	public Button getBackToMarket() {
 		return backToMarket;
 	}
 	
+	/**
+	 * gets the array list of herbaceous plants for the market
+	 * 
+	 * @return herbaceous market array list.
+	 */
 	public ArrayList<MarketItem> getHerbaceousMarket(){
 		return herbaceousMarket;
 	}
 	
+	/**
+	 * gets the array list of woody plants for the market
+	 * 
+	 * @return woody market array list.
+	 */
+
 	public ArrayList<MarketItem> getWoodyMarket(){
 		return woodyMarket;
 	}
 	
+	/**
+	 * gets the array list of herbaceous plants for the market
+	 * 
+	 * @return herbaceous market array list.
+	 */
 	public Button getWelcomeButton(){
 		return welcomeNext;
 	}
 
+	/**
+	 * gets the button that lets the user go to the conditions page.
+	 * 
+	 * @return conditions button.
+	 */
 	public Button getConditionsButton(){
 		return conditionsNext;
 	}
 	
+	/**
+	 * gets the button that lets the user go to the end summary screen.
+	 * 
+	 * @return end button
+	 */
 	public Button getEndButton() {
 		return gardenNext;
 	}
 	
+	/**
+	 * gets the button that lets the user go back to the welcome screen
+	 * 
+	 * @return toWelcome button
+	 */
 	public Button getToWelcomeButton(){
 		return toWelcome;
 	}
 	
+	/**
+	 * gets the button that lets the user load their saved garden
+	 * 
+	 * @return load button
+	 */
 	public Button getToLoadButton() {
 		return toLoad;
 	}
 	
+	/**
+	 * gets the button that lets the user save the garden
+	 * 
+	 * @return save button
+	 */
 	public Button getSaveButton() {
 		return save;
 	}
 	
+	/**
+	 * gets the button that lets the user load their saved garden
+	 * 
+	 * @return load button
+	 */
 	public Button getLoadButton() {
 		return load;
 	}
-
+	
+	/**
+	 * gets the sun choices for the sun drop down
+	 * 
+	 * @return sun choice box with the sun conditions
+	 */
 	public ChoiceBox<Sun> getSun() {
 		return sun;
 	}
 
+	/**
+	 * gets the soil choices for the soil drop down
+	 * 
+	 * @return soil choice box with the soil conditions
+	 */
 	public ChoiceBox<Soil> getSoil() {
 		return soil;
 	}
-
+	
+	/**
+	 * gets the moisture choices for the moisture drop down
+	 * 
+	 * @return moisture choice box with the moisture conditions
+	 */
 	public ChoiceBox<Moisture> getMoisture() {
 		return moisture;
 	}
 	
+	/**
+	 * gets the text field that lets the user enter budget
+	 * 
+	 * @return budget text field
+	 */
 	public TextField getBudget() {
 		return budget;
 	}
 	
+	/**
+	 * gets the text field for saving
+	 * 
+	 * @return save text field
+	 */
 	public TextField getSave() {
 		return saveBox;
 	}
 	
+	/**
+	 * gets the text field for width
+	 * 
+	 * @return width text field
+	 */
 	public TextField getWidth() {
 		return widthBox;
 	}
 	
+	/**
+	 * gets the text field for height
+	 * 
+	 * @return heightBox,  height text field
+	 */
 	public TextField getHeight() {
 		return heightBox;
 	}
 	
+	/**
+	 * gets the slider for the x dimension
+	 * 
+	 * @return x, horizontal dimensions slider
+	 */
 	public Slider getXSlider() {
 		return x;
 	}
 	
+	/**
+	 * gets the slider for the x dimension
+	 * 
+	 * @return y, horizontal dimensions slider
+	 */
 	public Slider getYSlider() {
 		return y;
 	}
 	
+	/**
+	 * gets the filename
+	 * 
+	 * @return filename
+	 */
 	public String getFileName() {
 		return fileName;
 	}
 	
+	/**
+	 * gets the model to access fields in model
+	 * 
+	 * @return model
+	 */
 	public Model getModel() {
 		//This method is used for view to access certain fields such as budget and lep count
 		//No fields should be changed or updated from view, it is only to access values.
 		return model;
 	}
-	
+
+	/**
+	 * gets the model to access fields in view
+	 * 
+	 * @return view
+	 */
 	public View getView() {
 		return view;
 	}
 	
+	/**
+	 * gets the soil types
+	 * 
+	 * @return Soil type
+	 */
 	public Soil getSoilType() {
 		return soil.getValue();
 	}
 	
 	//Setter to set the users choice of conditions
+	
+	/**
+	 * sets the choices for the drop downs
+	 * 
+	 * @param sun, choicebox containing sun conditions
+	 * @param soil, choicebox containing soil conditions
+	 * @param moisture, choicebox containing moisture conditions
+	 */
 	public void setChoice(ChoiceBox<Sun> sun, ChoiceBox<Soil> soil, ChoiceBox<Moisture> moisture ) {
 		sunChoice = sun.getValue();
 		soilChoice = soil.getValue();
@@ -548,14 +772,30 @@ public class Controller{
 	}
 
 	//Actions
+	
+	/**
+	 * calls the changeScreen method from view. 
+	 * 
+	 * @param cs, the current screen that the user is on.
+	 */
 	public void goToPage(CurrentScreen cs) {
 		view.changeScreen(cs);
 	}
-
+	
+	/**
+	 * calls update lep count from model and updates the leps accordingly
+	 * 
+	 * @param leps, the amount of leps each plant supports.
+	 */
 	public void updateLeps(int leps) {
 		model.updateLepCount(leps);
 	}
 	
+	/**
+	 * calls getBudget and updates it accordingly. Also shows the warning if budget goes below 0.
+	 * 
+	 * @param cost, the cost of each plant.
+	 */
 	public void updateBudget(int cost) {
 		if(model.getBudget() - cost < 0 && !model.getWarned()) {
 			warn();
@@ -564,6 +804,11 @@ public class Controller{
 		model.updateBudget(model.getBudget() - cost);
 	}
 	
+	/**
+	 * calls getBudget and updates it accordingly if the user deletes a plant from their garden.
+	 * 
+	 * @param cost, the cost of each plant.
+	 */
 	public void removalBudget(int cost) {
 		if (model.getBudget() + cost > 0 && model.getWarned()){
 			model.setWarned();
@@ -571,15 +816,29 @@ public class Controller{
 		model.updateBudget(model.getBudget() + cost);
 	}
 	
+	/**
+	 * adds plants that are in the garden to the arrayList of plants.
+	 * 
+	 * @param p, plant that the user has planted
+	 */
 	public void addPlant(Plant p) {
 		model.addPlant(p);
 	}
 	
+	/**
+	 * remove plants that are no longer in the garden from the arrayList of plants.
+	 * 
+	 * @param p, plant that the user has planted
+	 */
 	public void removePlant(Plant p) {
 		model.removePlant(p);
 	}
 	
-	
+	/**
+	 * contains logic for dragging mouse event
+	 * 
+	 * @return event handler for dragging
+	 */
 	public EventHandler dragPlant() {
 		return new EventHandler<MouseEvent>() {
 			@Override
@@ -587,6 +846,11 @@ public class Controller{
 		};
 	}
 	
+	/**
+	 * event handler the lets the user enter their budget
+	 * 
+	 * @return mouse event handler
+	 */
 	public EventHandler enterBudget() {
 		return new EventHandler<MouseEvent>() {
 			@Override
@@ -594,6 +858,11 @@ public class Controller{
 		};
 	}
 	
+	/**
+	 * event handler the lets the view other plant type.
+	 * 
+	 * @return action event handler that switches plant types.
+	 */
 	public EventHandler toOtherPlantType() {
 		return new EventHandler<ActionEvent>() {
 			@Override
@@ -601,6 +870,11 @@ public class Controller{
 		};
 	}
 	
+	/**
+	 * event handler the lets the user favorite a plant.
+	 * 
+	 * @return action event handler for favoriting plants.
+	 */
 	public EventHandler favoritePlant() {
 		return new EventHandler<ActionEvent>() {
 			@Override
