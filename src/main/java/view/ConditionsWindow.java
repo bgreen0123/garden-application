@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -51,7 +52,7 @@ public class ConditionsWindow extends Window{
     public void draw() {
         
         //Background image for conditions window
-        Image img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
+        Image img = new Image(getClass().getResourceAsStream("/images/welcome-background.jpg"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img,BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
         Background background = new Background(bg);
         
@@ -65,6 +66,7 @@ public class ConditionsWindow extends Window{
         
         Label cond = new Label("Enter Your Garden Conditions");
         cond.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 36));
+        cond.setTextFill(Color.BLACK);
         
         GridPane choiceBox = new GridPane();
         choiceBox.setPrefWidth(width * 60);
@@ -90,6 +92,7 @@ public class ConditionsWindow extends Window{
         
         Label dim = new Label("Set Garden Dimensions");
         dim.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 36));
+        dim.setTextFill(Color.BLACK);
         HBox dimBox = new HBox(dim);
         dimBox.setAlignment(Pos.CENTER);
         
@@ -98,6 +101,8 @@ public class ConditionsWindow extends Window{
         VBox xBox = new VBox();
         xBox.setPrefWidth(width * .3);
         Label l1 = new Label("Width (in ft.)");
+        l1.setFont(Font.font("Courier New", FontWeight.BOLD, 15));
+        l1.setTextFill(Color.BLACK);
         HBox l1Box = new HBox(l1);
         l1Box.setAlignment(Pos.CENTER);
         HBox s1Box = new HBox(widthBox);
@@ -107,6 +112,8 @@ public class ConditionsWindow extends Window{
         VBox yBox = new VBox();
         yBox.setPrefWidth(width * .3);
         Label l2 = new Label("Height (in ft.)");
+        l2.setFont(Font.font("Courier New", FontWeight.BOLD, 15));
+        l2.setTextFill(Color.BLACK);
         HBox l2Box = new HBox(l2);
         l2Box.setAlignment(Pos.CENTER);
         HBox s2Box = new HBox(heightBox);
@@ -123,6 +130,7 @@ public class ConditionsWindow extends Window{
         
         Label bud = new Label("Enter Your Budget");
         bud.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 36));
+        bud.setTextFill(Color.BLACK);
         HBox budBox = new HBox(bud);
         budBox.setAlignment(Pos.CENTER);
         

@@ -59,6 +59,10 @@ public class MarketWindowHerbaceous extends Window{
 		filter = !filter;
 	}
 	
+	public void defaultFilter() {
+		filter = true;
+	}
+	
     @Override
     public void draw() {
     	BackgroundImage bg = new BackgroundImage(img,BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
@@ -72,9 +76,7 @@ public class MarketWindowHerbaceous extends Window{
         count = 0;
         herbaceous.forEach(m -> {
         	if(filter) {
-        		if((cont.getModel().getSun() == m.getPlant().getSun() || cont.getModel().getSun() == Sun.SUN)
-        				&& (cont.getModel().getSoil() == m.getPlant().getSoil() || cont.getModel().getSoil() == Soil.SOIL)
-        				&& (cont.getModel().getMoisture() == m.getPlant().getMoisture() || cont.getModel().getMoisture() == Moisture.MOISTURE)) {
+        		if((cont.getModel().getSun() == m.getPlant().getSun() || cont.getModel().getSun() == Sun.SUN)) {
         			count++;
         			list.getItems().add(m.getComp());
     	        	m.getLabel().setPrefWidth(width * .4);

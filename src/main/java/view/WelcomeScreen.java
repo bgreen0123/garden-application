@@ -2,6 +2,8 @@ package view;
 
 import static javafx.geometry.Pos.CENTER;
 
+import java.awt.Color;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -43,13 +46,14 @@ public class WelcomeScreen extends Window{
     public void draw() {
 
         //Background Image
-        Image img = new Image(getClass().getResourceAsStream("/images/welcome-background.jpg"), width, height, false, true);
+        Image img = new Image(getClass().getResourceAsStream("/images/mtCuba-transparent.png"), width, height, false, true);
         BackgroundImage bg = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background= new Background(bg);
  
         //GridPane layout with Button in the center, and label on top
         Label title = new Label("Welcome To The Garden Builder");
-        title.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC, 36));
+        title.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC,36));
+        title.setTextFill(Paint.valueOf("black"));
 
         GridPane gp = new GridPane();
         VBox buttons = new VBox();

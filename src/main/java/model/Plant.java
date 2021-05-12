@@ -53,7 +53,7 @@ public class Plant implements Cloneable, Serializable{
 			im = new Image(getClass().getResourceAsStream("/plants/" + comName + ".jpg"));
 			iv = new ImageView(im);
 			if(circ == null) {
-				circ = new Circle();
+				circ = new Circle(); 
 				circ.setFill(new ImagePattern(im));
 			}
 		}catch(Exception e){

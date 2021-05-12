@@ -30,10 +30,15 @@ import model.Model;
 import model.Plant;
 import view.MarketItem;
 import view.View;
+import view.MarketWindowHerbaceous;
+import view.MarketWindowWoody;
 
 public class Controller{
 	Model model;
 	View view;
+	MarketWindowHerbaceous herb;
+	MarketWindowWoody wood;
+	
 	//Buttons
 	Button welcomeNext;
 	Button conditionsNext;
@@ -125,7 +130,7 @@ public class Controller{
 		});
 		
 		//Buttons
-		welcomeNext = new Button("Start");
+		welcomeNext = new Button("New Garden");
 		conditionsNext = new Button("NEXT");
 		gardenNext = new Button("FINISH");
 		woody = new Button("View Woody Plants");
@@ -175,21 +180,6 @@ public class Controller{
 		
 		backToConditions.setOnAction(e -> view.changeScreen(CurrentScreen.CONDITIONS));
 		
-		x.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                    Number old_val, Number new_val) {
-                        model.setWidth(new_val.intValue());
-                        System.out.println("Garden Width: " + model.getWidth());
-                }
-            });
-		
-		y.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                    Number old_val, Number new_val) {
-                        model.setHeight(new_val.intValue());
-                        System.out.println("Garden Height: " + model.getHeight());
-                }
-            });
 		conditionsNext.setOnAction(e -> {
 			setChoice(sun,soil,moisture);
 			String input = budget.getText();
@@ -290,8 +280,14 @@ public class Controller{
 		});
 		
 		restart.setOnAction(e -> {
+			//herb = new MarketWindowHerbaceous();
+			//woody = new MarketWindowWoody();
 			model = new Model();
 			view.getGardenWindow().newHash();
+			sun.setValue(Sun.SUN);
+			soil.setValue(Soil.SOIL);
+			moisture.setValue(Moisture.MOISTURE);
+			view.defaultFilter();
 			view.changeScreen(CurrentScreen.WELCOME);
 		});
 		

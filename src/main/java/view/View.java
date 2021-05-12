@@ -53,6 +53,12 @@ public class View extends Application {
 		drawScreen();
 	}
 	
+	public void defaultFilter() {
+		marketH.defaultFilter();
+		marketW.defaultFilter();
+		drawScreen();
+	}
+	
 	public void drawScreen() {
 		switch(currentScreen){
 		case WELCOME:
