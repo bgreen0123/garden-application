@@ -27,6 +27,7 @@ public class Plant implements Cloneable, Serializable{
 	private Moisture moist;
 	private Spread spread;
 	private String details;
+	private int spreadInt;
 	transient Image im;
 	transient Circle circ;
 	transient ImageView iv;
@@ -34,7 +35,7 @@ public class Plant implements Cloneable, Serializable{
 	public void move() {
 		return;
 	}
-	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, Spread spread, String details){
+	public Plant(String sciName, String comName, int lepsSupported, PlantType type, Soil soil, Sun sun, Moisture moist, Spread spread, String details, int spreadInt){
 		this.comName = comName;
 		this.sciName = sciName;
 		this.lepsSupported = lepsSupported;
@@ -44,6 +45,7 @@ public class Plant implements Cloneable, Serializable{
 		this.moist = moist;
 		this.spread = spread;
 		this.details = details;
+		this.spreadInt = spreadInt;
 	}
 	
 	public void makeImageView() {
@@ -212,6 +214,6 @@ public class Plant implements Cloneable, Serializable{
 
 	@Override
 	public String toString(){
-		return "Common Name: " + comName + '\n' + "Scientific Name : " + sciName + "\n" + "Leps Supported: " + lepsSupported;
+		return "Common Name: " + comName + '\n' + "Scientific Name : " + sciName + "\n" + "Leps Supported: " + lepsSupported + "\nSpread: " + spreadInt + " (" + spread + ")";
 	}
 }
