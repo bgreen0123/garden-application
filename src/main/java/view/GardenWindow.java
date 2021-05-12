@@ -63,7 +63,7 @@ public class GardenWindow extends Window{
     String fontColor = "black";
     String favBarColor = "white";
     int heartSize = 28;
-    String countBarColor = "rgb(102,201,52)";
+    String countBarColor = "rgb(14, 181, 51)"; //"rgb(102,201,52)";
     String imageBack;
     int countBarHeight = 50;
     int countBarItemHeight = 30;
