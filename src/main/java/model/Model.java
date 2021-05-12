@@ -140,6 +140,10 @@ public class Model implements Serializable{
 	public void updateLepCount(int l) {
 		lepsSupported += l;
 	}
+	
+	public void removeLepCOunt(int l) {
+		lepsSupported -= l;
+	}
 
 }
 

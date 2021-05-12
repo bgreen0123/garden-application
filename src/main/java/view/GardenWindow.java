@@ -372,6 +372,10 @@ public class GardenWindow extends Window{
 		                        	plot.getChildren().remove(circ1);
 		                        	cont.removePlant(plantCircles.get(circ1));
 		                        	plantCircles.remove(circ1);
+		                        	deletionBudget(price);
+		                        	cont.removalBudget(price);
+		                        	deletionLeps(p.getLepsSupported());
+		                        	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
 		                        }
 		                    }
 		                });
@@ -537,6 +541,12 @@ public class GardenWindow extends Window{
     	System.out.println("updating budget" + Integer.toString(budget));
     }
     
+    public void deletionBudget(int b) {
+    	budget += b;
+    	//cont.getModel().updateBudget(b);
+    	System.out.println("updating budget" + Integer.toString(budget));
+    }
+    
     public void updateLeps(int l) {
     	if(l < 100) {
     		if((cont.getModel().getNumLeps() % 100) + l >= 100) {
@@ -550,6 +560,11 @@ public class GardenWindow extends Window{
     	}
     	System.out.println("updating leps " + Integer.toString(cont.getModel().getNumLeps()));
     }
+    
+    public void deletionLeps(int l) {
+    	cont.getModel().removeLepCOunt(l);
+    }
+    
     public void initializeCircles() {
     	for(int i = 100; i <= cont.getModel().getNumLeps(); i = i+100) {
     		lepAnimation();

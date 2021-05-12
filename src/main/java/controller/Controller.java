@@ -564,6 +564,13 @@ public class Controller{
 		model.updateBudget(model.getBudget() - cost);
 	}
 	
+	public void removalBudget(int cost) {
+		if (model.getBudget() + cost > 0 && model.getWarned()){
+			model.setWarned();
+		}
+		model.updateBudget(model.getBudget() + cost);
+	}
+	
 	public void addPlant(Plant p) {
 		model.addPlant(p);
 	}
