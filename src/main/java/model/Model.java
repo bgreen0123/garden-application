@@ -272,10 +272,19 @@ public class Model implements Serializable{
 	/**
 	 * updates the lep count according to the amount of leps supported by each plant
 	 * 
-	 * @param l, amount of leps supported by each plant
+	 * @param l, amount of leps supported by a certain plant
 	 */
 	public void updateLepCount(int l) {
 		lepsSupported += l;
+	}
+	
+	/**
+	 * decreases the lep count by the amount of leps a certain plant has when that plant is deleted by
+	 * 
+	 * @param l, amount of leps supported by a certain plant
+	 */
+	public void decreaseLepCount(int l) {
+		lepsSupported -= l;
 	}
 
 }

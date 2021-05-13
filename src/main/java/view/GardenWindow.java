@@ -401,7 +401,7 @@ public class GardenWindow extends Window{
 		                        	plantCircles.remove(circ1);
 		                        	deletionBudget(price);
 		                        	cont.removalBudget(price);
-		                        	deletionLeps(p.getLepsSupported() * -1);
+		                        	deletionLeps(p.getLepsSupported());
 		                        	border.setTop(drawCountBar(makeMarketButton(), drawBudget(), drawLeps()));
 		                        }
 		                    }
@@ -636,7 +636,7 @@ public class GardenWindow extends Window{
      * @param l, amount of leps supported
      */
     public void deletionLeps(int l) {
-    	cont.getModel().updateLepCount(l);
+    	cont.getModel().decreaseLepCount(l);
     }
     
     /**
