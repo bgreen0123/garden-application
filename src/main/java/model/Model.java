@@ -277,15 +277,6 @@ public class Model implements Serializable{
 	public void updateLepCount(int l) {
 		lepsSupported += l;
 	}
-	
-	/**
-	 * updates the lep count when you remove a plant
-	 * 
-	 * @param l, amount of leps supported by each plant
-	 */
-	public void removeLepCOunt(int l) {
-		lepsSupported -= l;
-	}
 
 }
 

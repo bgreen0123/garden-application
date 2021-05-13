@@ -36,13 +36,6 @@ public class Plant implements Cloneable, Serializable{
 	transient Circle circ;
 	transient ImageView iv;
 	
-	
-	/**
-	 * plant is moving
-	 */	
-	public void move() {
-		return;
-	}
 	/**
 	 * constructor for the Plant class
 	 * 
