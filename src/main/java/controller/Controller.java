@@ -184,6 +184,10 @@ public class Controller{
 			model.setWidth(width);
 			model.setHeight(height);
 			view.changeScreen(CurrentScreen.MARKET_H);
+			if(model.getToldAboutDeletion()) {
+				informAboutDeletion();
+				model.setToldAboutDeletion();
+			}
 		});
 		
 		gardenNext.setOnAction(e -> {
@@ -225,7 +229,7 @@ public class Controller{
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				Model nm = (Model)ois.readObject();
 				model = new Model(nm.getWidth(),nm.getHeight(),nm.getData(),nm.getNumLeps(),nm.getPlants(),nm.getFavorites(),nm.getSun(),nm.getSoil(),nm.getMoisture(),
-						nm.getBudget(), nm.getWarned());
+						nm.getBudget(), nm.getWarned(), nm.getToldAboutDeletion());
 				
 				System.out.println("Loaded");
 				ois.close();
@@ -441,6 +445,13 @@ public class Controller{
 		confirmSave.setContentText("You are about to load a garden, would you like to continue?");
 		confirmSave.showAndWait();
 		return confirmSave.getResult();
+	}
+	
+	private void informAboutDeletion() {
+		Alert delete = new Alert(AlertType.INFORMATION);
+		delete.setHeaderText("How to delete a plant!");
+		delete.setContentText("To delete a plant from the garden\njust right click on the wanted plant!");
+		delete.showAndWait();
 	}
 
 	//Getters

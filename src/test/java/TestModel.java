@@ -5,6 +5,8 @@ import data.Data;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import enums.*;
 import model.*;
 
@@ -12,7 +14,7 @@ public class TestModel {
 	//private ArrayList<Plant> plantsTest = new ArrayList<Plant>();
 	//private ArrayList<Lep> lepsTest = new ArrayList<Lep>();
 	//private int budgetLeft = 30;
-	Plant plant1 = new Plant("Plant 1","Plant 1",34,PlantType.WOODY, Soil.CLAY, Sun.FULLSUN, Moisture.WET, "ImageURL");
+	Plant plant1 = new Plant("Plant 1","Plant 1",34,PlantType.WOODY, Soil.CLAY, Sun.FULLSUN, Moisture.WET, Spread.MEDIUM, "ImageURL", 45);
 	Model m = new Model();
 	
 	@Test 
@@ -22,16 +24,18 @@ public class TestModel {
 	}
 	
 	@Test
-	public void testAddFavoritePlant() {
+	public void testFavoritePlantAddGet() {
 		m.addFavoritePlant(plant1);
-		assertEquals(m.getFavorites().size(), 1);
+		m.addFavoritePlant(plant1);
+		m.addFavoritePlant(plant1);
+		
+		assertEquals(m.getFavorites().size(), 3);
 	}
 	
-	//DELETE REMOVEPLANT
-	
 	@Test
-	public void testGetThread() {
-		assertTrue(m.getThread() instanceof DataThread);
+	public void testRemovePlant() {
+		m.removePlant(plant1);
+		assertEquals(m.getPlants().size(),0);
 	}
 	
 	@Test
@@ -40,12 +44,16 @@ public class TestModel {
 	}
 	
 	@Test
-	public void testLepCountGetSet() {
+	public void testLepCountGetSetDecrease() {
 		System.out.println("test lepCount getter and setter");
 		
 		m.updateLepCount(5);
 		
 		assertEquals(5, m.getNumLeps());
+		
+		m.decreaseLepCount(5);
+		
+		assertEquals(0, m.getNumLeps());
 	}
 	
 	@Test
@@ -94,4 +102,24 @@ public class TestModel {
 		
 		assertEquals(500, m.getBudget());
 	}
+	
+	@Test
+	public void warnedGetSet() {
+		System.out.println("Test boolean warned getter and setter");
+		
+		m.setWarned();
+		
+		assertTrue(m.getWarned());
+	}
+	
+	@Test
+	public void toldAboutDeletionGetSet() {
+		System.out.println("Test boolean Deletion to see if the user has learned how to delete");
+		
+		m.setToldAboutDeletion();
+		
+		assertTrue(m.getToldAboutDeletion());
+	}
+	
+	
 }

@@ -28,6 +28,7 @@ public class Model implements Serializable{
 	private Moisture moist = Moisture.DRY;
 	private int budgetLeft;
 	private boolean warned;
+	private boolean toldAboutDeletion;
 
 	/**
 	 * constructor for the model class
@@ -38,7 +39,7 @@ public class Model implements Serializable{
 		plants = new ArrayList<Plant>();
 		favoritedPlants = new ArrayList<Plant>();
 		warned = false;
-		
+		toldAboutDeletion = false;
 	}
 	
 	/**
@@ -54,12 +55,13 @@ public class Model implements Serializable{
 	 * @param soil, soil enum
 	 * @param moist, moisture enum
 	 * @param budgetLeft, budget remaining
-	 * @param, warned, warning boolean
+	 * @param warned, warning boolean
+	 * @param toldAboutDeletion, boolean for is user knows how to delete plant
 	 * 
 	 */
 	
 	public Model(int width, int height, Data d, int lepSupported, ArrayList<Plant> plants, ArrayList<Plant>favoritedPlants, Sun sun, Soil soil, Moisture moist,
-			int budgetLeft, boolean warned) {
+			int budgetLeft, boolean warned, boolean toldAboutDeletion) {
 		this.width = width;
 		this.height = height;
 		this.d = d;
@@ -71,6 +73,7 @@ public class Model implements Serializable{
 		this.moist = moist;
 		this.budgetLeft = budgetLeft;
 		this.warned = warned;
+		this.toldAboutDeletion = toldAboutDeletion;
 	}
 	
 	/**
@@ -203,6 +206,14 @@ public class Model implements Serializable{
 		return warned;
 	}
 
+	/**
+	 * Gets a boolean to tell if the inform message about how to delete has already been shown
+	 * 
+	 * @return The boolean confirming if the information message has already appeared
+	 */
+	public boolean getToldAboutDeletion() {
+		return toldAboutDeletion;
+	}
 	//Setters
 	
 	/**
@@ -211,6 +222,13 @@ public class Model implements Serializable{
 	 */
 	public void setWarned() {
 		warned = !warned;
+	}
+	
+	/**
+	 * sets the boolean for if the user has seen the how to delete message to true or false;
+	 */
+	public void setToldAboutDeletion() {
+		toldAboutDeletion = !toldAboutDeletion;
 	}
 	
 	/**
