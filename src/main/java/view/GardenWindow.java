@@ -337,7 +337,7 @@ public class GardenWindow extends Window{
             		double rad = (imDiameter/2)*gardenWidth/model.getWidth();
             		boolean intersect = false;
             		int placeX = (int)(event.getSceneX() - plot.getLayoutX() - imDiameter*(gardenWidth/model.getWidth())/2);
-	            	int placeY = (int)(event.getSceneY() - countBarHeight - 45 - (centerHeight - gardenHeight)/2);
+	            	int placeY = (int)(event.getSceneY() - countBarHeight - plot.getLayoutY() - (outerPlot.getLayoutY() - countBarHeight) - rad);
             		for(Map.Entry<Circle, Plant> entry : plantCircles.entrySet()) {
                 		Circle e = (Circle) entry.getKey();
         	    		double distSq = (placeX - e.getCenterX()) * (placeX - e.getCenterX()) + 
@@ -467,17 +467,16 @@ public class GardenWindow extends Window{
 		boolean intersect = false;
 		double prevX = n.getTranslateX();
 		double prevY = n.getTranslateY();
-		double rad = plantCircles.get(n).getDiameter()/2*gardenWidth/model.getWidth();
-		System.out.println("plot getLayoutY: " + plot.getLayoutY());
+		double rad = ((double)(plantCircles.get(n).getDiameter()*gardenWidth/model.getWidth()))/2;
+		System.out.println("top bar height: " + countBarHeight);
 		System.out.println("outer getLayoutY: " + outerPlot.getLayoutY());
-		System.out.println("location: " + (event.getSceneY() - rad));
 		if(event.getSceneX() - rad > (plot.getLayoutX()) && event.getSceneX() + rad < (plot.getLayoutX() + gardenWidth)) {
 			n.setTranslateX(event.getSceneX() - plot.getLayoutX() - rad);
 			n.setCenterX(n.getTranslateX());
 		}
 		if(event.getSceneY() - rad > (outerPlot.getLayoutY() + plot.getLayoutY()) 
 				&& event.getSceneY() + rad < (height - centerHeight/2 + gardenHeight/2)) {
-			n.setTranslateY(event.getSceneY() - countBarHeight - 45 - (centerHeight-gardenHeight)/2);
+			n.setTranslateY(event.getSceneY() - countBarHeight - plot.getLayoutY() - (outerPlot.getLayoutY() - countBarHeight) - rad);//countBarHeight - 45 - (centerHeight-gardenHeight)/2);
 			n.setCenterY(n.getTranslateY());
 		}
 
