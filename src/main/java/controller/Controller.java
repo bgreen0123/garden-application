@@ -184,10 +184,6 @@ public class Controller{
 			model.setWidth(width);
 			model.setHeight(height);
 			view.changeScreen(CurrentScreen.MARKET_H);
-			if(model.getToldAboutDeletion()) {
-				informAboutDeletion();
-				model.setToldAboutDeletion();
-			}
 		});
 		
 		gardenNext.setOnAction(e -> {
@@ -197,7 +193,14 @@ public class Controller{
 		
 		woody.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_W));
 		herbaceous.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
-		marketNext.setOnAction(e -> loading(CurrentScreen.GARDEN, false));
+		marketNext.setOnAction(e -> {
+			
+		loading(CurrentScreen.GARDEN, false);
+			if(!model.getToldAboutDeletion()) {
+				informAboutDeletion();
+				model.setToldAboutDeletion();
+			}
+		});
 		applyConditions.setOnAction(e -> view.setFilter());
 		viewFavs.setOnAction(e -> view.changeScreen(CurrentScreen.FAVS));
 		backToMarket.setOnAction(e -> view.changeScreen(CurrentScreen.MARKET_H));
