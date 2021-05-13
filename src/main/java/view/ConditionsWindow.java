@@ -36,6 +36,23 @@ public class ConditionsWindow extends Window{
     TextField budget, widthBox, heightBox;
     
     //Constructor
+    
+    /**
+     * constructor for the conditions window
+     * 
+     * @param width, width of screen
+     * @param height, height of screen
+     * @param stage, javafx stage for window
+     * @param sun, drop down of sun conditions
+     * @param soil, drop down of soil conditions
+     * @param moisture, drop down of moisture conditions
+     * @param conditionsNext, button to go to next screen after conditions
+     * @param x, horizontal dimension slider
+     * @param y, vertical dimension slider
+     * @param text, budget input 
+     * @param widthBox, user input width dimensions
+     * @param heightBox, user input height dimensions
+     */
     public ConditionsWindow(int width, int height, Stage stage, ChoiceBox sun, ChoiceBox soil, ChoiceBox moisture, Button conditionsNext, 
     		Slider x, Slider y, TextField text, TextField widthBox, TextField heightBox){
         this.width = width;
@@ -51,6 +68,14 @@ public class ConditionsWindow extends Window{
         this.widthBox = widthBox;
         this.heightBox = heightBox;
     }
+    
+    
+    /**
+     * contains all the logic for the conditions screen.
+     * contains the condition drop downs, and text input boxes.
+     * contains a gridbox that contains all the components and shows the stage.
+     * conditions window stage gets drawn after button pressed from previous screen
+     */
     
     @Override
     public void draw() {

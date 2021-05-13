@@ -66,6 +66,23 @@ public class EndWindow extends Window{
     Button endToGarden;
     Button restart;
     Button save;
+    
+    /**
+     * endwindow constructor 
+     * 
+     * @param width, screen width
+     * @param height, screen height
+     * @param stage, end window stage
+     * @param restart, restart button
+     * @param cont, controller
+     * @param fileName, file
+     * @param saveBox, save popup
+     * @param plantsList, list of plants in the garden
+     * @param favoritePlants, list of favorite plants
+     * @param view, view 
+     * @param save, save button
+     * @param endToGarden, goes back to garden button
+     */
 
     public EndWindow(int width, int height, Stage stage, Button restart, Controller cont, String fileName, TextField saveBox, 
     				ArrayList<Plant> plantsList, ArrayList<Plant> favoritePlants, View view, Button save, Button endToGarden) {
@@ -83,6 +100,13 @@ public class EndWindow extends Window{
         this.save = save;
         this.endToGarden = endToGarden;
     }
+    
+    /**
+     * contains all the logic for the end window screen.
+     * creates a new scene that summarizes all the garden information. 
+     * prints out the remaining budget, leps supported, and displays as list of plants in garden
+     * also contains a garden preview button, save button, restart button, and a button to go back to the garden
+     */
     
     @Override
     public void draw() {
@@ -111,7 +135,6 @@ public class EndWindow extends Window{
 			public void handle(ActionEvent event) {
 				
 				Pane outerPlot = gw.getOuterPlot();
-//				outerPlot.removeEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED);
 				FlowPane garden = new FlowPane();
 				garden.getChildren().addAll(outerPlot);
 				
@@ -120,7 +143,6 @@ public class EndWindow extends Window{
 				previewStage.show();
 			}
 		});
-
         
         // summary information about garden
         
@@ -183,13 +205,6 @@ public class EndWindow extends Window{
         lepsBox.setSpacing(20);;
         lepsBox.setAlignment(Pos.CENTER);
         lepsBox.getChildren().addAll(theLep, totalLeps);
-        
-        // download button image
-        Image downloadimg = new Image(getClass().getResourceAsStream("/images/download.png"));
-        ImageView downloading = new ImageView();
-        downloading.setImage(downloadimg);
-        downloading.setFitHeight(30);
-        downloading.setPreserveRatio(true);
         
         save.setPrefSize(width*.1, height*.1);
         save.setFont(Font.font("Courier New", FontWeight.BOLD, 24));

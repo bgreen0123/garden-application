@@ -46,6 +46,21 @@ public class MarketWindowWoody extends Window{
     private boolean filter = true;
     private int count;
 
+    /**
+     * woody window constructor 
+     * 
+     * @param width, screen width
+     * @param height, screen height
+     * @param stage, woody stage
+     * @param woody, woody ArrayList
+     * @param herb, button to switch to herbaceous
+     * @param nextPage, button to go to garden
+     * @param applyConditions, button that applies conditions
+     * @param viewFavs, button that views favorites
+     * @param cond, conditions button
+     * @param cont, controller
+     * 
+     */
 	public MarketWindowWoody(int width, int height, Stage stage, ArrayList<MarketItem> woody, Button herb, Button nextPage, Button applyConditions, Button viewFavs, Button cond, Controller cont) {
         this.width = width;
         this.height = height;
@@ -60,14 +75,26 @@ public class MarketWindowWoody extends Window{
         img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
     }
 	
+	/**
+	 * sets the filter of conditions
+	 */
 	public void setFilter() {
 		filter = !filter;
 	}
 	
+	/**
+	 * creates default filter
+	 */
 	public void defaultFilter() {
 		filter = true;
 	}
 	
+	/**
+	 * 
+	 * draws woody market list of plants
+	 * has apply conditions button, next page button, view favorites button, herbaceous button, and going back to conditions button
+	 */
+
     @Override
     public void draw() {
     	BackgroundImage bg = new BackgroundImage(img,BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);

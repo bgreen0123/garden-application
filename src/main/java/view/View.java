@@ -32,6 +32,11 @@ public class View extends Application {
 	Model model;
 	View view;
 
+	/**
+	 * start method that contains creates all instances of each window
+	 * sets current screen as the welcome
+	 * calls draw Screen method
+	 */
 	@Override
     public void start(Stage stage) {
 		cont = new Controller(this);
@@ -51,18 +56,30 @@ public class View extends Application {
 		drawScreen();
 	}
 	
+	/**
+	 * sets the filter for herbaceous market and woody market
+	 * 
+	 */
 	public void setFilter() {
 		marketH.setFilter();
 		marketW.setFilter();
 		drawScreen();
 	}
 	
+	/**
+	 * sets a default market for herbaceous market and woody market
+	 * 
+	 */
 	public void defaultFilter() {
 		marketH.defaultFilter();
 		marketW.defaultFilter();
 		drawScreen();
 	}
 	
+	/**
+	 * switch case that draws a screen
+	 * contains a case for each screen in our garden application
+	 */
 	public void drawScreen() {
 		switch(currentScreen){
 		case WELCOME:
@@ -105,23 +122,43 @@ public class View extends Application {
 		}
 		return;
 	}
-
+	
+	/**
+	 * changes screen and uses the drawScreen method
+	 * @param s
+	 */
 	public void changeScreen(CurrentScreen s){
 		currentScreen = s;
 		drawScreen();
 	}
 	
+	/**
+	 * gets screen height
+	 * @return height of screen
+	 */
 	public int getHeight() {
 		return height;
 	}
+	/**
+	 * gets screen width
+	 * @return width of screen
+	 */
 	public int getWidth() {
 		return width;
 	}
 	
+	/**
+	 * gets the Garden Window
+	 * @return garden instance of a Garden
+	 */
 	public GardenWindow getGardenWindow() {
 		return garden;
 	}
 	
+	/**
+	 * main method that launches application
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch();
 	}

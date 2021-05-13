@@ -88,7 +88,16 @@ public class GardenWindow extends Window{
 	double herbDiameter = 1.0;
 	double woodyDiameter = 1.5;
 	GridPane plot;
-
+	
+	/**
+	 * garden window constructor
+	 * 
+	 * @param width, screen width
+	 * @param height, screen height
+	 * @param stage, garden window stage
+	 * @param cont, controller
+	 * @param gardenNext, button that goes to the end screen 
+	 */
     public GardenWindow(int width, int height, Stage stage, Controller cont, Button gardenNext) {
     	this.width = width;
         this.height = height;
@@ -98,13 +107,27 @@ public class GardenWindow extends Window{
         plantCircles = new HashMap<Circle, Plant>();
     }
     
+    /**
+     * creates a new hashmap of plant circles
+     */
     public void newHash() {
     	plantCircles = new HashMap<Circle, Plant>();
     }
     
+    /**
+     * gets the outerplot (garden section)
+     * @return the garden pane section of the window
+     */
     public Pane getOuterPlot() {
     	return outerPlot;
     }
+    
+    /**
+     * contains logic of the garden window. 
+     * displays the top bar with the market button and displays remaining budget and leps supported
+     * creates a Pane for the garden that lets the users drag and drop plants
+     * has a favorites sidebar containing the favorite list of plants, user can drag and drop these plants onto the outerpane
+     */
     @Override
     public void draw() {
     	model = cont.getModel();
@@ -425,12 +448,20 @@ public class GardenWindow extends Window{
         stage.show(); 
     }
     
+    /**
+     * mouse event to check if mouse pressed onto a plant
+     * @param event,  mouse event passed in
+     */
     public void pressed(MouseEvent event) {
     	System.out.println("pressed");
 		Node n = (Node)event.getSource();
 		n.toFront();
     }
     
+    /**
+     * mouse event for dragging
+     * @param event, mouse event passed in
+     */
 	public void drag(MouseEvent event) {
 		Circle n = (Circle)event.getSource();
 		boolean intersect = false;
@@ -474,10 +505,18 @@ public class GardenWindow extends Window{
     	}
 	}    
 	
+	/**
+	 * moust event for released
+	 * @param event, mouse event passed in
+	 */
     public void released(MouseEvent event) {
     	System.out.println("released");
     }
-    
+    /**
+     * displays leps supported and has an image of a butterfly, updates as plants are plants
+     * 
+     * @return an HBox that leps supported information
+     */
     public HBox drawLeps() {
     	Image lepImg = new Image(getClass().getResourceAsStream("/images/butterfly-png.png"));
         ImageView lepiv = new ImageView();
@@ -494,6 +533,11 @@ public class GardenWindow extends Window{
     	return lepBox;
     }
     
+    /**
+     * displays budget remaining and has an image of a dollar, updates as plants are planted
+     * 
+     * @return an Hbox that shows budget remaining information
+     */
     public HBox drawBudget() {
     	Image dollarimg = new Image(getClass().getResourceAsStream("/images/dollar-sign.png"));
         ImageView dollariv = new ImageView();
@@ -510,6 +554,10 @@ public class GardenWindow extends Window{
     	return budgetBox;
     }
     
+    /**
+     * makes the market Button
+     * @return a market stall image that acts as a button
+     */
     public ImageView makeMarketButton() {
     	Image marketImg = new Image(getClass().getResourceAsStream("/images/stand.jpg"));
         ImageView marketiv = new ImageView();
@@ -527,6 +575,14 @@ public class GardenWindow extends Window{
     	return marketiv;
     }
     
+    /**
+     * count bar at the top contains budget, leps, and market button
+     * 
+     * @param marketiv, market button to go to market
+     * @param budgetBox, HBox with dollar image and updating budget remaining
+     * @param lepBox, HBox with butterfly image and updating lepcount remaining
+     * @return HBox with all components
+     */
     public HBox drawCountBar(ImageView marketiv, HBox budgetBox, HBox lepBox) {
     	HBox countBar = new HBox();
     	countBar.setStyle("-fx-border-color:black; -fx-border-width:1px; -fx-background-color:" + countBarColor + ";");
@@ -535,7 +591,10 @@ public class GardenWindow extends Window{
         countBar.getChildren().addAll(marketBox, budgetBox, lepBox);
         return countBar;
     }
-    
+    /**
+     * updates the budget remaining after adding a plant
+     * @param b, cost of plant
+     */
     public void updateBudget(int b) {
     	budget -= b;
     	/*
@@ -545,12 +604,20 @@ public class GardenWindow extends Window{
     	System.out.println("updating budget" + Integer.toString(budget));
     }
     
+    /**
+     * updates budget remaining after deleting plant from garden
+     * @param b, cost of plant
+     */
     public void deletionBudget(int b) {
     	budget += b;
     	//cont.getModel().updateBudget(b);
     	System.out.println("updating budget" + Integer.toString(budget));
     }
     
+    /**
+     * updates the leps supported after adding a plant
+     * @param l, amount of leps supported
+     */
     public void updateLeps(int l) {
     	if(l < 100) {
     		if((cont.getModel().getNumLeps() % 100) + l >= 100) {
@@ -565,15 +632,25 @@ public class GardenWindow extends Window{
     	System.out.println("updating leps " + Integer.toString(cont.getModel().getNumLeps()));
     }
     
+    /**
+     * updates the leps supported after removing a plant from garden
+     * @param l, amount of leps supported
+     */
     public void deletionLeps(int l) {
     	cont.getModel().removeLepCOunt(l);
     }
     
+    /**
+     * starts lep animation for each 100 leps supported
+     */
     public void initializeCircles() {
     	for(int i = 100; i <= cont.getModel().getNumLeps(); i = i+100) {
     		lepAnimation();
     	}
     }
+    /**
+     * lep animation. leps fly around the screen.
+     */
     public void lepAnimation() {
     	Random rand = new Random();
     	//X

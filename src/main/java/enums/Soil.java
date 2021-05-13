@@ -13,9 +13,18 @@ public enum Soil {
     
     private String name = null;
 
+    /**
+     * soil type
+     * @param s, soil type
+     */
 	private Soil(String s){
 		name = s;
 	}
+	
+	/**
+     * soil type
+     * @return name of soil type
+     */
 	public String getName() {
 		return name;
 	}

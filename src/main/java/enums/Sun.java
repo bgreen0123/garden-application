@@ -12,10 +12,19 @@ public enum Sun {
     SHADE("SHADE");
     
     private String name = null;
-
+    
+    /**
+     * sun type
+     * @param s, sun type
+     */
 	private Sun(String s){
 		name = s;
 	}
+	
+	/**
+     * sun type
+     * @return name of sun type
+     */
 	public String getName() {
 		return name;
 	}

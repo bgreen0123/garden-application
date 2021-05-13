@@ -14,15 +14,29 @@ import javafx.scene.image.ImageView;
  *
  */
 
+/**
+ * 
+ * data thread which implements serializable for saving
+ *
+ */
 public class DataThread extends Thread implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Model m;
 	
 	transient Thread t;
+	
+	/**
+	 * data thread sets the model
+	 * @param m, instance of model
+	 */
 	public DataThread(Model m) {
 		this.m = m;
 	}
+	
+	/**
+	 * starts the thread that loads each plant and sets the imageviews
+	 */
 	@Override
 	public void run() {
 		System.out.println("START THREAD");

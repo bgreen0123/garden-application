@@ -40,7 +40,17 @@ public class WelcomeScreen extends Window{
     Stage stage;
     Color titleFill = Color.BLACK;
     Color titleOutline = Color.WHITE;
-
+    
+    /**
+     * welcome screen constructor
+     * 
+     * @param width, screen width
+     * @param height, screen height
+     * @param stage, welcome stage
+     * @param nextPage, button to go to conditions
+     * @param toLoad, button to go to load screen
+     * @param load, load button
+     */
     public WelcomeScreen(int width, int height, Stage stage, Button nextPage, Button toLoad, Button load){
         this.width = width;
         this.height = height;
@@ -49,7 +59,12 @@ public class WelcomeScreen extends Window{
         this.toLoad = toLoad;
         this.load = load;
     }
-    
+    /**
+     * contains logic and all components of starting screen
+     * title that says "welcome to garden builder"
+     * contains a load button to load saved garden
+     * button to start a new garden
+     */
     @Override
     public void draw() {
 

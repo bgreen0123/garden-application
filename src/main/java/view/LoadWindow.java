@@ -22,7 +22,16 @@ public class LoadWindow extends Window implements Serializable{
 	int width;
 	int height;
 	Button toWelcome;
-
+	
+	/**
+	 * load window constructor
+	 * 
+	 * @param width, screen width
+	 * @param height, screen height
+	 * @param stage, load window stage
+	 * @param fileName, file names
+	 * @param toWelcome, button to go back to welcome
+	 */
 	public LoadWindow(int width, int height, Stage stage, String fileName, Button toWelcome) {
 		this.stage = stage;
 		this.width = width;
@@ -31,6 +40,10 @@ public class LoadWindow extends Window implements Serializable{
 		this.toWelcome = toWelcome;
 	}
 	
+	/**
+	 * draws loading screen and contains button to go back to welcome screen
+	 * "this is where you will load a garden"
+	 */
 	@Override
 	public void draw() {
 		GridPane gp = new GridPane();

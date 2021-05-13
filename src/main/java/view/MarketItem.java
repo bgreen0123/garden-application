@@ -19,6 +19,13 @@ public class MarketItem {
 	Plant p;
 	ImageView iv;
 	HBox imageBox;
+	
+	/**
+	 * constructor of a market item, plants and favorite button
+	 * 
+	 * @param pl, plant
+	 * @param but, button
+	 */
 	public MarketItem(Plant pl, Button but) {
 		this.favorited = false;
 		this.b = but;
@@ -29,10 +36,18 @@ public class MarketItem {
 		comp = new HBox();
 		comp.getChildren().addAll(imageBox, l, b);
 	}
+	
+	/**
+	 * gets if the plant is favorited or not
+	 * @return boolean favorite, true = favorite/false = not
+	 */
 	public boolean getFavorited() {
 		return favorited;
 	}
 	
+	/**
+	 * default graphic of favorite button
+	 */
 	public void setDefault() {
 		favorited = false;
 		ImageView i = new ImageView(new Image(getClass().getResourceAsStream("/images/favorite_decal.jpg")));
@@ -40,6 +55,11 @@ public class MarketItem {
 		i.setFitWidth(30);
 		b.setGraphic(i);
 	}
+	
+	/**
+	 * changes the button if its favorited or not
+	 * check if its favorite, heart if its not
+	 */
 	public void setButton() {
 		favorited = !favorited;
 		ImageView i; 
@@ -52,21 +72,51 @@ public class MarketItem {
 		i.setFitWidth(30);
 		b.setGraphic(i);
 	}
+	
+	/**
+	 * gets the plant
+	 * @return plant
+	 */
 	public Plant getPlant() {
 		return p;
 	}
+	
+	/**
+	 * gets comp HBox of market items
+	 * @return, HBox of market item
+	 */
 	public HBox getComp() {
 		return comp;
 	}
+	
+	/**
+	 * gets label
+	 * @return l plant toString information
+	 */
 	public Label getLabel() {
 		return l;
 	}
+	
+	/**
+	 * favorite button
+	 * @return button to favorite a plant
+	 */
 	public Button getButton() {
 		return b;
 	}
+	
+	/**
+	 * image view of plant
+	 * @return plant image
+	 */
 	public ImageView getIV() {
 		return iv;
 	}
+	
+	/**
+	 * gets imageBox
+	 * @return Hbox of image
+	 */
 	public HBox getImageBox() {
 		return imageBox;
 	}

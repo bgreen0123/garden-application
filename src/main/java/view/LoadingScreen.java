@@ -19,12 +19,21 @@ public class LoadingScreen extends Window{
     Controller cont;
     GardenWindow gw;
     
+    /**
+     * loading screen constructor
+     * @param stage, stage of loading screen
+     * @param width, screen width
+     * @param height, screen height
+     */
 	public LoadingScreen(Stage stage, int width, int height) {
         this.height = height;
         this.stage = stage;
         this.width = width;
     }
 	
+	/**
+	 * contains logic of loading screen. says "Loading..."
+	 */
     @Override
     public void draw() {   
         GridPane grid = new GridPane();

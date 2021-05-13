@@ -30,6 +30,16 @@ public class Favs extends Window{
     Stage stage;
     Controller cont;
     
+    /**
+     * favorite window constructor
+     * 
+     * @param width, width of screen
+     * @param height, height of screen
+     * @param stage, favorite stage
+     * @param backToMarket, button to go back to market
+     * @param nextPage, button to go to next page
+     * @param cont, controller
+     */
 	public Favs(int width, int height, Stage stage, Button backToMarket, Button nextPage, Controller cont) {
         this.width = width;
         this.height = height;
@@ -40,6 +50,10 @@ public class Favs extends Window{
         img = new Image(getClass().getResourceAsStream("/images/conditions-window.jpg"), width, height, false, true);
     }
 	
+	/**
+	 * contains favorites list
+	 * displays favorited plants and has 2 buttons, one to go back to the market, and one to go to the next page
+	 */
     @Override
     public void draw() {
     	BackgroundImage bg = new BackgroundImage(img,BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);

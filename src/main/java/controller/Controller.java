@@ -94,7 +94,8 @@ public class Controller{
   	
   	/**
 	 * Main controller method that creates all necessary buttons, text boxes, and sliders.
-	 * Contains logic for the buttons.
+	 * Contains logic for the buttons. 
+	 * Creates drop down menus for the conditions screen
 	 * 
 	 * @param view, an instance of the view class
 	 */

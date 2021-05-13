@@ -12,10 +12,19 @@ public enum Spread {
     XL("XL");
     
     private String name = null;
-
+    
+    /**
+     * spread of plant
+     * @param s, spread of plant
+     */
 	private Spread(String s){
 		name = s;
 	}
+	
+	/**
+     * spread size
+     * @return name of spread
+     */
 	public String getName() {
 		return name;
 	}

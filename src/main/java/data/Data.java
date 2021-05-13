@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 
 /**
- * 
+ * gets the data from an xml file
  * @author Ryan Allarey, Cole Plum, Brendan Green, Adam Kenney
  *
  */
@@ -33,13 +33,19 @@ public class Data implements Serializable{
 	
 	private ArrayList<Plant> herb;
     private ArrayList<Plant> wood;
-
+    
+    /**
+     * calls setData and creates an herbaceous and woody arrayList
+     */
     public Data(){
         herb = new ArrayList<Plant>();
         wood = new ArrayList<Plant>();
         setData();
     }
-
+    
+    /**
+     *  reads in the plant information data from our plant_data xml file
+     */
     private void setData(){
         try {
         	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); 
@@ -162,12 +168,26 @@ public class Data implements Serializable{
     }
 
     //Getters
+    
+    /**
+     * gets the herbaceous list of plants
+     * @return herb, herbaceous arraylist
+     */
     public ArrayList<Plant> getHerbacious(){
         return herb;
     }
+    
+    /**
+     * gets the woody list of plants
+     * @return wood, woody arraylist
+     */
     public ArrayList<Plant> getWoody(){
         return wood;
     }
+    /**
+     * main method that gets the herbaceous and woody plant data
+     * @param args
+     */
     public static void main(String [] args){
         Data d = new Data();
         for(Plant p : d.getHerbacious()) {

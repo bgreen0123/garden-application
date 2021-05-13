@@ -6,6 +6,10 @@ package view;
  *
  */
 
+/**
+ * main window class, all windows are instances of Window
+ *
+ */
 public abstract class Window {
 	public abstract void draw();
 
