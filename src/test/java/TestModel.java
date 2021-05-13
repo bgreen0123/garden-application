@@ -16,6 +16,10 @@ public class TestModel {
 	//private int budgetLeft = 30;
 	Plant plant1 = new Plant("Plant 1","Plant 1",34,PlantType.WOODY, Soil.CLAY, Sun.FULLSUN, Moisture.WET, Spread.MEDIUM, "ImageURL", 45);
 	Model m = new Model();
+	Data d;
+	ArrayList<Plant> p;
+	ArrayList<Plant> favp;
+	Model m2 = new Model(15,10,d,200,p,favp,Sun.FULLSUN,Soil.CLAY,Moisture.WET,100, true, true);
 	
 	@Test 
 	public void testAddPlant() {
@@ -108,8 +112,10 @@ public class TestModel {
 		System.out.println("Test boolean warned getter and setter");
 		
 		m.setWarned();
-		
 		assertTrue(m.getWarned());
+		
+		m.setWarned();
+		assertFalse(m.getWarned());
 	}
 	
 	@Test
@@ -117,8 +123,10 @@ public class TestModel {
 		System.out.println("Test boolean Deletion to see if the user has learned how to delete");
 		
 		m.setToldAboutDeletion();
-		
 		assertTrue(m.getToldAboutDeletion());
+		
+		m.setToldAboutDeletion();
+		assertFalse(m.getToldAboutDeletion());
 	}
 	
 	
