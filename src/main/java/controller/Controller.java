@@ -73,10 +73,6 @@ public class Controller{
 	ChoiceBox<Soil> soil;
 	ChoiceBox<Moisture> moisture;
 	
-	//Sliders
-	Slider x;
-	Slider y;
-	
 	//Text Boxes
 	TextField budget;
 	TextField saveBox;
@@ -127,10 +123,6 @@ public class Controller{
 		saveBox = new TextField();
 		widthBox = new TextField();
 		heightBox = new TextField();
-		
-		//Making sliders
-		x = new Slider();
-		y = new Slider();
 		
 		//Actions
 		welcomeNext.setOnAction(e -> {
@@ -695,24 +687,6 @@ public class Controller{
 	 */
 	public TextField getHeight() {
 		return heightBox;
-	}
-	
-	/**
-	 * gets the slider for the x dimension
-	 * 
-	 * @return x, horizontal dimensions slider
-	 */
-	public Slider getXSlider() {
-		return x;
-	}
-	
-	/**
-	 * gets the slider for the x dimension
-	 * 
-	 * @return y, horizontal dimensions slider
-	 */
-	public Slider getYSlider() {
-		return y;
 	}
 	
 	/**

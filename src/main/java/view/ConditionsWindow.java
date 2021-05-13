@@ -32,7 +32,6 @@ public class ConditionsWindow extends Window{
     Stage stage;
     ChoiceBox sun, soil, moisture; 
     Button conditionsNext;
-    Slider x, y;
     TextField budget, widthBox, heightBox;
     
     //Constructor
@@ -54,15 +53,13 @@ public class ConditionsWindow extends Window{
      * @param heightBox, user input height dimensions
      */
     public ConditionsWindow(int width, int height, Stage stage, ChoiceBox sun, ChoiceBox soil, ChoiceBox moisture, Button conditionsNext, 
-    		Slider x, Slider y, TextField text, TextField widthBox, TextField heightBox){
+    		TextField text, TextField widthBox, TextField heightBox){
         this.width = width;
         this.height = height;
         this.stage = stage;
         this.sun = sun;
         this.soil = soil;
         this.moisture = moisture;
-        this.x = x;
-        this.y = y;
         this.conditionsNext = conditionsNext;
         this.budget = text;
         this.widthBox = widthBox;
