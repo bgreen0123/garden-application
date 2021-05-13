@@ -1,4 +1,4 @@
 ## Project README
 
 ### Updated Project UML
-![finalGardenUml](https://user-images.githubusercontent.com/54590893/116596058-fd964300-a8f1-11eb-9f65-2b6f45d5d211.jpg)
+![finalUML](https://user-images.githubusercontent.com/54590893/118148192-58de3000-b3de-11eb-858e-675cda751aeb.JPG)
