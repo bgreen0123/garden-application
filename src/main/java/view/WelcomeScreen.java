@@ -38,8 +38,8 @@ public class WelcomeScreen extends Window{
 	Scene scene;
     int width, height;
     Stage stage;
-    Color titleFill = Color.BLACK;
-    Color titleOutline = Color.WHITE;
+    Color titleFill = Color.WHITE;
+    Color titleOutline = Color.BLACK;
     
     /**
      * welcome screen constructor
@@ -78,8 +78,7 @@ public class WelcomeScreen extends Window{
         title.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.ITALIC,55));
         title.setFill(titleFill);
         title.setStroke(titleOutline);
-        title.setStrokeWidth(1);
-
+        title.setStrokeWidth(2);
         GridPane gp = new GridPane();
         VBox buttons = new VBox();
         buttons.setSpacing(height*.1);
